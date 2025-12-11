@@ -1,0 +1,1 @@
+\cp /home/icontel/public_html/intranet/sweet/htaccess_bueno  /home/icontel/public_html/intranet/sweet/.htaccess

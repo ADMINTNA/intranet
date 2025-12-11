@@ -1,0 +1,74 @@
+/* Just a little customization for samples */
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	margin:0;
+	background:url(../graphics/main_background.gif);
+	text-align:center;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	
+}
+
+
+#ghead{
+	background:url(../graphics/background_top.gif) no-repeat 0px -80px; 
+	height:80px;
+	width:100%;
+}
+
+#glogo{
+	background:url(../graphics/logo.png) no-repeat 15px 15px;
+	height:50px;
+	width:100%;
+	text-align:left;
+	padding:15px 0 0 120px;
+}
+
+#glogo a{
+	font-size:24px;
+	color:#000;
+	font-variant:small-caps;
+	text-decoration:none;
+	font-weight:bold;
+	margin:15px;
+}
+
+#bg{
+	margin:15px;
+	border:15px solid #ccc;
+	background:#eee;
+}
+
+#content{
+	text-align:left;
+}
+
+#content H2{
+	color:#000;
+	font-variant:small-caps;
+	border-bottom:2px solid #000;
+	margin-bottom:20px;
+}
+
+#descripcion{
+	font-size:13px;
+	font-weight:bold;
+	color:#069;
+	border-bottom:1px dotted #069;
+	margin-bottom:5px;
+}
+
+#description{
+	clear:both;
+	font-size:13px;
+	font-weight:bold;
+	color:#069;
+	border-bottom:2px solid #069;
+	margin-bottom:40px;
+}
+
+#dg{
+	margin:0 30px 20px 30px;
+}

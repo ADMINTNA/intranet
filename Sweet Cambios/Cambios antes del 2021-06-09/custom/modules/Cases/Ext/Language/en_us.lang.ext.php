@@ -1,0 +1,34 @@
+<?php 
+ //WARNING: The contents of this file are auto-generated
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_NOTES_CASES_1_FROM_NOTES_TITLE'] = 'Notas';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_NOTES_CASES_1_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_NOTES_CASES_2_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_CASES_NOTES_1_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_CASES_OPPORTUNITIES_1_FROM_OPPORTUNITIES_TITLE'] = 'Oportunidades';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_NOTES_CASES_1_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_NOTES_CASES_2_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_CASES_NOTES_1_FROM_NOTES_TITLE'] = 'Notas';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_NOTES_CASES_1_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_NOTES_CASES_2_FROM_NOTES_TITLE'] = 'Notas';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_NOTES_CASES_1_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_NOTES_CASES_2_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_CASES_NOTES_1_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_CASES_OPPORTUNITIES_1_FROM_OPPORTUNITIES_TITLE'] = 'Oportunidades';
+$mod_strings['LBL_CASES_AOS_QUOTES_1_FROM_AOS_QUOTES_TITLE'] = 'Cotizaciones';
+
+?>

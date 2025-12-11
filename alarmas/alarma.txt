@@ -1,0 +1,1 @@
+mao//está listo es Alarmas. Solo tienes que generar el archivo alarma.txt//

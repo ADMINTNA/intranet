@@ -1,6 +1,6 @@
 <?php
 // ==========================================================
-// kickoff/cm_header.php
+// kickoff_ajax/cm_header.php
 // Header de KickOff
 // Autor: Mauricio Araneda
 // Fecha: 2025-11-17
@@ -14,16 +14,8 @@ ini_set('display_startup_errors', 1);
 <meta charset="UTF-8">
 
 <style type="text/css">
-body,td,th { font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+body,td,th { font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
 a { color: #000000; }
-
-/* Corrige separación extra */
-.no-sort, .no-sort td, .no-sort tr {
-    padding: 0 !important;
-    margin: 0 !important;
-    border-spacing: 0 !important;
-    line-height: 0 !important;
-}
 
 /* === Frases motivacionales === */
 #frase-centro {
@@ -50,68 +42,92 @@ a { color: #000000; }
  #frase-centro {font-size: 16px;}
  #frase-motivacional{ font-size: 18px; }
 }
+/* ==========================================================
+   BOTÓN TOUCHBAR – Acceso a versión Beta AJAX
+   ========================================================== */
+
+.touchbar-beta-btn {
+    background: white;               /* estilo touchbar clásico */
+    color: #512554;                  /* violeta corporativo */
+    border: 2px solid #512554;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s ease;
+    white-space: nowrap;
+}
+
+.touchbar-beta-btn:hover {
+    background: #512554;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.touchbar-beta-btn:active {
+    transform: translateY(0px);
+}
+    
 </style>
 
 <!-- ========================================================== -->
 <!-- 🧭 FUNCIÓN GLOBAL DE SALIDA FUERA DEL IFRAME -->
 <!-- ========================================================== -->
 <script>
+// Redirige SIEMPRE al marco principal, no dentro del iframe
 function salirDelSistema() {
-    if (!confirm("¿Deseas cerrar tu sesión y salir del sistema?")) return false;
 
+    if (!confirm("¿Deseas cerrar tu sesión y salir del sistema?")) {
+        return false;
+    }
+
+    // Rompe el marco y redirige al login principal
     window.top.location.href = "https://intranet.icontel.cl/index.php";
     return false; 
 }
+    
+function abrirBetaKickoff() {
+    // Abrir nueva ventana pero ocultar URL completa al usuario
+    let nueva = window.open(
+        "https://intranet.icontel.cl/kickoff_ajax/icontel.php",
+        "_blank",
+        "noopener"
+    );
+
+    // Fuerza a mostrar URL limpia
+    if (nueva) {
+        nueva.opener = null;
+        setTimeout(() => {
+            try {
+                nueva.history.replaceState({}, "", "https://intranet.icontel.cl");
+            } catch (e) {
+                console.warn("No se pudo limpiar la URL, pero no afecta el funcionamiento.");
+            }
+        }, 500);
+    }
+}    
 </script>
 
-<table class="no-sort">
+<table class="no-sort" cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 0; padding: 0;">
   <tbody>
     <tr>
-      <!-- 🔥 CORREGIDO: se eliminaron alturas invisibles -->
-      <td valign="top" style="padding:0;margin:0;height:0;line-height:0;border:none;">
-        <table class="no-sort" border="0">
+      <td valign="top" style="padding:0;margin:0;border:none;border-spacing:0;">
+        <table class="no-sort" border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse;">
           <tbody>
-
-            <!-- 🧠 Fila 1 -->
-            <tr style="color:white;background-color:#64C2C8;">
-              <td width="6%" rowspan="2" align="center" valign="bottom">
-
-                <a href="#"
-                   title="Cerrar sesión y salir del sistema"
-                   onclick="return salirDelSistema();">
-                   <img src="../kickoff/images/Robot_Cool_01.png"
-                        width="80"
-                        alt="Cerrar sesión"
-                        style="height:112px; cursor:pointer;">
-                </a>
-
-              </td>
-
-              <td width="15%" rowspan="2" align="center" valign="middle">
-                <em>"Cuando todos vendemos, el Éxito es inevitable"</em>
-              </td>
-
-              <td style="color:#512554;height:30px;vertical-align:middle;" colspan="7">
-                <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;">
-                  <div id="frase-centro"></div>
-                  <div id="frase-motivacional"></div>
-                </div>
-              </td>
-            </tr>
-
             <!-- 🧩 Fila 2 -->
-            <tr style="color:white;background-color:#64C2C8;">
-
-              <td>
-                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:#64C2C8;border:none;"
+            <tr id="Fila_1" style="height: 140px; color:white;background-image: url('images/icontel_header.jpg'); background-size: 100% 100%;">
+              <td colspan="2"></td>
+              <td style="vertical-align: top">
+                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:transparent;border:none;"
                         name="calculadoras" id="calculadoras" onchange="manejarCambio(this)">
                   <option value="">Calculadoras</option>
                   <option value="https://intranet.icontel.cl/fotovoltaico/">Fotovoltaica</option>
                 </select>
               </td>
 
-              <td>
-                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:#64C2C8;border:none;"
+              <td style="vertical-align: top">
+                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:transparent;border:none;"
                         name="formularios" id="formulario" onchange="manejarCambio(this)">
                   <option value="">Formularios</option>
                   <option value="https://sweet.icontel.cl/custom/New_lead/new_lead.html">Referidos</option>
@@ -119,8 +135,8 @@ function salirDelSistema() {
                 </select>
               </td>
 
-              <td>
-                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:#64C2C8;border:none;"
+              <td style="vertical-align: top">
+                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:transparent;border:none;"
                         name="materiales" id="materiales" onchange="manejarCambio(this)">
                   <option value="">Marketing y Escalamiento</option>
                   <option value="https://drive.google.com/drive/folders/1caqwj2gJSbA0VYAg9MVWlJz5SogPjM2i?usp=sharing">Material/Marketing</option>
@@ -129,19 +145,19 @@ function salirDelSistema() {
                 </select>
               </td>
 
-              <td align="center">
+              <td style="vertical-align: top" align="center">
                 <a style="color:white;font-weight:bold;" href="https://calendar.app.google/9oeDbrLGtM3Gzhn28" target="_blank">
                   Agendamiento Comercial
                 </a>
               </td>
 
-              <td align="center">
+              <td style="vertical-align: top" align="center">
                 <a style="color:white;font-weight:bold;" href="https://www.tnagroup.cl/telecomunicaciones/presentacion" target="_blank">
                   Presentación Empresa
                 </a>
               </td>
 
-              <td align="center" style="white-space:nowrap;">
+              <td align="center" style="vertical-align: top; white-space:nowrap;">
                 <div id="auto-refresh-bar">
                   <form id="autoRefreshForm" method="post" style="margin:0;display:inline;">
                     <label style="cursor:pointer;">
@@ -154,10 +170,11 @@ function salirDelSistema() {
                 </div>
               </td>
 
-              <td align="right">
-                <!--button onclick="mostrarTodasLasCapas()">Mostrar iTems</button-->
-              </td>
-            </tr>
+<td align="right">
+    <!--button class="touchbar-beta-btn" onclick="abrirBetaKickoff()">
+        🚀 Beta KickOff
+    </button-->
+</td>            </tr>
 
             <!-- ⚙️ Fila 3 -->
             <tr style="background-color:#1F1D3E;color:white;">
@@ -190,16 +207,6 @@ function salirDelSistema() {
     </tr>
   </tbody>
 </table>
-
-<!-- FRASES MOTIVACIONALES -->
-<script>
-// ... (tu código original sin cambios)
-</script>
-
-<?php
-// AUTOREFRESH
-// ... (tu código original sin cambios)
-?>
 
 <!-- ========================================================== -->
 <!-- 🎯 FRASES MOTIVACIONALES -->

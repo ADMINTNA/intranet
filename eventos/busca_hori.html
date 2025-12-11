@@ -1,0 +1,33 @@
+     
+		<table border="0" style="border-style: solid solid solid solid; border-color: dimgrey; font-size: small;">
+            <tr>
+				<form action="../calls/busca.php" method="post" target="_blank">
+              <td style="background-color: #1F1D3E;color: white;"><input alt="Razon Social" style="background-color: lightgray" placeholder="Cliente" name="empresa" type="text" id="empresa" size="10"></td>
+              <td style="background-color: #1F1D3E;color: white;"><input alt="RUT" placeholder="RUT" style="background-color: lightgray" name="rut" type="text" id="rut" size="10"></td>
+              <td style="background-color: #1F1D3E;color: white;"><input alt="Contacto Nombre" style="background-color: lightgray" placeholder="Contacto Nombre" name="nombre" type="text" id="nombre" size="10"></td>
+              <td style="background-color: #1F1D3E;color: white;"><input alt="Contacto Apellido" style="background-color: lightgray" placeholder="Contacto Apellido" name="apellido" type="text" id="apellido" size="10"></td>
+              <td style="background-color: #1F1D3E;color: white;"><input alt="Teléfono" placeholder="Teléfono" style="background-color: lightgray" name="ani" type="text" id="ani" size="10"></td>
+              <td style="background-color: #1F1D3E;color: white;"><input alt="Código de Servicio" placeholder="C. Servicio" style="background-color: lightgray" name="codserv" type="text" id="codserv" size="10"></td>
+              <td style="background-color: #1F1D3E;color: white;">
+	          <select style="background-color: lightgray; color: gray;" name="estserv" id="estserv">
+				  <option value = "" selected>Estado Cuenta</option>
+                  <option value="Prospecto"> Prospecto </option>
+                  <option value="acuerdo_cobranza_comer"> Cobranza Comercial </option>
+                  <option value="Activo"> Activo </option>
+                  <option value="Baja"> De Baja </option>                  
+                  <option value="baja_forzada"> De Baja Forzada </option>
+                  <option value="esporadico"> Espor&acute;dico </option>
+                  <option value="Extrajudicial"> Dicom / Extrajudicial </option>
+                  <option value="Reemplazado"> Reemplazado </option>
+				  <option value="retencion_posible_baja"> Retenci&oacute;n </option>
+                  <option value="suspender"> Suspender </option>
+                  <option value="Suspendido"> Suspendido </option>
+                </select>
+              </td> 
+              <td style="background-color: #1F1D3E;color: white;"><input placeholder="Direcciónn" style="background-color: lightgray" name="direccion" type="text" id="direccion" size="15"></td>
+              <td style="background-color: #1F1D3E;color: white;" align="center"><input style="background-color: lightgray; color: gray;"  type="reset" value="Limpiar" />&nbsp;&nbsp;<input  style="background-color: lightgray" type="submit" value="Buscar Clientes" />
+              </td>
+			</form>                             
+            </tr>
+        </table>
+   

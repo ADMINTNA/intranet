@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Enlaces</title>
+<link type='text/css' rel='stylesheet' href='style.css' />
+<?php 
+	// Desactivar toda notificación de error
+	$errores = $_GET["errores"];
+	if(!isset($errores)) {
+		error_reporting(255);
+	}
+	// verifica si se obliga a una tabla especifica
+	$tabla = $_GET["tabla"];
+	if(!isset($tabla)) $tabla = "enlaces";
+	$nombre_tabla = $tabla;
+	$tabla.= ".php";
+	#es: esta es la forma RECOMENDADA de incluir los archivos auxiliares (CSS,JS)
+	#en: this is the recommended way to include the auxiliary files (CSS,JS)
+	include_once('class/phpmydatagrid.class.php'); 
+	echo set_DG_Header("js/","css/", " /", "lightgray");
+	
+?>
+<style type="text/css">
+	.activedata{background:#D3FFC9;}
+	.sinfactibilidad{background:lightgrey;}
+	.inactivo{font-weight:bold;color:grey;}
+	
+    #formFiltro { padding:0px; }
+    #formFiltro label{ margin-left:10px; display:block; width:80px; float:left; }
+    #formFiltro input{ margin-right:10px; float: left; width:130px; }
+    
+</style>
+<script type="text/javascript" language="javascript">
+
+	function Estado(){ window.location = "index.php?tabla=estado";;	}
+	function Enlaces(){ window.location = "cab_det.php";;	}
+	function Proveedor(){ window.location = "index.php?tabla=proveedor";;	}
+	function Tipo_Enlace(){ window.location = "index.php?tabla=tipo_enlace";;	}
+    function activateSearchBox(){
+        curDisplay = document.getElementById('formFiltro').style.display;
+        DG_Slide("formFiltro",{duration:.2}).swap()
+        if (curDisplay=='none') document.getElementById('fname').focus();
+    }
+
+    /* function to set new filter */
+    function setFilter(){
+		parameters = "&estado=" + DG_gvv('estado') + 
+					// "&tipo=" + DG_gvv('tipo') + 
+					// "&direccion=" + DG_gvv('direccion') +
+                    // "&proveedor=" + DG_gvv('proveedor') +
+                     "&top_search=1";    // This variable MUST be included to success
+        DG_Do('filter', parameters);
+    }
+
+    function resetFilter(){
+		DG_svv('estado', '');
+		//DG_svv('tipo', '');
+		//DG_svv('direccion', '');
+		//DG_svv('proveedor', '');
+        DG_Do('filter', "&top_search=1");
+        DG_Slide("formFiltro",{duration:.2}).swap()
+    }
+    
+    function activateSearchBox(){
+        curDisplay = document.getElementById('formFiltro').style.display;
+        DG_Slide("formFiltro",{duration:.2}).swap()
+        if (curDisplay=='none') document.getElementById('estado').focus();
+    }
+    /* fin function to set new filter */
+
+</script>
+
+</head>
+
+<body>
+	<table border="0" id="bg">
+	  <tr>
+		<td id="content">
+			<div id='dg'> 
+                <div class="dgTable" style="width: 100%;">
+                    <form class="dgToolbar" method="post" name="formFiltro" id="formFiltro" style="display: none; height: 80px;">
+                    <table border="0" style="margin-top: 10px; width: 100%;" >
+                        <tr>
+                            <td style="width: 250px;"><label>Estado:</label> <input id="estado" name="estado" type="text" /></td>
+                            <td style="width: 270px;"><label>Tipo Conexion:</label> <input id="tipo" name="tipo" type="text" /></td>
+                            <td style="width: 250px;">&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td><label>Direccion:</label> <input id="direccion" name="direccion" type="text" /></td>
+                            <td><label>Proveedor:</label> <input id="proveedor" name="proveedor" type="text" /></td>
+                            <td>
+                                <a class="fbutton" href="javascript:setFilter()"><span class="buttonImage"><img src="images/search.gif" alt="Search" title="Search" class="dgImgLink" border="0" /></span></a>
+                                <a class="fbutton" href="javascript:resetFilter()"><span class="buttonImage"><img src="images/cancel_search.gif" alt="Search" title="Search" class="dgImgLink" border="0" /></span></a>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                    </form>
+                </div>
+				<?php include_once($tabla); ?>
+			</div>
+		</td>
+	  </tr>
+	</table>
+
+</body>
+</html>

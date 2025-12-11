@@ -1,0 +1,175 @@
+/*
+Copyright (c) 2005-2008, Guru Sistemas and/or Gustavo Adolfo Arcila Trujillo
+All rights reserved.
+www.gurusistemas.com
+
+phpMyDataGrid professional and evolution ARE NOT FREE and may not be re-sold as a single library.
+
+If you want to use phpMyDataGrid Professional or evolution on any of your projects, you Must purchase a license.
+
+You can buy the full source code or encoded version at http://www.gurusistemas.com/
+also can try the free version, which can be downloaded from http://www.gurusistemas.com/indexdatagrid.php
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS  "AS IS"  AND ANY EXPRESS  OR  IMPLIED WARRANTIES, INCLUDING, 
+BUT NOT LIMITED TO,  THE IMPLIED WARRANTIES  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT
+SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,  INDIRECT,  INCIDENTAL, SPECIAL, EXEMPLARY,  OR CONSEQUENTIAL 
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF  USE, DATA, OR PROFITS;  OR BUSINESS 
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+
+For more info, samples, tips, screenshots, help, contact, support, please visit phpMyDataGrid site  
+http://www.gurusistemas.com/
+*/
+																																 /* 
+--------------------------------------------------------------------------------------------------------------------------------
+	es: Todas las propiedades para el manejo de fondos, colores y bordes. 
+	en: All the properties for background, color and borders 
+-------------------------------------------------------------------------------------------------------------------------------- */
+
+/* 
+	es: Tabla del grid
+	en: DataGrid Table
+*/
+
+
+.dgHeader, .dg_dataTable .editTitle	/* Titulo del grid *//* DataGrid Title */
+	{ 
+		background: url(../icons/bck_title.gif) repeat-x 0 -1px;
+		border: 1px solid #333;
+	}
+
+.dgTable .dgToolbar	/* Toolbar */
+	{
+		background: #787878 url(../icons/bck_toolbar.gif) repeat-x top;
+		border: 1px solid #333;
+	}
+
+.dgTable .dgToolbar div.btnseparator	/* Separador de la barra de iconos *//* Toolbar Separator */
+	{
+		border-left: 1px solid #333;
+		border-right: 1px solid #666;
+	}
+
+.dgTable .dgTitles /* Titulo de cada columna *//* column titles */
+	{
+		background: #fafafa url(../icons/bck_column_names.gif) repeat-x bottom;
+		border-left: 1px solid #666;
+		border-right: 1px solid #333;
+		border-bottom: 1px solid #333;
+	}
+
+.dgTable .dgTitles .ordered /* Titulo de cada columna ordenada *//* ordered column titles */
+	{
+		background: #CBD8D1 url(../icons/bck_column_ordered.gif) repeat-x top;
+	}
+
+.dgTable .SelectLines
+	{
+		border:1px solid #333; 
+	}
+
+.dgTable .dgSelectpages, .dgTable .dgSelectnormal 
+	{
+		border:1px solid #333; 
+	}
+
+.dgSearchDivInline, .dgExportDivInline	/* Barra de búsqueda y exportación en línea */
+	{
+		border-bottom: 1px solid #333;
+	}
+
+.dgRowsnormTR /* Color de las filas *//* Rows Color */
+	{
+		background:#181818; 
+		color:#B4B4B4;
+	}
+
+.dgRowsaltTR /* Color alterno de las filas *//* Alternate Rows Color */
+	{
+		background:#000;
+		color:#B4B4B4;
+	}
+
+.dgRowsnormTR:hover, .dgRowsaltTR:hover /* Colores de las filas *//* Rows Colors */
+	{
+		background: #2D2D2D;
+	}
+
+.dgSelRow /* Color de las filas seleccionadas *//* Selected rows color */
+	{
+		background-color:#3D3D3D;
+		color:#FFF;
+	}
+
+.dgRowalt, .dgRownorm {
+		border:1px dotted #565656;
+		border-left:none;
+		border-bottom:none;
+}
+
+.dgRowalt div input, .dgRownorm div input /* Cuadros de lectura de datos *//* Input fields */
+	{
+		border:1px solid #333;
+		background:#eee;
+		color:#900;
+	}
+
+.dgInnerDiv .dg_dataTable thead tr th
+	{
+		background:#999;
+	}
+
+.dgInnerDiv .dg_dataTable tfoot tr th
+	{
+		background:#333;
+		color:#FFF;
+	}
+
+/* Ventana indicadora de procesos AJAX */
+/* Floating AJAX loading Window */
+.dgAjax
+	{
+		background-color:#FFFFE1; 
+	}
+
+/* Ventanas flotantes de búsqueda y exportación */
+/* Floating search and export windows */
+.dgSearchDiv 
+	{
+		background:#666 url(../icons/bck-windows.gif) repeat-x;
+		border:1px solid #000;
+	}
+
+.dgInnerDiv 
+	{
+		background:#F5F5F5;
+	}
+	
+.dgSearchTit 
+	{
+		color:#FFF;
+	}
+
+.dgPagRow
+	{
+		background:#EFEFEF;
+		border-top:solid 5px #C0C0C0;
+	}
+
+/* celdas de total */ /* Total cells */
+.dgRowsTot
+	{
+		border-top:10px solid #333;
+		background:#efefef;
+	}
+
+.dgTable .dgToolbar div.fbutton:hover
+	{
+		border: 1px solid #333;
+	}
+								
+/* Mensajes de ayuda al usuario *//* Input help Message */
+.dgMsgInput{color:#00F;}
+
+/* Error al validar un campo *//* A field do not pass the validation */
+.dgErrorInput{color:#F00;}

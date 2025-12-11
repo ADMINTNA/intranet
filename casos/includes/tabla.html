@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Estadíticas de Casos</title>
+</head>
+<body>
+    <table class="tabla_casos" border="0" style="border-color: yellow;">
+      <tbody>
+        <tr>
+          <th rowspan="13">&nbsp;</th>    
+          <th bgcolor="#1F1D3E" align="left" id="lupa"><a href="/casos/buscador.php" title="Buscador de Casos de Seleción Múltiple" target="_blank" style="background: #1F1D3E;"><img src="../../images/lupa_azul.jpeg" width="20"  alt="Buscador de Casos"/></a></th>    
+          <th colspan="9" id="titulo" align="center" style="font-size: 16px;">Casos x Categoría, actualización en: 05:00</th>
+          <th rowspan="13" width="4%">&nbsp;</th>
+        </tr>
+        <tr>
+          <th  align="left">Categ. / Tiempo</th>
+          <th>Open</th>
+          <th>12H</th>
+          <th>24H</th>
+          <th>48H</th>
+          <th>7D</th>
+          <th>15D</th>
+          <th>30D</th>
+          <th>6M</th>
+          <th>12M</th>          
+        </tr>
+        <tr align="center">
+          <th align="left">Kick Off &nbsp;</th>
+          <td class="abierto" ><a id="kickoff" style="color: orangered;" target="_blank" href="https://intranet.icontel.cl/kickoff/">KOff</a></td>
+          <td id="kickoff12h">&nbsp;</td>
+          <td id="kickoff24h">&nbsp;</td>
+          <td id="kickoff48h">&nbsp;</td>
+          <td id="kickoff1s">&nbsp;</td>
+          <td id="kickoff15d">&nbsp;</td>
+          <td id="kickoff1m">&nbsp;</td>
+          <td id="kickoff6m">&nbsp;</td>
+          <td id="kickoff1a">&nbsp;</td>
+        </tr>
+        <tr align="center">
+          <th align="left">Enlace</th>
+          <td class="abierto" ><a id="enlacea" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=Enlace">&nbsp;</a></td>
+          <td id="enlace12h">&nbsp;</td>
+          <td id="enlace24h">&nbsp;</td>
+          <td id="enlace48h">&nbsp;</td>
+          <td id="enlace1s">&nbsp;</td>
+          <td id="enlace15d">&nbsp;</td>
+          <td id="enlace1m">&nbsp;</td>
+          <td id="enlace6m">&nbsp;</td>
+          <td id="enlace1a">&nbsp;</td>
+        </tr>
+        <tr align="center">
+          <th align="left">Enlace Caido</th>
+          <td class="abierto"><a id="caidoa" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=enlace_caido">&nbsp;</a></td>
+          <td id="caido12h">&nbsp;</td>
+          <td id="caido24h">&nbsp;</td>
+          <td id="caido48h">&nbsp;</td>
+          <td id="caido1s">&nbsp;</td>
+          <td id="caido15d">&nbsp;</td>
+          <td id="caido1m">&nbsp;</td>
+          <td id="caido6m">&nbsp;</td>
+          <td id="caido1a">&nbsp;</td>
+        </tr>
+        <tr align="center">
+          <th align="left">Facturación</th>
+          <td class="abierto"><a id="facturaa" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=facturacion">&nbsp;</a></td>
+          <td id="factura12h">&nbsp;</td>
+          <td id="factura24h">&nbsp;</td>
+          <td id="factura48h">&nbsp;</td>
+          <td id="factura1s">&nbsp;</td>
+          <td id="factura15d">&nbsp;</td>
+          <td id="factura1m">&nbsp;</td>
+          <td id="factura6m">&nbsp;</td>
+          <td id="factura1a">&nbsp;</td>
+        </tr>
+        <tr align="center">
+          <th align="left">Hosting / Correos &nbsp;&nbsp;</th>
+          <td class="abierto"><a id="hostinga" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=Hosting">&nbsp;</a></td>
+          <td id="hosting12h">&nbsp;</td>
+          <td id="hosting24h">&nbsp;</td>
+          <td id="hosting48h">&nbsp;</td>
+          <td id="hosting1s">&nbsp;</td>
+          <td id="hosting15d">&nbsp;</td>
+          <td id="hosting1m">&nbsp;</td>
+          <td id="hosting6m">&nbsp;</td>
+          <td id="hosting1a">&nbsp;</td>
+        </tr>
+        <tr align="center">
+          <th align="left">Soporte</th>
+          <td class="abierto"><a id="soportea" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=Soporte">&nbsp;</a></td>
+          <td id="soporte12h">&nbsp;</td>
+          <td id="soporte24h">&nbsp;</td>
+          <td id="soporte48h">&nbsp;</td>
+          <td id="soporte1s">&nbsp;</td>
+          <td id="soporte15d">&nbsp;</td>
+          <td id="soporte1m">&nbsp;</td>
+          <td id="soporte6m">&nbsp;</td>
+          <td id="soporte1a">&nbsp;</td>
+        </tr>
+        <tr align="center">
+          <th align="left">Telefonía</th>
+          <td class="abierto"><a id="telefoniaa" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=Telefonia">&nbsp;</a></td>
+          <td id="telefonia12h">&nbsp;</td>
+          <td id="telefonia24h">&nbsp;</td>
+          <td id="telefonia48h">&nbsp;</td>
+          <td id="telefonia1s">&nbsp;</td>
+          <td id="telefonia15d">&nbsp;</td>
+          <td id="telefonia1m">&nbsp;</td>
+          <td id="telefonia6m">&nbsp;</td>
+          <td id="telefonia1a">&nbsp;</td>
+        </tr>
+        <tr align="center">
+          <th align="left">Término Contrato</th>
+          <td class="abierto"><a id="terminoa" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=termino_contrato" title="Casos Abiertos Término de Contrato, ordenados por Usuario">&nbsp;</a></td>
+          <td id="termino12h">&nbsp;</td>
+          <td id="termino24h">&nbsp;</td>
+          <td id="termino48h">&nbsp;</td>
+          <td id="termino1s">&nbsp;</td>
+          <td id="termino15d">&nbsp;</td>
+          <td id="termino1m">&nbsp;</td>
+          <td id="termino6m">&nbsp;</td>
+          <td id="termino1a">&nbsp;</td>
+        </tr>
+         <tr align="center">
+          <th align="left">En Seguimiento</th>
+          <td class="abierto"><a id="seguimiento" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=En Seguimiento" title="Casos Abiertos Término de Contrato, ordenados por Usuario">&nbsp;</a></td>
+          <td id="seguimiento12h">&nbsp;</td>
+          <td id="seguimiento24h">&nbsp;</td>
+          <td id="seguimiento48h">&nbsp;</td>
+          <td id="seguimiento1s">&nbsp;</td>
+          <td id="seguimiento15d">&nbsp;</td>
+          <td id="seguimiento1m">&nbsp;</td>
+          <td id="seguimiento6m">&nbsp;</td>
+          <td id="seguimiento1a">&nbsp;</td>
+        </tr>
+         <tr align="center">
+          <th align="left">Congelado</th>
+          <td class="abierto"><a id="congelado" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=Congelado" title="Casos Abiertos Término de Contrato, ordenados por Usuario">&nbsp;</a></td>
+          <td id="congelado12h">&nbsp;</td>
+          <td id="congelado24h">&nbsp;</td>
+          <td id="congelado48h">&nbsp;</td>
+          <td id="congelado1s">&nbsp;</td>
+          <td id="congelado15d">&nbsp;</td>
+          <td id="congelado1m">&nbsp;</td>
+          <td id="congelado6m">&nbsp;</td>
+          <td id="congelado1a">&nbsp;</td>
+        </tr>
+        <tr align="center" style="font-size: 16px;">
+          <th align="left"><a id="usuarios" style="color: white;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=usuarios" title="Casos Abiertos ordenados por Usuario">TOTAL</a></th>
+          <th class="abierto"><a id="totala" style="color: orangered;" target="_blank" href="/casos/includes/busca_detalle.php?categoria=todos" title="Casos Abiertos ordenados por Fecha de Creación">&nbsp;</a></th>
+          <th id="total12h">&nbsp;</th>
+          <th id="total24h">&nbsp;</th>
+          <th id="total48h">&nbsp;</th>
+          <th id="total1s">&nbsp;</th>
+          <th id="total15d">&nbsp;</th>
+          <th id="total1m">&nbsp;</th>
+          <th id="total6m">&nbsp;</th>
+          <th id="total1a">&nbsp;</th>
+        </tr>
+        <tr height="2px"><th colspan="11"></th></tr>  
+      </tbody>
+    </table>
+</body>
+</html>

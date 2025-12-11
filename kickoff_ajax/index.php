@@ -57,19 +57,19 @@ function salirIntranet() {
         display: flex;
         background: #1F1D3E;
         color: white;
-        height: 48px;
+        height: 28px;
         align-items: center;
         padding-left: 10px;
     }
 
     .tab {
-        padding: 12px 25px;
+        padding: 5px 20px;
         margin-right: 4px;
         cursor: pointer;
         background: #2A285C;
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
-        font-size: 14px;
+        font-size: 12px;
         user-select: none;
         transition: 0.2s;
     }
@@ -87,7 +87,7 @@ function salirIntranet() {
 
     .capa {
         display: none;
-        height: calc(100vh - 48px);
+        height: calc(100vh - 28px);
         overflow: auto;
         background: #fff;
         border-top: 2px solid #ddd;

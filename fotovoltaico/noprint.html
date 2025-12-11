@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hide element at print</title>
+    <style>
+        body {
+            text-align:center;
+        }
+        h1 {
+            color:green;
+        }
+        @media print {
+           .noprint {
+              visibility: hidden;
+           }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="noprint">GeeksforGeeks</h1>
+
+    <p>
+        GeeksforGeeks: It is a computer science
+        portal for geeks
+    </p>
+
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+  @charset "UTF-8";
+/* CSS Document */
+ /*   <style> */
+        body {
+            font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .navbar {
+            background-color: #00695c;
+            padding: 1px;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .container {
+            margin: 1px auto;
+            padding: 5px 5px 5px 5px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 750px;
+            max-width: 1000px;
+            border-radius: 8px;
+        }
+		.entrada {
+			color: orangered;
+		}
+		.ocultar{
+		   display: none;
+		}
+		label {
+            font-weight: bold;
+            margin-top: 3px;
+            display: block;
+            font-size: 14px;
+        }
+        h1, h2 {
+            text-align: center;
+            font-weight: 400;
+            color: #37474f;
+            margin: 3px 0;
+            font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        h2 {
+            font-size: 18px;
+        }
+        table {
+            width: 100%;			
+            border-collapse: collapse;
+            margin-top: 3px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            font-size: 12px;
+        }
+        th, td {
+            padding: 1px 10px ;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #4b0082;
+            color: white;
+            text-transform: capitalize;
+            font-weight: bold;
+            font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+        }
+        tr:nth-child(even) {
+            background-color: #f4f6f8;
+        }
+        tr:hover {
+            background-color: #eceff1;
+        }
+		td {
+			text-align: left;
+		}
+		input[type="number"] {
+            max-width: 20ch;
+            padding: 1px;
+            margin-top: 3px;
+            border: 1px solid #b0bec5;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 12px;
+            text-align: right;
+			width: 6em; 
+        }
+       button {
+            border-radius: 6px;
+            background-color: #4b0082;
+            color: white;
+            padding: 1px 1px;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 3px auto;
+            font-size: 12px;
+            transition: background-color 0.3s;
+            width: calc(100% - 20px);
+            max-width: 20ch;
+        }
+        button:hover {
+            background-color: #C39BD3;
+        }
+        @media (max-width: 1200px) {
+            .container {
+                padding: 3px;
+            }
+            th, td {
+                font-size: 10px;
+                padding: 2px;
+            }
+            .navbar {
+                font-size: 12px;
+            }
+            button {
+                padding: 3px;
+                font-size: 12px;
+            }
+  
+            @media print {
+                @page {
+                    size: 8.5in 11in; /* Tamaño carta */
+                    margin: 0.5in 0.5in; /* Márgenes: 0.5 pulgadas */
+                }
+                .container {
+                    width: 7.5in; /* Ajustado al tamaño carta con márgenes */
+                    max-width: 7.5in; /* Máximo ancho permitido */
+                    margin: 0 auto;
+                }
+                table {
+                    font-size: 10px; /* Tamaño de fuente ajustado para caber en el tamaño carta */
+                }
+                button, .noprint {
+                    display: none; /* Oculta elementos no necesarios en el PDF */
+                }
+            }
+            
+ /*
+            @media print {
+				@page {
+				size: 8.5in 11in;
+				margin-top: 0.5in;
+				margin-bottom: 0.75in;
+				margin-left: 1.25in;
+				margin-right: 1in;
+				}
+*/            
+				table, figure {
+					page-break-inside: avoid; /* Prevent the table from breaking across pages */
+				}
+			   .noprint{
+					visibility: hidden;
+				}
+				.print-only {
+					display: none;
+				}
+			}
+		

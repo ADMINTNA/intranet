@@ -1,0 +1,58 @@
+@charset "UTF-8";
+/* CSS Document */
+   	html, body, div {
+   		margin:0;
+   		padding:0;
+   		height:100%;
+   		margin-left: 0px;
+   		margin-top: 0px;
+   		margin-right: 0px;
+   		margin-bottom: 0px;
+   	}
+    table{
+           border: none;
+           color: #1F1D3E;
+           color: white;
+           font-size: 15px;
+           border-collapse: collapse;
+           background-color: #19173C;
+           border-collapse: collapse;
+
+       }   
+   	iframe {
+        border: none;
+        border-collapse: collapse;
+        padding: 0;
+        margin: 0;
+        display:block; 
+        width:100%;  
+        height: 80%;
+    }
+ 	footer {
+	  background-color: white;
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height: 25px;
+	  color: gray;
+	  font-size: 12px;
+	}
+	/* unvisited link */
+	a:link {
+	  color: gray;
+	}
+	/* visited link */
+	a:visited {
+	  color: gray;
+	}
+	/* mouse over link */
+	a:hover {
+	  color: darkgrey;
+	  font-size: 20px;
+	  font-weight: bold;
+	}
+	/* selected link */
+	a:active {
+	  color: blue;
+	}		
+

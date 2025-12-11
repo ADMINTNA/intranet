@@ -1,0 +1,40 @@
+
+/* ===== suma_selected_col_cel.css ===== */
+.selected-col{
+  background-color:#ffec99 !important; /* Amarillo suave */
+  transition: background-color .15s ease-in-out;
+}
+
+/* Botón flotante para calcular */
+.ssc-btn{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:9999;
+  background:#1F1D3E;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  font-size:14px;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.ssc-btn:hover{ opacity:.9; }
+
+/* Toast de resultado */
+.ssc-toast{
+  position:fixed;
+  right:16px;
+  bottom:60px;
+  z-index:9999;
+  background:#1F1D3E;
+  color:#fff;
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:14px;
+  box-shadow:0 4px 12px rgba(0,0,0,.18);
+  display:none;
+  max-width:60vw;
+  word-break:break-word;
+}

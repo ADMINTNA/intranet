@@ -1,0 +1,40 @@
+/* =========================
+   ORDENAMIENTO DE TABLAS
+   sort_columna.css
+   ========================= */
+
+th.sortable {
+  cursor: pointer;
+  background-color: #512554;
+  color: #C39BD3;
+  user-select: none;
+  position: relative;
+  padding-right: 18px;
+}
+
+th.sortable:hover {
+  background-color: #6C3483;
+}
+
+/* Indicador visual (flecha) */
+th.sortable::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  margin-top: -6px;
+  border: 6px solid transparent;
+  border-top-color: #C39BD3;
+  opacity: 0.5;
+}
+
+/* Ascendente */
+th.sortable.asc::after {
+  border-top-color: transparent;
+  border-bottom-color: #C39BD3;
+}
+
+/* Activa */
+th.sortable.active {
+  background-color: #7D3C98;
+}

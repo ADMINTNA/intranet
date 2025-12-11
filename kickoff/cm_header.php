@@ -14,7 +14,7 @@ ini_set('display_startup_errors', 1);
 <meta charset="UTF-8">
 
 <style type="text/css">
-body,td,th { font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+body,td,th { font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
 a { color: #000000; }
 
 /* === Frases motivacionales === */
@@ -109,54 +109,25 @@ function abrirBetaKickoff() {
 }    
 </script>
 
-<table class="no-sort">
+<table class="no-sort" cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 0; padding: 0;">
   <tbody>
     <tr>
-      <td valign="top" style="padding:0;margin:0;height:5px;border:none;border-spacing:0;">
-        <table class="no-sort" border="0">
+      <td valign="top" style="padding:0;margin:0;border:none;border-spacing:0;">
+        <table class="no-sort" border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse;">
           <tbody>
-
-            <!-- 🧠 Fila 1 -->
-            <tr style="color:white;background-color:#64C2C8;">
-              <td width="6%" rowspan="2" align="center" valign="bottom">
-
-                <!-- 🔒 LOGO CON SALIDA SEGURA -->
-                <a href="#"
-                   title="Cerrar sesión y salir del sistema"
-                   onclick="return salirDelSistema();">
-                   <img src="../kickoff/images/Robot_Cool_01.png"
-                        width="80"
-                        alt="Cerrar sesión"
-                        style="height:112px; cursor:pointer;">
-                </a>
-
-              </td>
-
-              <td width="15%" rowspan="2" align="center" valign="middle">
-                <em>"Cuando todos vendemos, el Éxito es inevitable"</em>
-              </td>
-
-              <td style="color:#512554;height:30px;vertical-align:middle;" colspan="7">
-                <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;">
-                  <div id="frase-centro"></div>
-                  <div id="frase-motivacional"></div>
-                </div>
-              </td>
-            </tr>
-
             <!-- 🧩 Fila 2 -->
-            <tr style="color:white;background-color:#64C2C8;">
-
-              <td>
-                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:#64C2C8;border:none;"
+            <tr id="Fila_1" style="height: 112px; color:white;background-image: url('images/icontel_header.jpg'); background-size: 100% 100%;">
+              <td colspan="2"></td>
+              <td style="vertical-align: top">
+                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:transparent;border:none;"
                         name="calculadoras" id="calculadoras" onchange="manejarCambio(this)">
                   <option value="">Calculadoras</option>
                   <option value="https://intranet.icontel.cl/fotovoltaico/">Fotovoltaica</option>
                 </select>
               </td>
 
-              <td>
-                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:#64C2C8;border:none;"
+              <td style="vertical-align: top">
+                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:transparent;border:none;"
                         name="formularios" id="formulario" onchange="manejarCambio(this)">
                   <option value="">Formularios</option>
                   <option value="https://sweet.icontel.cl/custom/New_lead/new_lead.html">Referidos</option>
@@ -164,8 +135,8 @@ function abrirBetaKickoff() {
                 </select>
               </td>
 
-              <td>
-                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:#64C2C8;border:none;"
+              <td style="vertical-align: top">
+                <select style="color:white;font-weight:bold;text-decoration:underline;background-color:transparent;border:none;"
                         name="materiales" id="materiales" onchange="manejarCambio(this)">
                   <option value="">Marketing y Escalamiento</option>
                   <option value="https://drive.google.com/drive/folders/1caqwj2gJSbA0VYAg9MVWlJz5SogPjM2i?usp=sharing">Material/Marketing</option>
@@ -174,19 +145,19 @@ function abrirBetaKickoff() {
                 </select>
               </td>
 
-              <td align="center">
+              <td style="vertical-align: top" align="center">
                 <a style="color:white;font-weight:bold;" href="https://calendar.app.google/9oeDbrLGtM3Gzhn28" target="_blank">
                   Agendamiento Comercial
                 </a>
               </td>
 
-              <td align="center">
+              <td style="vertical-align: top" align="center">
                 <a style="color:white;font-weight:bold;" href="https://www.tnagroup.cl/telecomunicaciones/presentacion" target="_blank">
                   Presentación Empresa
                 </a>
               </td>
 
-              <td align="center" style="white-space:nowrap;">
+              <td align="center" style="vertical-align: top; white-space:nowrap;">
                 <div id="auto-refresh-bar">
                   <form id="autoRefreshForm" method="post" style="margin:0;display:inline;">
                     <label style="cursor:pointer;">
@@ -200,9 +171,9 @@ function abrirBetaKickoff() {
               </td>
 
 <td align="right">
-    <button class="touchbar-beta-btn" onclick="abrirBetaKickoff()">
+    <!--button class="touchbar-beta-btn" onclick="abrirBetaKickoff()">
         🚀 Beta KickOff
-    </button>
+    </button-->
 </td>            </tr>
 
             <!-- ⚙️ Fila 3 -->

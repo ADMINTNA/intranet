@@ -1,0 +1,111 @@
+
+/* ===== filtro_columna.css ===== */
+.filter-row th {
+  background: #eaeaea !important;
+  position: sticky;
+  top: 32px;
+  z-index: 4;
+}
+
+.filter-row input {
+  width: 95%;
+  padding: 2px 4px;
+  font-size: 11px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.filter-row input:focus {
+  outline: none;
+  border-color: #1F1D3E;
+  box-shadow: 0 0 3px rgba(31,29,62,.5);
+}
+.page-footer-bar button:hover {
+  opacity: 0.9;
+}
+
+.help-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.help-content {
+  background: #fff;
+  color: #1F1D3E;
+  padding: 20px 30px;
+  border-radius: 10px;
+  max-width: 450px;
+  line-height: 1.6;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.help-content h3 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.help-content code {
+  background: #f1f1f1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.help-content button.close-help {
+  display: block;
+  margin: 20px auto 0;
+  background: #1F1D3E;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* === Encabezado fijo === */
+table thead th {
+  position: sticky;
+  top: 0;
+  background: #1F1D3E;
+  color: #fff;
+  z-index: 5;
+}
+
+/* === Fila de filtros fija debajo del encabezado === */
+.filter-row th {
+  position: sticky;
+  top: 33px; /* altura del encabezado */
+  background: #eaeaea;
+  z-index: 4;
+  text-align: center;
+}
+
+.filter-row input {
+  width: 95%;
+  padding: 2px 4px;
+  font-size: 11px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  color: #1F1D3E;
+}
+
+/* === Cuerpo desplazable === */
+.table-container {
+  max-height: calc(100vh - 220px); /* ajusta según tu layout */
+  overflow-y: auto;
+  overflow-x: auto;
+}
+

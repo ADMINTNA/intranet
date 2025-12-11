@@ -241,12 +241,27 @@ foreach ($datos as $lin):
 
     <td>
         <?php
-        $estado_key_selected = $lin["estado"];
-        if (!array_key_exists($estado_key_selected, $lista_estado)) {
-            $val_db = mb_strtolower(trim($lin["estado"]));
-            foreach($lista_estado as $k => $v) {
-                if (mb_strtolower($v) == $val_db) {
-                    $estado_key_selected = $k;
+        // Lógica robusta para detectar estado (Key vs Value vs CaseInsensitive)
+        $estado_db = trim($lin["estado"]);
+        $estado_selected = "";
+
+        // 1. Coincidencia directa con la LLAVE (lo más probable si la BD guarda keys)
+        if (array_key_exists($estado_db, $lista_estado)) {
+            $estado_selected = $estado_db;
+        } 
+        else {
+            // 2. Búsqueda por VALOR o Keys insensible a mayúsculas
+            $estado_db_lower = mb_strtolower($estado_db);
+            
+            foreach ($lista_estado as $key_list => $val_list) {
+                // Comparar con LLAVE (lowercase)
+                if (mb_strtolower($key_list) === $estado_db_lower) {
+                    $estado_selected = $key_list;
+                    break;
+                }
+                // Comparar con VALOR (lowercase) - (si la BD devuelve "Pendiente de Info")
+                if (mb_strtolower($val_list) === $estado_db_lower) {
+                    $estado_selected = $key_list;
                     break;
                 }
             }
@@ -254,7 +269,7 @@ foreach ($datos as $lin):
         ?>
         <select data-campo="estado">
         <?php foreach ($lista_estado as $k => $v): ?>
-            <option value="<?=$k?>" <?=($k==$estado_key_selected?"selected":"")?>><?=$v?></option>
+            <option value="<?=$k?>" <?=($k == $estado_selected) ? "selected" : ""?>><?=$v?></option>
         <?php endforeach; ?>
         </select>
     </td>

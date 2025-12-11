@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/* CSS Document */
+
+        table {
+               border: none;
+               color: #1F1D3E;
+               color: black;
+               font-size: 10px;
+               border-collapse: collapse;
+           }   
+          th, td {
+              padding: 4px;
+              font-size: 12px;
+         }
+         th {
+            background-color: #1F1D3E; 
+            color: white;
+         }
+         body{
+            margin:0;
+            padding:0px;
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+            font-size: 10px;
+            background-color: #FFFFFF;
+            color: #1F1D3E;
+        }
+        table tbody tr:nth-child(odd) {
+            background: #F6F9FA;
+        }
+        table tbody tr:nth-child(even) {
+            background: #FFFFFF;
+        }
+        table thead {
+          background: #444;
+          color: #fff;
+          font-size: 18px;
+        }
+        table {
+          border-collapse: collapse;
+        }            
+.container{
+    margin: 0 auto;
+}
+
+#empTable{
+  border-collapse: collapse;
+}
+
+#empTable th span:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,467 @@
+﻿id,fac,rut,estadoprod,proveedor,producto,clase_modelo,costo_UF,valor_UF,Tipo_Pago,n_pagador,vendedor,fecha_contrato,meses_contrato,meses_renovacion,fecha_factura,fecha_inst_fac,codigo_servicio,ip,gw,ip_router,modelo_router,dir_inst,comentarios
+2,0,99.556.110-7,activo,claro,enlace dedicado,100/50,6,16,mensual,1513999,dam,13-12-18,36,32,,,06-01-0010161740,200.29.188.32/29,200.29.188.33,200.29.188.35,CCR-1016-12G,"P√©rez Valenzuela 1635, piso 7, Providencia. Santiago Regi√≥n Metropolitana   Chile ",Enlace de respaldo
+3,0,99.556.110-7,activo,telefonica empresas,enlace dedicado,100/50,12.3,15.3,mensual,201504032,dam,20-07-15,60,15,,,PSITIE18959,201.236.135.240/29,201.236.135.241,201.236.135.242,CCR-1016-12G,"P√©rez Valenzuela 1635, piso 7, Providencia. Santiago Regi√≥n Metropolitana   Chile ",Perez valenzuela
+4,0,76.848.190-3,activo,telefonica empresas,enlace dedicado,UP a 100-10,0.09,2.6,mensual,201601774-201805476,romina,04-07-18,60,,,09-07-18,PSTIE20068 - PSITIE24837,,,,,"Avenida Valle Norte 961, of 2702, Huechuraba",
+5,0,76.424.331-5,activo,telefonica empresas,enlace dedicado,100-20,6.29,8.4,mensual,201503394,,06-05-15,60,,,,PSITIE18827,186.103.222.72/29,186.103.222.73,186.103.222.74,RB-1100,Cha√±arcillo 1201,
+6,0,76.233.391-0,activo,gtd manquehue,adsl,200/100,1.68,0,mensual,cta fac 3233073 - Folio inter 74141731,,04-07-18,,,,,222111785,,,,,,
+7,0,76.048.177-7,activo,telefonica empresas,enlace dedicado,100-20,8.3,12,mensual,201503810,,27-08-15,60,,,,PSITIE-18983,201.236.150.64/29,201.236.150.65,201.236.150.66,CRS-125-24G,"Avenida La Dehesa 1844,  Oficina 801",
+8,0,76.073.937-5,en traslado,telefonica empresas,enlace dedicado,100-10,7.93,12,mensual,201504770,dam,16-11-15,60,19,,,PSITIE-19273,186.103.228.24/29,186.103.228.25,186.103.228.26,CRS-125-24G,Camino lo Echevers 550,
+9,0,96.785.290-2,activo,telefonica empresas,enlace dedicado,100/10,7.2,9,mensual,201501389,,06-05-15,60,,,,PSITIE18679,186.103.218.32/29,186.103.218.33,186.103.218.34,MKT Propio de Cliente,Los Lingues 800,DVR nuevo : 186.103.218.38 DVR antiguo : 186.103.218.38:82
+10,0,99.516.750-6,activo,telefonica empresas,enlace dedicado,10-ene,4.15,5.4,mensual,201504892,,06-05-15,60,,,,PSITIE19163,186.103.227.64/29,186.103.227.65,,MKT 952 - dhcpClient,Jose M Balmaceda 98 Santiago,
+11,0,77.934.110-0,de baja,telefonica empresas,enlace dedicado,10-ene,0,0,mensual,,,,,,,,PSITIE-18471,186.103.214.240/29,186.103.214.241,186.103.214.242,RB-751U,,"Bezanilla 1302, Independecia"
+12,0,76.385.255-5,de baja,telefonica empresas,enlace dedicado,10-abr,4.56,6,mensual,,,,,,,,PSITIE18509,200.42.191.72/29,200.42.191.73,200.42.191.74,Cisco 881 - SIN MKT,,Folio 01-12-16: 580579
+13,0,96.773.060-2,activo,telefonica empresas,enlace dedicado,100-20,9.3,17,mensual,201503690,dam,,,,,07-05-18,PSITIE19277,186.103.228.120/29,186.103.228.121,186.103.228.122,RB-1100,"Los Robles 615, Valle Grande",18-01-17 Down - folio 662489
+14,0,76.015.531-4,de baja,telefonica empresas,enlace dedicado,10-ene,0,0,mensual,,,,,,,,PSITIE-19112,186.103.225.136/29,186.103.225.137,186.103.225.138,MKT RB-751,,"Avda del Parque 4860 Local 4, Ciudad Empresarial"
+15,0,76.015.531-4,de baja,telefonica empresas,enlace dedicado,10-ene,0,0,mensual,,,,,,,,PSITIE-19110,186.103.226.128/29,186.103.226.129,186.103.226.130,MKT RB-951,,"Pio Nono 73 Local 66, Providencia"
+16,0,76.596.787-2,de baja,telefonica empresas,enlace dedicado,10-ene,11,8.5,mensual,201604611,,,,,,,PSITIE20931,186.103.225.224/29,186.103.225.225,186.103.225.226,,,ex Fukai Plaza √ëu√±oa - Folio 09-12-16 N¬∫: 596854 - folio de escalamiento 12-12-16 N¬∫: 4422953
+17,0,76.304.060-7,activo,telefonica empresas,enlace dedicado,100-10,6.29,8.5,mensual,201603922,dam,06-09-16,60,,,,PSITIE20771,201.236.135.232/29,201.236.135.233,201.236.135.234,RB-951,Hu√©rfanos 786 oficina 1200,Ex TNA - Ex Serviplaga
+18,0,76.230.578-K,de baja,telefonica chile,adsl,6 Megas,0.75,1.01,mensual,222110449,,,,,,,222110449,,,,76.466.204-0,,
+19,0,76.099.521-5,activo,telefonica empresas,enlace dedicado,100-2,7.78,10,mensual,201502551-201504640,,24-08-15,60,,,,PSITIE19092,186.103.221.168/29,186.103.221.169,186.103.221.170,CRS-125-24G,"Avenida del Parque 4928,  Oficina 426, Ciudad Empresarial",
+20,0,76.186.746-6,activo,telefonica empresas,enlace dedicado,10-ene,2.8,6.32,mensual,201504577,,23-09-15,60,,,,PSITIE19181,186.103.227.56/29,186.103.227.57,186.103.227.58,MKT RB-951,"Avenida del Parque 5275 Oficina 204, Ciudad Empresarial",
+21,0,52.004.472-8,activo,telefonica chile,adsl,6 Megas,0.75,1,mensual,222030243,,,,,,,222030243,,,,,,
+22,0,76.466.204-0,de baja,telefonica empresas,enlace dedicado,10-ene,0,0,mensual,,,,,,,,PSITIE19780,186.103.222.40/29,186.103.222.41/29,186.103.222.42,RB-951,,Ex Serviplaga
+23,0,76.908.430-4,de baja,telefonica empresas,enlace dedicado,100-20,0,0,mensual,,,,,,,,PSTIE-20369,186.103.219.152/29,186.103.219.153,186.103.219.154,RB-1100,,
+24,0,76.534.218-k,activo,tna solutions,enlace dedicado,100-40,0,14.05,mensual,,,,,,,,LLAMOV14024,186.103.167.208/29,186.103.167.209,186.103.167.210,CCR-1016-12G,,
+25,0,96.986.170-4,activo,telefonica empresas,enlace dedicado,100-10,4.2,8.5,mensual,201600957 - N201604267-1,,06-12-16,60,,,,PSITIE20842,186.103.220.240/29,186.103.220.241,186.103.220.242,RB-951,Cerro del Plomo 5630 Las Condes,Cerro El Plomo
+26,0,77.597.410-9,activo,telefonica empresas,enlace dedicado,100-10,6.29,8.5,mensual,201602930,,30-09-16,60,,,,PSITIE20459,186.103.217.234-238/,186.103.237.129/29,,,PRESIDENTE KENNEDY 5488,
+27,0,77.597.410-9,activo,gtd manquehue,adsl,50 Mbps,2.4,2.6,mensual,,,,,,,,3162799,,,,,"Presidente Kennedy 5488,  piso 2,  Torre Sur",viernes 09 de 9:00 a 13:00 - N¬∫ reclamo: 6035642
+28,0,76.487.735-7,activo,telefonica empresas,enlace dedicado,100-20,6.29,8.5,mensual,201814152,,13-07-16,60,,,,VPF1667649,200.54.154.160/29,200.54.154.161,,,NUEVA YORK #33. PISO 17 OFI. 17. SANTIAGO,trasladado de Bernardo O Higgins 886 
+29,0,76.094.894-2,de baja,telefonica empresas,enlace dedicado,10-ene,0,0,mensual,,,,,,,,VFP1560752 - PSITIE20223,186.103.217.234-238/,186.103.217.233/29,,,,
+30,0,78.469.420-8,de baja,telefonica empresas,enlace dedicado,100-10,8.3,8.3,mensual,200433450,,,,,,,PSITIE-20300,200.54.182.26-30/29,200.54.182.25,,,,traslado a Charles Hamilton - DE BAJA
+31,0,76.397.334-4,activo,telefonica empresas,enlace dedicado,100-10,6.3,7,mensual,201602662,,16-06-16,60,,,,PSITIE20392,186.103.223.162-166/,186.103.223.161/29,,Cisco R1941,Juan XXIII 6110,
+32,0,76.272.440-5,activo,telefonica chile,adsl,15 MB,0.9,1.2,mensual,225215753,,,,,,,225215753,,,,,,soporte 6006000280
+33,0,76.848.190-3,de baja,telefonica empresas,adsl,50 Megas,0,0,mensual,,,,,,,,222077791,,,,76.466.204-0,,
+34,0,77.913.720-1,de baja,telefonica empresas,enlace dedicado,100/10,0,0,mensual,,,,,,,,VPS1560753,186.103.217.226/29,186.103.217.225,186.103.217.228,MKT Propio de Cliente,,
+35,0,96.785.290-2,de baja,telefonica empresas,adsl,6 Megas,0,0,mensual,,,,,,,,228720603,,,,76.178.138-3,,
+36,0,96.773.060-2,de baja,telefonica empresas,enlace dedicado,100-10,0,0,mensual,,,,,,,,06-01-0010154115,200.27.49.89/29,200.27.49.89,200.27.49.90,RB-1100,,
+37,0,76.085.050-0,de baja,telefonica empresas,enlace dedicado,10-ene,0,0,mensual,,,,,,,,VPF1550752,186.103.217.232/29,186.103.217.233,186.103.217.234,MKT RB-751,,
+38,0,76.466.204-0,de baja,telefonica empresas,enlace dedicado,10-ene,0,0,mensual,,,,,,,,PSITIE20931,186.103.225.224/29,186.103.225.225/29,186.103.225.226,,,Ex Fukai √ëu√±oa
+40,0,76.848.887-8,activo,pit chile,enlace dedicado,200-50,7.7,11.2,mensual,FAC PIT 187,,01-04-18,36,,,,LLAMOV14807,,,,,SAN FRANCISCO DE ASIS P16 8B REINA SUR SN COLINA,Ex Telecomunicaciones Internacionales S.A(179).
+41,0,78.454.700-0,activo,telefonica empresas,enlace dedicado,100-20,7.96,11.2,mensual,201602960,,24-11-16,60,,,,PSITIE20619,201.236.136.170-174/,,,, AV AMERICO VESPUCIO 2100,V. Distribucion - A. Vespucio 2100 Quilicura
+42,0,78.454.700-0,activo,telefonica empresas,mpls,10M,4.73,12.6,mensual,201602960,,24-11-16,60,,,,VIP13580.,Datos 172.16.1.0/24 ,,,, AV AMERICO VESPUCIO 2100,A. Vespucio 2100 Quilicura - cerramiento - euro stgo - termo Q - v. dist - V mont.
+43,0,78.454.700-0,activo,telefonica empresas,mpls,10M,4.36,9.8,mensual,201602960,,24-11-16,60,,,,VIP13581.,Datos 172.16.6.0/24 ,,,,Manuel Rodriguez 333 Concepcion,Euro concepcion - Manuel Rodriguez 333 Concepcion
+44,0,78.454.700-0,activo,telefonica empresas,mpls,10M,7.08,4.9,mensual,201602960,,24-11-16,60,,,,VIP13582.,Datos 172.16.7.0/24 ,,,,"Sebastopol 1707, Osorno","Euro Osorno - Sebastopol 1707, Osorno"
+45,0,78.454.700-0,activo,telefonica empresas,mpls,10M,6.34,5.6,mensual,201602960,,24-11-16,60,,,,VIP13583.,Datos 172.16.4.0/24 ,,,,"Ruta 60 CH520, Vina del Mar","Euro Vina - Ruta 60 CH520, Vina del Mar"
+46,0,78.454.700-0,activo,telefonica empresas,mpls,10M,4.45,13.3,mensual,201603630,,24-11-16,60,,,,VIP13678,Datos 172.16.3.0/24 ,,,,"Santa Maria 7030, Vitacura","Santa Maria 7030, Vitacura"
+47,0,78.454.700-0,activo,telefonica empresas,mpls,10M,4.35,2.8,mensual,201603630,,24-11-16,60,,,,VIP13679,Datos172.16.2.0/24 -,,,,ALONSO DE CORDOVA 4294,"termoqualit - Alonso de Cordova, Vitacura"
+48,0,78.454.700-0,activo,telefonica empresas,mpls,10M,4.85,9.8,mensual,201603630,,24-11-16,60,,,,VIP13680,Datos 172.16.5.0/24 ,,,,"AV EDMUNDO ELUCHANS 1850, Vina del mar","Edmundo Luchans, V. del Mar"
+50,0,77.934.110-0,de baja,pit chile,enlace dedicado,100-10,0,0,mensual,,,,,,,,LLAMOV14169,170.79.233.16/29,170.79.233.16/29,172.16.100.9,,,"Camino del Cerro 4868, Huechuraba"
+51,0,76.094.894-2,de baja,tna solutions,telefonia ip,Central telefonica 500 Minutos ,0.46,0.6,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual,  Incluye: - Hasta 5 DID (n√∫meros telef√≥nicos) - Hasta 50 Anexos"
+52,0,76.094.894-2,de baja,tna solutions,soporte,2 Horas OnSite Mensual,0,1.5,mensual,,,,,,,,,,,,,,
+53,0,76.094.894-2,de baja,tna solutions,reseller,Reseller 30 GB Mensual,0,0.72,mensual,,,,,,,,,,,,,,"Espacio:	30 GB  Dominios IS2.cl - grupobox.cl - inversionesmagnolio.cl - lasierradechicureo.cl"
+54,0,76.230.578-K,de baja,tna solutions,telefonia ip,Central telefonica Virtual 2.000 minutos,1.15,1.5,mensual,,,,,,,,,,,,,,
+55,0,76.090.231-4,activo,tna solutions,enlace dedicado,100/100,0.01,13.5,mensual,,,,,,,,,,,,,,
+56,0,76.090.231-4,activo,tna solutions,telefonia ip,3.000 minutos,1.62,2.1,mensual,,,,,,,,,,,,,, De 26 a 100 Anexos - Plan de 3.000 Minutos SLM - 1 DID 
+57,0,76.435.693-4,de baja,telefonica empresas,enlace dedicado,20-oct,0,0,mensual,,,,,,,,,,,,,,
+58,0,76.435.693-4,de baja,tna solutions,telefonia ip,central telefonica  2000 Minutos,1.38,1.8,mensual,,,,,,,,,,,,,,Hasta 5 DID (n√∫meros telef√≥nicos) - Hasta 50 Anexos - Plan de 2000 Minutos SLM
+59,0,76.435.693-4,de baja,tna solutions,hosting,Reseller 30 GB,0,0.8,mensual,,,,,,,,,,,,,,
+60,0,76.497.396-8,de baja,tna solutions,hosting,Hosting 25 Gb,0,0.47,mensual,,,,,,,,,,,,,,"Espacio:	25 GB Cuentas de Email:	200"
+61,0,52.004.472-8,activo,tna solutions,reseller,Reseller 15GB,0,0.77,mensual,,,,,,,,,,,,,,business-center.cl cognac.cl
+62,0,52.004.472-8,activo,tna solutions,telefonia ip,Central Telefonica 500 Minutos ,3.08,4,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual, incluye 25 DID, 500 Minutos"
+63,0,52.004.472-8,activo,tna solutions,cloud,50 Gb,0,0.83,mensual,,,,,,,,,,,,,,"Servicio Cloud B√°sico Espacio:	50 GB"
+64,0,76.073.937-5,en traslado,entel,enlace dedicado,10-ene,8.7,11.31,mensual,Folio 1799632110093434,dam,21-10-16,36,6,,,Num contrato 329131,,,,,,
+65,0,76.073.937-5,activo,tna solutions,telefonia ip,Central telefonica 3.000 minutos,2.8,4,mensual,,,,,,,,,,,,,,
+66,0,76.304.060-7,de baja,tna solutions,telefonia ip,"SipTrunk 	10k Minutos",3.85,5,mensual,,,,,,,,,,,,,,
+67,0,76.304.060-7,activo,tna solutions,hosting,Hosting 25 GB,0,5.25,anual,,,,,,,,,,,,,,
+68,0,76.397.334-4,activo,tna solutions,soporte,1 visita de 3H mes ,0,2.25,mensual,,,,,,,,,,,,,,2do Lunes de cada mes
+69,0,76.397.334-4,activo,tna solutions,telefonia ip,Central Telefonica 10.000 Minutos ,6.4,8.32,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual. Incluye hasta 50 n√∫meros telef√≥nicos, 8,32SLM, anexos ilimitados."
+70,0,76.526.927-K,de baja,tna solutions,hosting,25 GB,0,0.47,mensual,,,,,,,,,,,,,,
+71,0,76.015.531-4,de baja,telefonica chile,adsl,10 MB,0,0,mensual,,,,,,,,7456742,,,,,,Ciudad Empresarial - Avda del Parque 4860 Local 4
+72,0,76.015.531-4,de baja,telefonica chile,adsl,10 MB,0,0,mensual,,,,,,,,7442357,,,,,,"Patio Bellavista - Pio Nono 73 Local 66, Providencia - Folio 494680 (intal router)"
+73,0,76.015.531-4,de baja,telefonica chile,adsl,10 MB,0,0,mensual,,,,,,,,7442357,,,,"Wifi (N900): .arroz.fk.,17",,"Patio Bellavista - Pio Nono 73 Local 66, Providencia"
+74,0,76.085.050-0,de baja,tna solutions,hosting,6 GB,0,0,mensual,,,,,,,,,,,,,,
+75,0,76.015.531-4,de baja,telefonica chile,adsl,5 MB,0,0,mensual,,,,,,,,7456742,,,,,,"Jorge washington 144, √ëu√±oa"
+76,0,99.556.110-7,activo,didww,did adicional,DID 800 Costa RIca ,0.23,0.35,mensual,,,,,,,,,,,,,,"Costo mensual n√∫mero telefonico 800 para paises de America, seg√∫n el siguiente detalle de paises y costo:    Costa Rica	UF 0,35  Mexico		UF 0,28  USA		UF 0,175  Canada		UF 0,175  Costo por minuto de l"
+77,0,99.516.750-6,activo,tna solutions,telefonia ip,2.000 minutos,1.4,1.82,mensual,,,,,,,,,,,,,,
+78,0,99.556.110-7,activo,tna solutions,telefonia ip,Central telefonica 3.000 Minutos,1.62,2.1,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual. Incluye Plan de 3.000 minutos SLM, hasta 100 anexos, 30 Canales y administraci√≥n de una centena de DID."
+79,0,99.556.110-7,de baja,tna solutions,equipo en arriendo, 2 Licencias para Roter Cisco ,0,7.8,mensual,,,,,,,,,,,,,,"2 Licencias de por vida SEC-K9, para Router Cisco 1941-K9 Ubicado en SIA y GTD Licencia facturable en 6 cuotas de UF 3,9 c/u"
+80,0,99.556.110-7,de baja,tna solutions,soporte,Confiruacion de Telefonia para turnos ,0,1,mensual,,,,,,,,,,,,,,Configuraci√≥n mensual  de  Llamadas desde n√∫mero Virtual a usuarios por Turno AM- PM
+81,0,76.424.331-5,activo,tna solutions,telefonia ip,Central Telefonica 7.000 ,6.15,8,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual, Incluye 7.000 minutos"
+82,0,76.424.331-5,de baja,tna solutions,soporte,Cloud  100GB,0,1.5,mensual,,,,,,,,,,,,,,"Servicio Cloud Pyme Espacio:	100 GB"
+83,0,76.410.308-4,activo,tna solutions,telefonia ip,Central Telefonica 500 Minutos,0.48,0.62,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual Incluye 3 anexos, 500 Minutos y 1 DID"
+84,0,76.534.218-k,activo,tna solutions,soporte,Full 8 horas x 5 dias sem.,0,8,mensual,,,,,,,,,,,,,,
+85,0,76.534.218-k,activo,tna solutions,cloud,50 GB.,0,0,mensual,,,,,,,,,,,,,,
+86,0,76.534.218-k,de baja,tna solutions,colocate,1 U Morando,0,1,mensual,,,,,,,,,,,,,,
+87,0,76.534.218-k,de baja,tna solutions,hosting,Reseller 50 GB Morando,0,0.5,mensual,,,,,,,,,,,,,,
+88,0,76.048.177-7,activo,tna solutions,telefonia ip,4.000 min ,4.15,5.4,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual. Incluye: Hasta 100 N¬∫ Telef√≥nicos, 60 Anexos, 30 Canales, 10.000 Minutos SLM."
+89,0,76.534.218-k,de baja,telefonica empresas,vpn,VPN iP publica Orbis,0,0,mensual,,,,,,,,,,,,,,
+90,0,96.785.290-2,activo,tna solutions,reseller,Reseller 30 GB,0,1,mensual,,,,,,,,,,,,,,chileantrading.cl - worldpack.cl
+91,0,96.785.290-2,activo,tna solutions,soporte,soporte on site,0,6,mensual,,,,,,,,,,,,,,8 Horas Hombre de Soporte Informatico On Site
+92,0,96.785.290-2,activo,tna solutions,telefonia ip,Central Telefonica 3.000 MInutos,3.85,5,mensual,,,,,,,,,,,,,,
+93,0,96.785.290-2,activo,tna solutions,cloud,Cloud 50 GB,0,0.83,mensual,,,,,,,,,,,,,,"Servicio Cloud B√°sico Espacio:	50 GB"
+95,0,77.934.110-0,de baja,tna solutions,hosting,Hosting 25 GB,0,0.44,mensual,,,,,,,,,,,,,,
+96,0,77.934.110-0,de baja,tna solutions,telefonia ip,central Telefonica  2.000 minutos,1.92,2.5,mensual,,,,,,,,,,,,,,
+97,0,77.934.110-0,de baja,tna solutions,soporte,soporte on site de Lunes a Viernes 1/2 Dia,0,15.6,mensual,,,,,,,,,,,,,,Soporte Informatico On Site de Lunes a Viernes de 8:30 Hrs a 13:30 Hrs. Soporte inormatico para continuidad Operacional de la red y equipamiento en uso y generaci√≥n de Informes estad√≠sticos.
+98,0,76.385.255-5,de baja,tna solutions,telefonia ip,Central telefonica 500 Min,0.19,0.25,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual Incluye 3 anexos, 500 Minutos y 1 DID"
+99,0,99.534.800-4,activo,tna solutions,telefonia ip,Central telefonica 2.000 Min,1.23,1.6,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual, Incluye 2000 minutos."
+100,0,99.534.800-4,de baja,tna solutions,colocate,1U (2U),0,4,mensual,,,,,,,,,,,,,,Collocate Servidores 1U
+101,0,99.534.800-4,de baja,bynarya,soporte,Soporte On Site ,0,3,mensual,,,,,,,,,,,,,,4 Horas Hombre de Soporte Informatico On Site  Visita de 2 Horas Quincenales.
+102,0,96.773.060-2,activo,tna solutions,soporte,Soporte On SIte 16 HRS,0,12,mensual,,,,,,,,,,,,,,"Soporte On site, Todos los Viernes 4 Horas diarias "
+103,0,96.773.060-2,activo,tna solutions,telefonia ip,Central Telefonica 18.000 Min,11.54,15,mensual,,,,,,,,,,,,,,
+104,0,76.908.430-4,de baja,telefonica empresas,adsl,3.000 min.,0,3,mensual,,,,,,,,,,,,,,
+105,0,96.773.060-2,activo,tna solutions,soporte,Manage de Servidor,0,13.5,mensual,,,,,,,,,,,,,,ADministracion Remota de 1 servidor 
+106,0,76.015.531-4,de baja,tna solutions,telefonia ip,Central Telef√≥nica  1.000 min,0.45,0.63,mensual,,,,,,,,,,,,,,
+107,0,76.015.531-4,de baja,tna solutions,soporte,Soporte On Site 3 Hrs,0,3,mensual,,,,,,,,,,,,,,"3 Horas Hombre de Soporte Informatico On Site.  1 Visita mensual de una hora, a cada local."
+108,0,76.233.391-0,activo,tna solutions,telefonia ip,Central Telefonica 500 min,0,0,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual Incluye 3 anexos, 500 Minutos y 1 DID"
+109,0,76.360.929-4,de baja,tna solutions,telefonia ip,Central Telef√≥nica  2000,1.54,2,mensual,,,,,,,,,,,,,,"Servicio de Central Telefonica Virtual,  Incluye: - Hasta 1 DID +56 2 2940 2303  - Hasta 50 Anexos - Plan de 2000 Minutos SLM Valor Minuto Nacional $ 15 Valor Minuto a Celular $ 29"
+110,0,76.360.929-4,de baja,tna solutions,telefonia ip,DID Sao Pablo,0.38,0.5,mensual,,,,,,,,,,,,,,
+111,0,76.186.746-6,activo,tna solutions,telefonia ip,Sip-Trunk 1.000 Minutos,0.46,0.6,mensual,,dam,,,,,,,,,,,,
+112,0,76.099.521-5,activo,tna solutions,telefonia ip,Central Telefonica 4.000 minutos,2.31,3,mensual,,,,,,,,,,,,,,
+113,0,76.908.430-4,de baja,tna solutions,did adicional,1 DID adicional,0,20,mensual,,,,,,,,,,,,,,
+114,0,76.099.521-5,activo,tna solutions,soporte,Soporte On Site 8 HRs,0,6,mensual,,,,,,,,,,,,,,"2 horas diaria , todo los Miercoles en la ma√±ana "
+115,0,76.255.233-7,activo,tna solutions,telefonia ip,Sip-Trunk 18.000,1.12,1.6,mensual,,,,,,,,,,,,,,
+116,0,76.356.306-5,activo,tna solutions,telefonia ip,500 min,0.46,0.62,mensual,,,,,,,,,,,,,,
+117,0,76.558.268-7,de baja,pit chile,enlace dedicado,100-10,0,0,mensual,,,,,,,,LLAMOV1442,,,,,,"TRASLADO GNT FAC385 - Isidora Goyenechea 2800, piso 29"
+118,0,81.246.800-6,activo,tna solutions,reseller,Reseller 5GB ,0,3.05,anual,,,,,,,,,,,,,,mobelstore.cl  - nagel.cl -  nagelantiguedades.cl
+119,0,76.180.102-3,activo,tna solutions,telefonia ip,2.000 Min,1.22,1.58,mensual,,,,,,,,,,,,,,
+120,0,76.015.531-4,de baja,tna solutions,hosting,25 GB,0,0.7,mensual,,,,,,,,,,,,,,
+121,0,96.841.500-K,de baja,gtd teleductos,enlace dedicado,10/2 MB,7.2,10,mensual,,,,,,,,401574,,,,,Maria Josefina S/N Lote 2-05 Parque Industrial,de baja 11-18
+122,0,96.841.500-K,activo,tna solutions,telefonia ip,2.500 Mintutos,1.54,2,mensual,,,,,,,,,,,,,,asta 10 DID hasta 25 anexos 2.500 Minutos SLM
+123,0,76815270-5,activo,pit chile,enlace dedicado,100/20,4.93,9.45,mensual,FAC PIT 51,,08-06-17,36,,,,LLAMOV14430,,,,,"Arrayan 2750, of 301, providencia","Arrayan 2750, of 301, providencia"
+124,0,76.181.442-7,de baja,tna solutions,telefonia ip, 500 Minutos,0.46,0.6,mensual,,,,,,,,,,,,,,"TRASLADO A CASAMUSA FAC391 - Avda. Kennedy N¬∫5488, Oficina 1306, Vitacura"
+125,0,96.952.620-4,de baja,tna solutions,telefonia ip,500 min,0.54,0.7,mensual,,,,,,,,,,,,,,
+126,0,96.605.150-7,activo,tna solutions,telefonia ip,8.000 min,5.42,7.05,mensual,,,,,,,,,,,,,,
+127,0,76.558.268-7,de baja,pit chile,adsl,50 MB,0,0,mensual,,,,,,,,LLAMOV1442,,,,,,
+128,0,76.596.787-2,de baja,tna solutions,telefonia ip,3.000 min,1.62,2.1,mensual,,,,,,,,,,,,,,
+129,0,76.596.787-2,activo,tna solutions,cloud,200 GB,0,0.83,mensual,,,,,,,,,,,,,,
+130,0,76.596.787-2,de baja,tna solutions,soporte,soporte on line + 1 visita,0,0,mensual,,,,,,,,,,,,,,
+131,0,78.469.420-8,activo,tna solutions,soporte,2 visitas Quincenales de 2 Horas ,0,3,mensual,,,,,,,,,,,,,,2 visitas Quincenales de 2 Horas Hombre de Soporte Informatico On Site
+132,0,78.469.420-8,activo,tna solutions,reseller,Reseller 100 GB ,0,1.2,mensual,,,,,,,,,,,,,,accuratek.cl
+133,0,76.618.607-6,de baja,tna solutions,hosting,25 GB,0,0.7,mensual,,,,,,,,,,,,,,
+134,0,76129526-4,activo,telefonica empresas,enlace dedicado,100-10,8.3,8.5,mensual,201712658,mam,26-12-17,60,,,,PSITIE21733 - ex Fukai Bella,186.103.226.128/29,186.103.226.129,186.103.226.130,,"Nueva costanera 4261, Vitacura","Sucursal Vitacura: Nueva costanera 4261, Vitacura"
+135,0,99.541.390-6,de baja,tna solutions,reseller,"	Reseller 30 GB - Anual",0,6,mensual,,,,,,,,,,,,,,adisol.cl ancona.cl avarservi.cl bitgo.cl bittner.cl chabit.cl chavan.cl colegionewenmapu.cl dagavea.cl dipromat.cl espaciosdeensuenos.cl factorvital.cl farmaciasanjavier.cl fnp.cl fundacionarca.cl gl
+136,0,76.754.117-1,activo,pit chile,enlace dedicado,100-10,4.93,8.5,mensual,FAC PIT 57,dam,23-03-17,36,,,,LLAMOV14338,,,,,"CERRO COLORADO 5812 , LAS CONDES",
+137,0,76.541.256-0,activo,tna solutions,telefonia ip,Servicio de Central Telef√≥nica Empresa,1,2,mensual,,,,,,,,,,,,,,Servicio de Central Telef√≥nica Empresa
+138,0,76.541.256-0,activo,telefonica empresas,enlace dedicado,Enlace Dedicado 100 Nac. - 10 Inter. 1:4,6.29,11.5,mensual,201602985,,31-08-16,60,,,,PSITIE20537,,,,,"Avenida viel poniente 1965, Santiago",Enlace Dedicado 100 Nac. - 10 Inter. 1:4
+139,0,76.541.256-0,activo,tna solutions,soporte,Horas Hombre de Soporte Informatico On Site   cada,0,4,mensual,,romina,13-02-19,,,,13-02-19,,,,,,,Horas Hombre de Soporte Informatico On Site   cada martes todo el dia 
+140,0,76409351-8,activo,telefonica empresas,enlace dedicado,100/20,6.29,5.5,mensual,201701621,,17-06-17,60,,,,PSITIE21940,,186.103.167.209,186.103.167.210,,"Pio Nono 59, local 64, Patio Bellavista","Pio Nono 59, local 64, Bellavista (patio) "
+141,0,76.015.531-4,activo,telefonica empresas,enlace dedicado,10-jun,4.94,7.25,mensual,201701620-201501486,,26-04-17,60,,,,PSITIE21939 ex PSITIE18471,,186.103.214.241,186.103.214.242,,"Avenida del Parque 4860 Local 4, Ciudad empresarial (ex bezanilla)","Avenida del Parque 4860 Local 4, Ciudad empresarial (ex bezanilla)"
+142,0,76.015.531-4,activo,tna solutions,enlace dedicado,50/20,0,5.5,mensual,201504715,,,,,,,PSITIE21940,,186.103.167.209,186.103.167.212,,Instalado en TPF bellavista,"enlace desde TPF Bellavista SPA - CCTV http://186.103.167.212:82 - remoto 1313131313 - admin P3rf3ct0., - WIFI: FUKAI: .arroz.fk.,17 - FUKAIVISITAS: sushi.2016"
+143,0,76.018.196-K,de baja,tna solutions,reseller,Reseller 100 GB ,0,1.2,mensual,,,,,,,,,,,,,,ovalbox.cl ovalgroup.cl ovalpass.cl ovaltrade.cl
+144,0,76.018.196-K,de baja,tna solutions,soporte,Soporte On site ,0,3,mensual,,,,,,,,,,,,,,4 H. Soporte on site ( 2 Visitas Quincenales ) 
+145,0,76.018.196-K,de baja,tna solutions,soporte,SOporte On - Line  8 h,0,2,mensual,,,,,,,,,,,,,,8 Horas soporte remoto 
+146,0,76.587.136-0,de baja,tna solutions,hosting,servicio de Hosting 9G,0,4,mensual,,,,,,,,,,,,,,
+147,0,77.253.090-0,de baja,telefonica empresas,adsl,ADSL 50 MB,0,0,mensual,,,,,,,,7495204,,,,,,
+148,0,77.253.090-0,activo,tna solutions,telefonia ip,100 min,0.19,0.25,mensual,,,,,,,,,,,,,,2 telefonos T21p - DID 232100778
+149,0,77.253.090-0,activo,pit chile,enlace dedicado,100-10,5.23,7.23,mensual,FAC PIT 144,,08-09-17,60,,,,LLAMOV14703,,,,,PRESIDENTE RIESCO 5330 LAS CONDES - LOCAL 101C,
+150,0,78.454.700-0,activo,tna solutions,equipo en comodato,MKT 2011,0,0,mensual,,,,,,,,,,,,, AV AMERICO VESPUCIO 2100, AV AMERICO VESPUCIO 2100
+151,0,76286709-5,activo,pit chile,enlace dedicado,100-10,5.01,7.38,mensual,FAC PIT 83,,01-08-17,,,,,LLAMOV14510,,,,,NUEVA CENTRAL 4588 CONCHALI,
+152,0,76.099.521-5,activo,tna solutions,hosting,25 GB ,0,7,anual,,,,,,,,,,,,,,
+154,0,76.222.023-7,de baja,tna solutions,telefonia ip,500 min,0.46,0.25,mensual,,,,,,,,,,,,,,1 telefono T21p - DID: 232100712 Anexo: 200 clave: !B!ZBoNi?L Dominio: natural.pbx
+155,0,76.222.023-7,de baja,gtd manquehue,adsl,50 Mb,1.3,1.43,mensual,INTFTTH254916,,,,,,,7502021,,,,,,telefono soporte GTD: 600 950 5000
+156,0,76111152-3,activo,tna solutions,telefonia ip,2.000 min.,0.46,1.6,mensual,,,,,,,,,,,,,,"Servicio de Central Telef√≥nica Cloud B√°sica Concepci√≥n (0,4uf), Quilpue (0,4uf), Temuco (0,4uf), Antofagasta (0,4uf)"
+157,0,76111152-3,activo,tna solutions,did adicional,1 DID +,0,0.48,mensual,,,,,,,,,,,,,,
+158,0,76409351-8,activo,tna solutions,equipo en comodato,MKT 3011,0,0,mensual,,,,,,,,,,,,,,
+159,0,76409351-8,activo,tna solutions,telefonia ip,500 min,0.19,0.25,mensual,,,,,,,,,,,,,,
+160,0,76.057.687-5,activo,tna solutions,enlace dedicado,20-20,0,8,mensual,,,,,,,,TNA,,,,,,
+161,0,76.057.687-5,activo,tna solutions,telefonia ip,1.000 min,0.74,0.96,mensual,,,,,,,,,,,,,,"2 num a portar, 8 anexos"
+162,0,76.093.861-0,activo,pit chile,enlace dedicado,100-20,3.95,7.05,mensual,FAC PIT 56,,28-06-17,,,,,LLAMOV14606,,,,,ROMAN DIAZ 205 PROVIDENCIA - OF 505,"Rom√°n D√≠az 205, Oficina 505, Providencia"
+163,0,81.246.800-6,activo,tna solutions,telefonia ip,Central Virtual 500 Min.,0.27,0.78,mensual,,,,,,,,,,,,,,
+164,0,76.181.442-7,en traslado,pit chile,enlace dedicado,20-may,4.44,5.5,mensual,,,,,,,,LLAMOV14724,,,,,,"TRASLADO A CASAMUSA FAC391 - Avda. Kennedy N¬∫5488, Oficina 1306, Vitacura"
+165,0,76.181.442-7,de baja,tna solutions,did adicional,4 DID adicionales,0,0.6,mensual,,,,,,,,,,,,,,"TRASLADO A CASAMUSA FAC391 - Avda. Kennedy N¬∫5488, Oficina 1306, Vitacura"
+166,0,76.607.184-8,en traslado,pit chile,enlace dedicado,100-50,7.93,16.5,mensual,FAC PIT 32,,29-11-17,,,,,LLAMOV14201,,,,,"Queule 2642, La Pintana",
+167,0,76.607.184-8,en traslado,pit chile,enlace dedicado,100-50,6.13,10,mensual,FAC PIT 204,,24-08-17,,,,,LLAMOV14763,,,,,"Queule 2642, La Pintana",
+168,0,76.181.442-7,de baja,telefonica empresas,adsl,50 MB,0,0,mensual,,,,,,,,7511452,,,,,,"TRASLADO A CASAMUSA FAC391 - Avda. Kennedy N¬∫5488, Oficina 1306, Vitacura"
+169,0,76.449.789-9,activo,pit chile,enlace dedicado,100-10,5.13,7.9,mensual,FAC PIT 189,,31-08-17,,,,,LLAMOV14772,,,,,NAPOLEON 3233 LAS CONDES,Napole√≥n 3233
+170,0,76.360.929-4,de baja,pit chile,enlace dedicado,100-20,0,12,mensual,,,,,,,,LLAMOV14803,,,,,,
+171,0,96.986.170-4,activo,pit chile,enlace dedicado,100-20,5.13,8.5,mensual,FAC PIT 174,,14-08-17,,,,,LLAMOV14751,,,,,HOLANDA 99 PROVIDENCIA - PISO 3. OFICINA 301,"Holanda 090, Piso 3. Oficina 301"
+172,0,76.480.929-7,en traslado,pit chile,enlace dedicado,100-10,5.13,8,mensual,FAC PIT 218,,24-08-17,,,,03-06-18,LLAMOV14810,,,,,GENERAL DEL CANTO 105 PROVIDENCIA,Se traslada a Casa Musa Matta
+173,0,76.094.894-2,de baja,tna solutions,equipo en comodato,T21P,0,0,mensual,,,,,,,,,,,,,,pr√©stamo 1 mes para prueba de telefonia 
+174,0,76.534.218-k,activo,tna solutions,did adicional,DID Adicional,0,2.5,mensual,,,,,,,,,,,,,,
+175,0,76.534.218-k,activo,tna solutions,telefonia ip,10k min,9.23,12,mensual,,,,,,,,,,,,,,
+176,0,76.534.218-k,activo,tna solutions,pack ip,8 IPs,0.08,4.5,mensual,,,,,,,,,,,,,,
+177,0,76.324.590-K,activo,pit chile,enlace dedicado,100-10,5.05,8.5,mensual,FAC PIT 158,,23-08-17,,,,,LLAMOV14671,,,,,PADRE LUIS DE VALDIVIA 333 (BARRIO LASTARRIA) SANTIAGO,PADRE LUIS DE VALDIVIA 333 (BARRIO LASTARRIA) SANTIAGO -  DVR  IP 192.168.1.99/24 Gateway 192.168.1.1 DNS 192.168.1.1
+179,0,99.556.110-7,activo,telefonica empresas,punto a punto,S&A y GTD,26.8,28,mensual,201600044-201603982-201601212,,11-07-19,60,,,,VIP 13224 - VIP 13223,,,,,"Huerfanos  725, Santiago - Av. Pedro de Valdivia  1609, Providencia",
+180,0,78.469.420-8,activo,tna solutions,telefonia ip,basica 2k min,1.23,1.6,mensual,,,,,,,,,,,,,,
+181,0,96.785.290-2,de baja,tna solutions,soporte,Mantencion web ,0,3.5,mensual,,,,,,,,,,,,,,
+182,0,76.541.256-0,de baja,tna solutions,telefonia ip,Serv. audio conferencias,0,0,mensual,,,,,,,,,,,,,,
+183,0,76.541.256-0,de baja,tna solutions,telefonia ip,Licencia 3cx,2.31,3.58,mensual,,,,,,,,,,,,,,
+184,0,76.018.196-K,de baja,tna solutions,vps,500 GB,0,3,mensual,,,,,,,,,,,,,,
+185,0,76.534.218-k,activo,tna solutions,enlace dedicado,piso 16,0,4.52,mensual,,,,,,,,,,,,,,
+186,0,76.534.218-k,activo,tna solutions,colocate,1 U Netquest,0,2,mensual,,,,,,,,,,,,,,
+190,0,76.039.028-3,de baja,tna solutions,soporte,32 Horas Soporte on site,0,20.4,mensual,,,,,,,,,,,,,,centena 2-32742000 hasta 2-327420099.
+191,0,99.534.800-4,activo,pit chile,enlace dedicado,100/10,5.77,9.21,mensual,FAC PIT 272,,01-12-17,,,,,LLAMOV14964,,,,,KENNEDY 7900 VITACURA - OFICINA 201,"Kennedy 7900, oficina 201, Vitacura"
+192,0,76.607.184-8,en traslado,pit chile,enlace dedicado,100-10,5.42,7.1,mensual,FAC PIT 300,,23-02-17,,,,,LLAMOV15021,,,,,"Queule 2642, La Pintana",
+193,0,96.927.920-7,en traslado,pit chile,enlace dedicado,100-10,4.93,9.2,mensual,FAC PIT 244,,29-11-17,36,,,,LLAMOV14915,,,,,SAN ANTONIO 385 SANTIAGO - OFICINA 503,Se traslada a Casa Musa Manuel Rodriguez
+194,0,76.480.929-7,en traslado,pit chile,enlace dedicado,100-10,4.53,7.2,mensual,FAC PIT 259,,26-10-17,,,,03-06-18,LLAMOV14932,,,,,TRES 326 COLINA,Se traslada a Casa Musa Las Condes
+195,0,76.177.621-5,activo,pit chile,enlace dedicado,100-50,5.21,11.86,mensual,FAC PIT 293,mao,28-11-17,36,,,,LLAMOV15035,,,,,"Apoquindo 5400 piso 2, Las Condes",
+196,0,76.177.621-5,activo,tna solutions,telefonia ip,5000,2.69,3.5,mensual,,romina,,,,,,3cx - KJ6H-GSBU-SYWH-QKCJ,,,,,,
+197,0,76.380.318-K,de baja,tna solutions,hosting,9 GB,0,4,anual,,,,,,,,,,,,,,
+198,0,76.295.486-9,activo,tna solutions,telefonia ip,1.000 min,0.71,0.92,mensual,,,,,,,,,,,,,,
+199,0,76.295.486-9,activo,didww,did adicional,DID adicional peru,0.42,0.55,mensual,,,,,,,,,,,,,,
+200,0,76.295.486-9,activo,tna solutions,did adicional,DID adicional x 2,0.31,0.4,mensual,,,,,,,,,,,,,,
+202,0,763784134,activo,tna solutions,enlace dedicado,50-10,0,7.5,mensual,,,,,,,,,,,,,,Con equipo - Mikrotik RB 951G y  Acces Point  : ip: 172.16.10.1 user: solarity password: Acceso.2018..
+203,0,76.397.334-4,activo,tna solutions,hosting,9GB,0,2.2,anual,,,,,,,,,,,,,,
+204,0,76129526-4,activo,tna solutions,soporte,1.5 Hrs. semanales Vitacura,0,4.5,mensual,,,,,,,,,,,,,,
+205,0,76129526-4,activo,tna solutions,telefonia ip,Basica 500 Min,0.46,0.62,mensual,,,,,,,,,,,,,,
+206,0,76.558.268-7,de baja,pit chile,telefonia ip,5.000 min,0,0,mensual,,,,,,,,LLAMOV1442,,,,,,
+207,0,82.409.100-5,activo,pit chile,mpls,MPLS 10 MB,3,46.02,mensual,FAC PIT 166,,25-01-18,36,,,25-01-18,LLAMOV15075 - LLAMOV 15191,,,,,"Orrego Luco 150, Providencia","Orrego Luco 150, Providencia"
+208,0,82.409.100-5,activo,pit chile,mpls,MPLS 5 MB,3.37,0,mensual,FAC PIT 291,,30-01-18,36,,,30-01-18,LLAMOV15076,,,,,Tranqueras 56 - Las Condes,Tranqueras 56 - Las Condes
+209,0,82.409.100-5,activo,pit chile,mpls,MPLS 5 MB,3.37,0,mensual,FAC PIT 303,,23-01-18,36,,,23-01-18,LLAMOV15077,,,,,Curic√≥ 244 - Santiago,Curic√≥ 244 - Santiago
+210,0,82.409.100-5,activo,pit chile,mpls,MPLS 5 MB,4.68,0,mensual,FAC PIT 375,,05-06-18,36,,,05-06-18,LLAMOV15078,,,,,Av. Kennedy 5314 Local 567 - Las Condes,Av. Kennedy 5314 Local 567 - Las Condes
+211,0,82.409.100-5,activo,pit chile,mpls,MPLS 5 MB,3.37,0,mensual,FAC PIT 376,,22-01-18,36,,,22-01-18,LLAMOV15080,,,,,Los Herreros 8751 - La Reina,Los Herreros 8751 - La Reina
+212,0,82.409.100-5,activo,pit chile,mpls,MPLS 5 MB,4.16,0,mensual,FAC PIT 377,,13-02-18,36,,,13-02-18,LLAMOV15079,,,,,"Alonso de Cordova 3026, Vitacura","Alonso de Cordova 3026, Vitacura"
+213,0,82.409.100-5,activo,pit chile,mpls,MPLS 5 MB,3.65,0,mensual,FAC PIT 378,,19-01-18,36,,,19-01-18,LLAMOV15068,,,,,"Presidente Riesco 3178, Las Condes","Presidente Riesco 3178, Las Condes"
+214,0,82.409.100-5,activo,pit chile,mpls,MPLS 5 MB,3.88,0,mensual,FAC PIT 379,,07-02-18,36,,,07-02-18,LLAMOV15067,,,,,"Charles Hamilton 125 , Las Condes","Charles Hamilton 125 , Las Condes"
+215,0,82.409.100-5,activo,tna solutions,telefonia ip,6.000 Min,3.46,4.5,mensual,,,,,,,,,,,,,,
+216,0,763784134,activo,tna solutions,telefonia ip,3.000 Min,1.62,2.1,mensual,,,,,,,,,,,,,,
+217,0,78.469.420-8,activo,telefonica empresas,enlace dedicado,100-20,6.19,8.3,mensual,201602552,,14-08-16,60,,,,PSTIE20369,,,,,Av. Palacio Riesco of. 4201-A,EX the Cow PSTIE-20369
+218,0,11.348.398-9,activo,tna solutions,hosting,9 GB,0,2,anual,,,,,,,,,,,,,,
+219,0,93.689.000-8,activo,tna solutions,equipo en arriendo,Appliance 3CX Tower,0,1.02,mensual,,,,,,,,,,,,,,
+220,0,93.689.000-8,activo,tna solutions,telefonia ip,1.000 Min,0.75,0.98,mensual,,,,,,,,3cx - ISOR-YFNK-IRD7-LWJM,,,,,,
+221,0,93.689.000-8,de baja,bynarya,telefonia ip,Licencia 3cx ANUAL,35.77,46.5,anual,,,,,,,,,,,,,,
+222,0,93.689.000-8,activo,tna solutions,telefonia ip,Mantencion 3CX ANUAL,8.92,11.6,anual,,,,,,,,,,,,,,
+223,0,76.015.531-4,activo,tna solutions,reseller,100 GB,0,1.2,mensual,,,,,,,,,,,,,,https://restauranterosita.cl/ - Fukai.cl
+224,0,76.803.046-4,activo,tna solutions,telefonia ip,3k min,0.42,3,mensual,,,,,,,,,,,,,,
+225,0,76.803.046-4,activo,pit chile,enlace dedicado,100-10,5.01,9,mensual,FAC PIT 385,,10-12-18,,,,,LLAMOV14429 - LLAMOV 15349,,,,,"ARRAYAN 2750 , PROVIDENCIA","El Arrayan 2750, of 402, Providencia"
+226,0,76.848.190-3,activo,tna solutions,telefonia ip,siptrunk 1.000 min ,1.85,2.4,mensual,,,,,,,,,,,,,,
+227,0,76.015.531-4,de baja,tna solutions,equipo en comodato,t21p,0,0,mensual,,,,,,,,,,,,,,telefono instalado por urgencia el dia Viernes 02-03-2018
+228,0,76.315.164-K,de baja,tna solutions,vps,25 GB,0,0.5,mensual,,,,,,,,,,,,,,
+229,0,76.315.164-K,de baja,tna solutions,soporte,Remoto - 2 horas mes,0,0.5,mensual,,,,,,,,,,,,,,
+230,0,76.315.164-K,de baja,tna solutions,telefonia ip,3cx licencia Anual ,6.92,9,mensual,,,,,,,,,,,,,,
+231,0,93.689.000-8,activo,tna solutions,equipo en arriendo,Switch CISCO WS-C2960+24PC-L,0,0.59,mensual,,,,,,,,,,,,,,
+232,0,93.689.000-8,activo,tna solutions,equipo en arriendo,Mikrotik RB3011UiAS-RM,0,0.8,mensual,,,,,,,,,,,,,,
+233,0,65.058.385-k,activo,tna solutions,hosting,3 GB,0,1.3,anual,,,,,,,,,,,,,,
+234,0,99.534.800-4,activo,pit chile,x conect,Murano,1.35,1.7,mensual,FAC PIT 272,,01-12-17,,,,,LLAMOV14964,,,,,KENNEDY 7900 VITACURA - OFICINA 201,
+235,0,99.534.800-4,de baja,tna solutions,soporte,Manage Correo Zimbra,0,1.5,mensual,,,,,,,,,,,,,,
+236,0,77.597.410-9,activo,tna solutions,telefonia ip,central ,1.62,2.1,mensual,,,,,,,,,,,,,,
+237,0,77.597.410-9,activo,tna solutions,telefonia ip,plan 1.000 min,0.45,1.16,mensual,,,,,,,,,,,,,,
+238,0,77.597.410-9,activo,tna solutions,colocate,1 U,0,2.5,mensual,,,,,,,,,,,,,,
+239,0,77.597.410-9,activo,gtd manquehue,adsl,IPTV HD,1.1,1.2,mensual,,,,,,,,3233120,,,,,"Presidente Kennedy 5488,  piso 2,  Torre Sur",
+240,0,76.093.906-4,de baja,tna solutions,canje,100 MB,38,38,mensual,,,,,,,,,,,,,,
+241,0,76.093.906-4,de baja,tna solutions,canje,X-Connect x 7,26.6,26.6,mensual,,,,,,,,,,,,,,
+242,0,76.093.906-4,de baja,tna solutions,canje,Premium IP,10.4,10.4,mensual,,,,,,,,,,,,,,
+243,0,76.093.906-4,de baja,tna solutions,canje,Servicios agregados,10.2,10.2,mensual,,,,,,,,,,,,,,
+244,0,76.093.906-4,de baja,tna solutions,canje,Uso espacio datacenter IFX (expansion),10,10,mensual,,,,,,,,,,,,,,
+245,0,15.478.047-5,de baja,tna solutions,hosting,1 GB,0,1.5,anual,,,,,,,,,,,,,,Tinta Negra
+246,0,15.478.047-5,de baja,tna solutions,hosting,1 GB,0,1.5,anual,,,,,,,,,,,,,,Cruz.cl
+247,0,15.478.047-5,de baja,tna solutions,hosting,1 GB,0,1.5,anual,,,,,,,,,,,,,,xmart
+248,0,76.140.595-0,activo,tna solutions,hosting,1 GB,0,1,anual,,,,,,,,,,,,,,
+250,0,99.560.290-3,activo,tna solutions,telefonia ip,sipt trunk  20.000,46.15,60,mensual,,mao,,,,,21-09-16,,,,,,,Servicio Sip-Trunk Mensual que Incluye: - Administraci√≥n de 15 Servicio de DID 600 - Administraci√≥n de 2 Centenas (PRI) - 30 Canales VOIP - Enlace Dedicado Fibra Optica para Siptrunk hasta 120 canales
+251,0,76815270-5,activo,tna solutions,telefonia ip,central telefonica 10.000,5.77,7.5,mensual,,,,,,,,,,,,,,
+252,0,76815270-5,activo,tna solutions,did adicional,DID Adicional x 24,0,2.88,mensual,,,,,,,,,,,,,,
+253,0,76.677.503-9,de baja,tna solutions,hosting,1gb,0,1.5,anual,,,,,,,,,,,,,,
+254,0,76.534.218-k,activo,tna solutions,telefonia ip,Siptrunk 3k min,1.62,2.1,mensual,,,,,,,,3cx - G7UO-PY9I-8VO9-8SOO,,,,,,
+255,0,76.534.218-k,activo,tna solutions,colocate,1U appliance 3cx,0,1.75,mensual,,,,,,,,,,,,,,
+256,0,76.534.218-k,activo,didww,did adicional,Netquest Arg - Per - Col - Ecu,3.02,4.63,mensual,,,,,,,,,,,,,,
+257,0,76.534.218-k,activo,tna solutions,telefonia ip,Mantencion y licencia 3cx ANUAL,4.69,6.1,anual,,,,,,,,,,,,,,
+259,0,76129526-4,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.1,0,mensual,201604274 - 201603922,,,,,,, PSITIE24777 - PSITIE23755,,,,,de badajoz a huerfanos,ex grupobox
+260,0,93.689.000-8,activo,tna solutions,equipo en comodato,T21P - 1,0,0,mensual,,,,,,,,,,,,,,Sucursal Las Condes
+261,0,93.689.000-8,activo,tna solutions,equipo en comodato,T21p - 2,0,0,mensual,,,,,,,,,,,,,,Sucursal las Condes
+262,0,76.480.929-7,activo,tna solutions,pack ip,2 x pack de 8 IP,0.16,1.06,mensual,,,,,,,,,,,,,,General del Canto 105 of 1207
+263,0,76.480.929-7,activo,tna solutions,pack ip,pack 8 Ip ,0.08,0.75,mensual,,,,,,,,,,,,,,"Pasaje Tres N¬∫ 326, Colina, Santiago"
+264,0,76.480.929-7,activo,tna solutions,colocate,2 U ifx,0,5,mensual,,,,,,,,,,,,,,
+265,0,76.480.929-7,activo,tna solutions,pack ip,Pack 8 ip,0.08,1.5,mensual,,,,,,,,,,,,,,Colocate ifx
+266,0,76.424.530-K,de baja,tna solutions,mpls,20 Mb Enlace Internacional,0,4.6,mensual,,,,,,,,,,,,,,
+267,0,76.152.362-7,de baja,pit chile,enlace dedicado,100-10,5.7,9.5,mensual,,,,,,,,LLAMOV14895,,,,,,"Av La Dehesa 181, Piso 11, Ofic 1107 a la 1112, Lo Barnechea"
+269,0,78.454.700-0,activo,tna solutions,telefonia ip,Sip-Trunk,1.85,2.64,mensual,,,,,,,,3cx - 83PS-MRR7-BYR8-I84I,,,,,,DISTRIBUCION
+270,0,78.454.700-0,activo,tna solutions,telefonia ip,Sip-Trunk,0.81,1.16,mensual,,,,,,,,3cx - 83PS-MRR7-BYR8-I84I,,,,,,Europerfiles Osorno Limitada
+271,0,78.454.700-0,activo,tna solutions,telefonia ip,Sip-Trunk,1.6,2.31,mensual,,,,,,,,3cx - 83PS-MRR7-BYR8-I84I,,,,,,Europerfiles Concepcion S.A
+272,0,78.454.700-0,activo,tna solutions,telefonia ip,Sip-Trunk,2,2.97,mensual,,,,,,,,3cx - 83PS-MRR7-BYR8-I84I,,,,,,CERRAMIENTOS TECNOLOGICOS S.A
+273,0,76.118.556-K,activo,tna solutions,hosting,1 GB,0,1.5,anual,,,,,,,,,,,,,,digicam.cl
+274,0,76.118.556-K,activo,tna solutions,hosting,Renov. Dominio ,0.7,1,bienal,,,,,,,,,,,,,,
+275,0,76.129.319-2,de baja,tna solutions,equipo en comodato,WIFI Ubiquiti,0,0,mensual,,,,,,,,,,,,,,prueba de wifi 
+276,0,76286709-5,en instalacion,tna solutions,colocate,1 U,1.5,2.87,mensual,,,,,,,,,,,,,,
+277,0,76286709-5,en instalacion,pit chile,enlace dedicado,Para Collocate,0,3.56,mensual,,,,,,,,,,,,,,
+278,0,93.689.000-8,activo,ifx,colocate,2 U ifx,0,7.89,mensual,,,,,,,,,,,,,,
+279,0,7.748.952-5,activo,tna solutions,hosting,6 GB,0,2,anual,,,,,,,,,,,,,,baytelman.cl
+280,0,76.743.719-6,activo,tna solutions,hosting,3 GB,0,1.8,anual,,,,,,,,,,,,,,
+281,0,96.933.270-1,activo,tna solutions,hosting,6 GB,0,2.2,anual,,,,,,,,,,,,,,
+283,0,76.848.190-3,activo,telefonica empresas,enlace dedicado,10-ene,6.56,5.4,mensual,201601774,,04-07-18,60,,,,PSTIE20068 - PSITIE24837,200.50.126.58/29,,,76.466.204-0,"Avenida Valle Norte 961, of 2702, Huechuraba",
+284,0,76.230.578-K,de baja,tna solutions,hosting,10 GB,0,0,anual,,,,,,,,,,,,,,
+285,0,76.534.218-k,activo,tna solutions,hosting,9 GB,0,4,anual,,,,,,,,,,,,,,
+286,0,7.367.539-1,activo,telefonica chile,adsl,30 MB,1.25,0,mensual,,,,,,,,,,,,,,
+289,0,76.466.204-0,gasto,tna office,gasto,OF,65,0,mensual,,mam,,,,,,,,,,,,
+290,0,76.466.204-0,gasto,tna solutions,gasto,suel,350,0,mensual,,mam,,,,,,,,,,,,"1J-2,5D-0,6D-0,9R-0,3P-1,9M-0,7R"
+291,0,76.466.204-0,de baja,bynarya,colocate,9 U,5.04,0,mensual,,,,,,,,,,,,,,MKT 1100 - Cpanel - Voip - SW 01 - VMW - Router - Border - SW02
+292,0,76.466.204-0,gasto,tna solutions,gasto,CC Santander,0.5,0,mensual,,mam,,,,,,,,,,,,
+293,0,99.541.390-6,activo,tna solutions,reseller,Reseller 100 GB - Anual,0,10,anual,,,,,,,,,,,,,,
+294,0,82.409.100-5,activo,tna solutions,colocate,1 U MKT,0,0,mensual,,,,,,,,,,,,,,
+295,0,76.466.204-0,gasto,tna solutions,gasto,W DNS 200 zonas,0.9,0,mensual,,mam,,,,,,,,,,,,
+296,0,76.180.102-3,activo,tna solutions,did adicional,,0,0.16,mensual,,,,,,,,,,,,,,
+297,0,76111152-3,de baja,tna solutions,telefonia ip,1k min,0.6,0.85,mensual,,,,,,,,,,,,,,
+298,0,96.785.290-2,activo,tna solutions,vps,400 GB,0,7.22,mensual,,,,,,,21-06-18,,,,,,,
+299,0,76129526-4,activo,telefonica empresas,enlace dedicado,100-20,8.33,9.85,mensual,201806067,,27-04-18,60,,,, PSITIE24777 - PSITIE23755,,,,,Jose Alcalde delano 10581 Local 1005,ex grupobox
+300,0,76129526-4,activo,tna solutions,did adicional,1 DID,0,0.4,mensual,,,,,,,,,,,,,,
+301,0,93.689.000-8,activo,pit chile,enlace dedicado,Punto a Punto ,3.63,5.5,mensual,FAC PIT 391,,20-06-18,,,,01-07-18,LLAMOV15352,,,,,SAN ISIDRO 1685 SANTIAGO,
+302,0,76.099.521-5,activo,tna solutions,cctv,DNS para DVR,0,0.5,mensual,,,,,,,,,,,,,,
+303,0,76.628.256-3,de baja,tna solutions,soporte,2m Horas hombre,0,74,mensual,,,,,,,,,,,,,,
+304,0,76.534.218-k,activo,didww,did adicional,DID USA 800,1.17,1.5,mensual,,,,,,,,,,,,,,
+305,0,76.534.218-k,activo,didww,did adicional,DID Sao Pablo,0.32,0.52,mensual,,,,,,,,,,,,,,
+306,0,76.534.218-k,activo,didww,did adicional,DID Mexico,0.19,0.4,mensual,,,,,,,,,,,,,,
+307,0,76.523.625-8,activo,tna solutions,did adicional,DID vina y valpo,0,0.4,mensual,,,,,,,,,,,,,,
+308,0,76.523.625-8,activo,tna solutions,telefonia ip,1k min,0.84,1.2,mensual,,,,,,,,,,,,,,
+309,0,76.534.218-k,de baja,tna solutions,colocate,2 U CJL,0,1.24,mensual,,,,,,,,,,,,,,
+310,0,76.534.218-k,de baja,tna solutions,pack ip,IP Publica CJL,0,0.31,mensual,,,,,,,,,,,,,,
+311,0,76.534.218-k,de baja,tna solutions,vpn,Vlan capa 2 CJG,0,0.16,mensual,,,,,,,,,,,,,,
+312,0,76.534.218-k,de baja,tna solutions,pack ip,IP Privada CJG,0,0,mensual,,,,,,,,,,,,,,
+314,0,78.454.700-0,activo,tna solutions,telefonia ip,Sip-Trunk,2.2,3.14,mensual,,,,,,,,3cx - 83PS-MRR7-BYR8-I84I,,,,,,Europerfiles Stgo
+315,0,78.454.700-0,activo,tna solutions,telefonia ip,Sip-Trunk,0.92,1.32,mensual,,,,,,,,3cx - 83PS-MRR7-BYR8-I84I,,,,,,Eruroperfiles Vina
+316,0,78.454.700-0,activo,tna solutions,telefonia ip,Sip-Trunk,0.46,0.66,mensual,,,,,,,,3cx - 83PS-MRR7-BYR8-I84I,,,,,,Termoquialit
+317,0,78.454.700-0,activo,tna solutions,telefonia ip,Sip-Trunk,1.61,2.31,mensual,,,,,,,,3cx - 83PS-MRR7-BYR8-I84I,,,,,,Montajes S.A
+318,0,76.858.593-8,activo,telefonica empresas,enlace dedicado,10-feb,4.72,6,mensual,201501642,romina,23-09-15,60,,,10-07-18,PSITIE18509,,,,," Andres Bello, 2233, Local 104, edificio Costaner Lyon",ex TPF
+319,0,76.858.593-8,activo,tna solutions,telefonia ip,1.000 min,0.69,0.98,mensual,,romina,,,,,10-07-18,,,,,,,
+320,1,76.768.946-2,activo,pit chile,enlace dedicado,10-ene,4.18,5.62,mensual,FAC PIT 341,romina,17-07-18,,,01-06-18,,LLAMOV15609,,,,,"Avda. Ricardo Cummings 746, Santiago",FAC341 (PIT) traslado de FAC222 Genesis
+321,2,76.177.621-5,activo,gtd teleductos,enlace dedicado,100-50,9,11.86,mensual,FIL 730409,mao,30-10-18,36,,,,523038,,,,,"Apoquindo 5400 piso 2, Las Condes",
+322,3,76.674.060-K,activo,pit chile,enlace dedicado,10-abr,5,6,mensual,FAC PIT 447,romina,13-08-18,,,10-01-90,,LLAMOV14058 - LLAMOV 15608,,,,,"Andres Bello #1567, Providencia",EX Dentalink
+323,4,76.674.060-K,activo,tna solutions,telefonia ip,3k min,2.1,3.5,mensual,,romina,,,,10-01-90,01-10-18,,,,,,,
+324,5,89.003.900-6,activo,tna solutions,enlace dedicado,100-20,0,13,mensual,,,,,,01-06-18,05-06-18,,,,,,"Badajoz 45, piso 5",
+325,6,76.117.015-5,activo,tna solutions,telefonia ip,Discador 30 CH 5k min,4.1,5.82,mensual,Romina,,,,,01-06-18,04-06-18,,,,,,,
+326,7,76.117.015-5,activo,tna solutions,soporte,Soporte para Discador,0,7,mensual,Romina,,,,,01-06-18,04-06-18,,,,,,,
+329,10,76.117.015-5,activo,tna solutions solutions,router,apliance 1 U,0,4.4,mensual,Romina,,,,,01-06-18,04-06-18,,,,,,,
+330,11,76.830.188-3,activo,tna solutions,hosting,reseller 5GB,0,3.05,anual,,,,,,01-06-18,04-06-18,,,,,,,
+331,12,76.466.204-0,gasto,pit chile,enlace dedicado,1 GB,20,0,mensual,FAC PIT 179,,15-05-18,,,08-01-18,15-05-18,C1037918-DWF183388-DWF183389,,,,,"Badajoz 45 Piso 17, Las condes",
+332,13,76.090.231-4,de baja,telefonica empresas,enlace dedicado,100-100,0,0,mensual,,,,,,10-01-90,,LLAMOV14058 ,,,,,,Se traslado a Allcom
+333,14,96.927.920-7,activo,tna solutions,pack ip,8 IP /29,0,1.5,mensual,,,,,,10-01-90,,,,,,,,
+334,15,99.556.110-7,de baja,tna solutions solutions,did adicional,DID - Dentidesk,0,0.2,mensual,,,,,,06-06-18,08-06-18,,,,,,,
+335,16,76129526-4,activo,tna solutions,soporte,1.5 Hrs. semanales La Dehesa,0,4.5,mensual,Romina,,,,,11-06-18,11-06-18,,,,,,,"Sucursal La Dehesa: Av. Jose Alcalde Delano 10581, Local 1005, Lo Barnechea"
+336,17,76.534.218-k,activo,didww,did adicional,DID USA Philadelpia,0.1,0.55,mensual,,,,,,10-01-90,,,,,,,,
+337,18,76.874.538-2,activo,tna solutions,reseller,30 GB,0,0.72,mensual,,,,,,10-01-90,,,,,,,,"Espacio:	30 GB  Dominios IS2.cl - grupobox.cl - inversionesmagnolio.cl - lasierradechicureo.cl"
+338,19,76.874.538-2,activo,tna solutions,telefonia ip,500 Min,0.46,0.6,mensual,,,,,,10-01-90,,,,,,,,"Servicio de Central Telefonica Virtual,  Incluye: - Hasta 5 DID (n√∫meros telef√≥nicos) - Hasta 50 Anexos"
+339,20,76.851.556-5,activo,tna solutions,reseller,Reseller 15 GB - Anual,0,5,anual,Romina,,,,,13-06-18,15-06-18,,,,,,,
+340,21,76.466.204-0,gasto,telefonica chile,gasto,celulares,4,0,mensual,,mam,,,,10-01-90,,,,,,,,
+341,22,76.466.204-0,gasto,tna solutions,gasto,Bsale,2,0,mensual,,mam,,,,10-01-90,,,,,,,,
+342,23,53.322.521-7,activo,tna solutions,enlace dedicado,100/10 MB,0,0.92,mensual,,romina,,,,10-01-90,,,,,,,,
+343,24,53.322.521-7,activo,tna solutions,telefonia ip,1k min,0.69,0.3,mensual,,romina,,,,10-01-90,,,,,,,,
+344,25,53.322.521-7,activo,tna solutions,equipo en arriendo,T21P,0,0.07,mensual,,romina,,,,10-01-90,,,,,,,,
+345,26,96.841.500-K,de baja,gtd teleductos,enlace dedicado,UP a 100-10,1.4,4.67,mensual,,,,,,10-01-90,,401574,,,,,Maria Josefina S/N Lote 2-05 Parque Industrial,de baja 11-18
+346,27,76.795.930-3,de baja,tna solutions,telefonia ip,2k min,1.4,2,mensual,Romina,,,,,10-01-90,,,,,,,,
+347,28,76.466.204-0,gasto,tna solutions,gasto,Dyn DNS,0.09,0,mensual,,mam,,,,10-01-90,,,,,,,,
+348,29,76.607.184-8,activo,gtd teleductos,enlace dedicado, 1GB,20,40,mensual,FIIL 738572,romina,17-10-18,36,,10-01-90,17-10-18,528985,,,,,"Queule 2642, La Pintana",20 uf costo GB + 3 uf cruzada ifx
+351,32,76.371.767-4,activo,tna solutions,telefonia ip,1000 min,0.74,1.12,mensual,Romina,romina,,,,10-01-90,,3cx -  XLO2-UBT5-EKLI-TSOW,,,,,,
+352,33,76.371.767-4,activo,tna solutions,telefonia ip,2.000 min,0.78,0.98,mensual,Romina,romina,,,,10-01-90,,3cx -  XLO2-UBT5-EKLI-TSOW,,,,,,
+353,34,76.371.767-4,activo,tna solutions,vps,15 GB,0,0.9,mensual,Romina,romina,,,,10-01-90,,,,,,,,
+354,35,76.371.767-4,activo,tna solutions,telefonia ip,Pack Grabaci√≥n PBX 10 canales,0,1.9,mensual,Romina,romina,,,,10-01-90,,,,,,,,
+355,36,76.371.767-4,activo,tna solutions,did adicional,DID premium,0,0.64,mensual,Romina,romina,,,,10-01-90,,,,,,,,
+356,37,76.534.218-k,activo,tna solutions,hosting,3 GB,0,1.8,anual,,,,,,10-01-90,11-07-18,,,,,,,
+357,38,76.371.767-4,activo,tna solutions,sms,SMS service,0,2.8,mensual,Romina,romina,,,,,,,,,,,,
+358,39,76.776.354-9,en traslado,telefonica empresas,enlace dedicado,PRO 10/10,2.03,2.63,mensual,201810484,romina,28-09-18,36,,,01-10-18,PSXTIE25954,,,,,"Manquehue Norte 151, Oficina 509, Las Condes.",
+359,40,76.776.354-9,de baja,tna solutions,telefonia ip,1000 min,0.7,0.98,mensual,,romina,,,,,,,,,,,,
+360,41,76.776.354-9,de baja,tna solutions,equipo en arriendo,telefono T19,0,0.2,mensual,,romina,,,,,,,,,,,,
+361,42,76.776.354-9,de baja,tna solutions,equipo en arriendo,Telefono T19,0,0.2,mensual,,romina,,,,,,,,,,,,
+362,43,76.776.354-9,de baja,tna solutions,equipo en arriendo,Telefono T29 G,0,0.72,mensual,,romina,,,,,,,,,,,,
+363,44,76.776.354-9,de baja,tna solutions,equipo en arriendo,Donge WIFI para T29G,0,0.13,mensual,,romina,,,,,,,,,,,,
+365,46,76.776.354-9,de baja,tna solutions,equipo en arriendo,MKT HAP-LITE,0,0.15,mensual,,romina,,,,,,,,,,,,
+366,47,76.776.354-9,de baja,telefonica chile,adsl,Talla L,1,2.63,mensual,228469289,romina,,,,,,228469289,,,,,,
+367,48,76.800.329-7,activo,gtd teleductos,enlace dedicado,1GB/100,20,35,mensual,FIL 736898,romina,01-11-18,36,,15-11-18,15-11-18,527598,,,170.79.234.106,,"Luis Matte Larrain # 1839, Puente Alto",20 uf costo GB + 3 uf cruzada ifx
+368,49,93.689.000-8,activo,tna solutions,soporte,1 visita 2 horas,0,4.62,mensual,MAO,,,,,,01-08-18,,,,,,,
+369,50,76.547.955-k,de baja,telefonica empresas,enlace dedicado,PRO 10,0,2.63,mensual,,,17-12-18,,,,,,,,,,"Cha√±arcillo 1201, Maipu",
+370,51,76.547.955-k,activo,tna solutions,telefonia ip,500 min,0.42,0.6,mensual,,romina,17-12-18,,,,17-12-18,,,,,,,
+371,52,76.547.955-k,activo,tna solutions,equipo en arriendo,T19,0,0.2,mensual,,romina,17-12-18,,,,17-12-18,,,,,,,
+372,53,76.547.955-k,activo,tna solutions,equipo en arriendo,MKT HAP LITE,0,0.15,mensual,,romina,17-12-18,,,,17-12-18,,,,,,,
+373,54,76.778.319-1,activo,gtd teleductos,enlace dedicado,1GB/100,20,40,mensual,FIIL 738568,romina,17-10-18,36,,,17-10-18,528984,,,,,"Pasaje ap√≥stol Bernab√© 4201, Puente Alto.",20 uf costo GB + 3 uf cruzada ifx
+374,55,53.322.521-7,activo,tna solutions,equipo en arriendo,T19 compartido ,0,0.07,mensual,,romina,,,,,,,,,,,,
+375,56,53.322.521-7,activo,tna solutions,equipo en arriendo,T19 compartido ,0,0.07,mensual,,romina,,,,,,,,,,,,
+376,57,53.322.521-7,activo,tna solutions,equipo en arriendo,T19 compartido ,0,0.07,mensual,,romina,,,,,,,,,,,,
+377,58,53.322.521-7,activo,tna solutions,equipo en arriendo,T19 compartido ,0,0.07,mensual,,romina,,,,,,,,,,,,
+378,59,53.322.521-7,activo,tna solutions,equipo en arriendo,T19 compartido ,0,0.07,mensual,,romina,,,,,,,,,,,,
+379,60,53.322.521-7,activo,tna solutions,equipo en arriendo,T19 compartido ,0,0.07,mensual,,romina,,,,,,,,,,,,
+380,61,53.322.521-7,activo,tna solutions,equipo en arriendo,T19 compartido ,0,0.07,mensual,,romina,,,,,,,,,,,,
+381,62,53.322.521-7,activo,tna solutions,equipo en arriendo,MKT 3011 compartido,0,0.31,mensual,,romina,,,,,,,,,,,,
+382,63,78.454.700-0,activo,tna solutions,telefonia ip,Licencia 3cx,17,27.5,anual,,mao,,,,,28-06-18,3cx - 83PS-MRR7-BYR8-I84I,,,,,,
+383,64,76.466.204-0,gasto,pit chile,enlace dedicado,boca GB,4,0,mensual,FAC PIT 505,mao,,,,,01-01-18,Boca GB PIT,,,,,,
+384,65,76.466.204-0,gasto,pit chile,enlace dedicado,Boca GB,4,0,mensual,FAC PIT 115,mao,,,,,01-01-18,Boca GB PIT,,,,,,
+385,66,76.466.204-0,gasto,tna solutions,gasto,Mail CH,8,0,mensual,,mam,,,,,,,,,,,,
+386,67,76.295.486-9,de baja,telefonica empresas,enlace dedicado,PRO 10,2.25,2.63,mensual,,romina,,,,,17-09-18,,,,,,,
+387,68,76.783.127-7,activo,gtd teleductos,enlace dedicado,50-10,6,7.8,mensual,FIL 738564,romina,17-10-18,36,,,17-10-18,528974,,,,,"Cha√±arcillo 1201, Maip√∫ Santiago",
+388,69,76.896.034-8,de baja,gtd teleductos,enlace dedicado,100-10,9,11.02,mensual,,romina,,,,,10-09-18,,,,,,"San francisco de Asis P16 8B, La Reina",
+389,70,76.466.204-0,gasto,telefonica empresas,enlace dedicado,10-ene,13,0,mensual,201601212-201711598,mam,,,,,,PSITIE20930,,,,,, 201601212 - 201604274 - 201711598
+390,71,76.534.218-k,activo,tna solutions,hosting,renovacion dominio weworkchile,0.4,1.5,anual,,dam,,,,,25-09-18,,,,,,,
+391,72,96.521.440-2,activo,tna solutions,telefonia ip,5.000 Min,2.2,3.19,mensual,,romina,,,,,09-10-18,,,,,,,
+392,73,76.596.787-2,activo,telefonica empresas,enlace dedicado,UP 100-10,6.39,8.5,mensual,201701759-201503643 - 201505512,mam,04-05-17,60,37,,01-06-17,PSITIE21941,,,,,ISIDORA GOYENECHEA 3120 piso 4,
+393,74,76.466.204-0,gasto,tna solutions,gasto,LACNIC,2,0,mensual,,mam,,,,,,,,,,,,pago USD 1k anual 
+394,75,76.466.204-0,gasto,ifx,gasto,RACK ifx,20,0,mensual,819319,mao,,,,,,819319,,,,,,
+395,76,76.015.531-4,activo,telefonica empresas,enlace dedicado,100-20,6.77,8.14,mensual,201814439,romina,21-11-18,36,,22-11-18,21-11-18,PSITIE26092,,,,,"Ma√±io 1637, vitacura / El Coigue 3886, Vitacura",
+396,77,76.015.531-4,activo,tna solutions,telefonia ip,2000 min,1.5,2.39,mensual,,romina,10-12-18,,,,10-12-18,,,,,,,
+397,78,76.466.204-0,gasto,gtd teleductos,enlace dedicado,Entronque 1GB,0,0,mensual,FIL 730395,mao,,,,,15-10-18,523023,,,,,"El Bosque sur 90, las condes",
+398,79,96.841.500-K,activo,gtd teleductos,enlace dedicado,100-10,9,14.67,mensual,FIL 730403,romina,25-10-18,36,,,25-10-18,523031,,,,,Maria Josefina S/N Lote 2-05 Parque Industrial,
+399,80,77.863.910-6,activo,tna solutions,telefonia ip,500 Min,0.35,0.5,mensual,,romina,01-11-18,,,08-11-18,08-11-18,,,,,,,
+400,81,77.863.910-6,activo,tna solutions,hosting,6 GB,0,2.2,anual,,romina,01-11-18,12,,08-11-18,08-11-18,,,,,,,
+401,82,76.503.410-8,activo,tna solutions,equipo en comodato,Switch Level one GES-2451,0,0,mensual,,romina,,,,,07-11-18,,,,,,,equipo prestado mientras compra el definitivo 
+402,83,76.466.204-0,gasto,3cx,telefonia ip,Ilimitado,1.2,0,mensual,,romina,,,,,,3cx - OKLG-PY3Y-4PVO-O6CB,,,,,,
+403,84,76.803.046-4,activo,pit chile,enlace dedicado,Cruzada MURANO,1.35,1.95,mensual,FAC PIT 385,mam,10-05-18,,,,,LLAMOV14429 - LLAMOV 15349,,,,,"ARRAYAN 2750 , PROVIDENCIA",
+404,85,76815270-5,activo,pit chile,enlace dedicado,Cruzada MURANO,1.35,1.95,mensual,FAC PIT 51,mam,08-06-17,36,,,,LLAMOV14430,,,,,"Arrayan 2750, of 301, providencia",
+405,86,76.607.184-8,activo,ifx,x conect,Cruzada ifx,3,0,mensual,,romina,,,,,,,,,,,,
+406,87,76.778.319-1,activo,ifx,x conect,xconect,3,0,mensual,,romina,,,,,,,,,,,,
+407,88,76.800.329-7,activo,ifx,x conect,Cruzada GTD,3,0,mensual,,romina,01-11-18,,,15-11-18,15-11-18,,,,,,,
+408,89,76.440.437-8,activo,gtd teleductos,enlace dedicado,1 GB,18,31,mensual,FIIL 760331,romina,25-02-19,,,,,546047,,,,,CAMINO A SAN JOSE DE MAIPO #7784. PUENTE ALTO,
+409,90,76.440.437-8,activo,tna solutions,pack ip,32 IPs,0.5,4.5,mensual,,romina,25-02-19,,,,,,,,,,,
+410,91,76.440.437-8,activo,tna solutions,mb internacional,100,0,8,mensual,,romina,25-02-19,,,,,,,,,,,
+411,92,76.440.437-8,activo,tna solutions,boca switch,Boca GB,1,2,mensual,,romina,25-02-19,,,,,,,,,,,
+412,93,76.440.437-8,activo,ifx,x conect,Cruzada GTD,3,4,mensual,,romina,25-02-19,,,,,,,,,,,
+413,94,76.487.735-7,activo,gtd teleductos,enlace dedicado,100-10,8,10,mensual,Fiil 756286,romina,04-12-18,36,,,,542462,,,,,NUEVA YORK #33. PISO 17 OFI. 17. SANTIAGO,
+414,95,76.177.621-5,activo,3cx,telefonia ip,Licencia,13.5,21.1,anual,,romina,28-11-18,12,,08-11-18,08-11-18,,,,,,,
+415,96,78.469.420-8,activo,tna solutions,soporte,ANTIVIRUS,8,16.5,bienal,,romina,22-11-18,24,,22-11-18,23-11-18,,,,,,,
+416,97,96.785.290-2,activo,tna solutions,soporte,ANTIVIRUS,20,32.85,bienal,,romina,22-11-18,24,,,22-11-18,,,,,,,
+417,98,76.466.204-0,gasto,pit chile,x conect,VLAN Silica,0.5,0,mensual,FAC 615,mao,04-12-18,,,,04-12-18,FAC 615,,,,,El Bosque norte 90,
+418,99,99.560.290-3,activo,tna solutions,telefonia ip,Sip peru 2 DID - 4 Canales,2.61,3.2,mensual,,mao,15-04-19,,,,15-04-19,,,,,,,
+419,100,76.466.204-0,gasto,ifx,x conect,PIT 1er X 1 GB,0,0,mensual,,mao,,,,,,,,,,,,
+420,101,76.466.204-0,gasto,ifx,x conect,PIT 2do X 1 GB,0,0,mensual,,mao,,,,,,,,,,,,
+421,102,76.466.204-0,gasto,ifx,x conect,Badajoz 45 ,3.5,0,mensual,819324,mao,,,,,,819324,,,,,,
+422,103,76.480.929-7,activo,ifx,x conect,1 GB,3,4,mensual,,mao,,,,,01-11-18,,,,,,,
+423,104,76.466.204-0,gasto,ifx,x conect,10 GB Nac,10,0,mensual,,mao,,,,,,,,,,,,
+424,105,76.466.204-0,gasto,ifx,enlace dedicado,100MB Internacional,22.5,0,mensual,,mao,,,,,01-11-18,,,,,,,
+425,106,76.466.204-0,gasto,ifx,x conect,Entronque GTD,0,0,mensual,,mao,,,,,01-10-18,,,,,,,
+426,107,76.466.204-0,gasto,tna solutions,gasto,Impo,80,0,mensual,,mam,,,,,,,,,,,,
+427,108,76.466.204-0,gasto,ifx,gasto,50 MB internacional,16,0,mensual,819322,mao,,,,,01-11-18,819322,,,,,,
+428,109,76.523.625-8,activo,tna solutions,hosting,Hosting 9 GB,0,2,mensual,,dam,,,,,,,,,,,,
+429,110,76.466.204-0,gasto,didww,did adicional,DID internacionales,1.15,0,mensual,,mam,,,,,,,,,,,,
+430,111,99.560.290-3,activo,didww,did adicional,DID de peru x 4,0.8,2,mensual,,mao,15-04-19,,,,15-04-19,,,,,,,+ 51 (1) 6419220 - + 51 (1) 6419162
+432,113,76.914.621-0,de baja,gtd teleductos,punto a punto,1 GB- 100,18,23,mensual,FIIL 764881,romina,,,,,,549568,,,,,"D√°maso Alonso 10893, La pintana",
+433,114,76.914.621-0,de baja,tna solutions,adsl,100,6,6,mensual,,romina,,,,,,,,,,,,
+434,115,76.914.621-0,de baja,ifx,x conect,cruzada GTD,3,4,mensual,,romina,,,,,,,,,,,,
+435,116,76.914.621-0,de baja,tna solutions,boca switch,Boca 1GB,0,2,mensual,,romina,,,,,,,,,,,,
+436,117,76.366.405-8,activo,gtd teleductos,punto a punto,1 GB,18.5,35,mensual,FIIL 764937,romina,31-01-19,,,,31-01-19,549625,,,,,"Los Naranjos 02709, La Pintana",
+437,118,76.366.405-8,activo,tna solutions,boca switch,Boca 1GB,0,8,mensual,,romina,31-01-19,,,,31-01-19,,,,,,,
+438,119,76.366.405-8,activo,ifx,x conect,Cruzada GTD,3,4,mensual,,romina,31-01-19,,,,31-01-19,,,,,,,
+439,120,76.466.204-0,gasto,tna solutions,gasto,Cpanel - WHM,1.3,0,mensual,,mam,,,,,,,,,,,,
+440,121,76.534.218-k,activo,tna solutions,vpn,Vlan Netquest x 3,0,1.5,mensual,,mao,,,,,,,,,,,,
+441,122,76.466.204-0,gasto,gtd teleductos,enlace dedicado,1GB Entronque IFX ,0,0,mensual,523023,romina,01-10-18,,,,,523023,,,,,,
+442,123,76.424.331-5,activo,tna solutions,did adicional,2 DID adicional,0,0.4,mensual,,romina,19-02-19,,,,19-02-19,,,,,,,
+443,124,76.503.410-8,activo,tna solutions,enlace dedicado,100/100,0,12,mensual,,romina,21-02-19,36,,,21-02-19,,,,,,"Badajoz 45, piso 9",
+444,125,76.541.256-0,activo,tna solutions,equipo en arriendo,MKT,0,1,mensual,,romina,15-02-19,,,,15-02-19,,,,,,,
+445,126,76.117.337-5,activo,tna solutions,enlace dedicado,100/10,0,10,mensual,,romina,,,,,,,,,,,"Badajoz 45, piso 21",
+446,127,76.117.337-5,activo,tna solutions,telefonia ip,1k,0.69,0.98,mensual,,romina,,,,,,,,,,,,
+447,128,76.466.204-0,activo,silica,mb internacional,100 mb,12.5,0,mensual,,mao,,,,,,,,,,,,
+448,129,76.978.069-6,activo,tna solutions,telefonia ip,Basica,0.3,0.5,mensual,,dam,,,,,12-03-19,,,,,,,
+449,130,76.553.667-7,activo,gtd teleductos,enlace dedicado,10-ene,4.08,8,mensual,FIIL 775768,romina,,36,,,,,,,,,"AVENIDA VENTISQUERO 1225, BODEGA 70",
+450,131,76.553.667-7,en instalacion,tna solutions,telefonia ip,1.000 min,0.7,0.98,mensual,,romina,,,,,,,,,,,,
+451,132,76.783.127-7,activo,gtd teleductos,enlace dedicado,2do enlace PRO Southern Vending,0,2.63,mensual,FIL 738564,romina,17-10-18,36,,,17-10-18,528974,,,,,"Cha√±arcillo 1201, Maip√∫ Santiago",
+452,133,76129526-4,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.6,1.35,mensual,201700957,mam,26-12-17,,,,,PSITIE21733,,,,,UP grade nueva costanera,
+453,134,76129526-4,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.1,0,mensual,201504715,mam,26-12-17,,,,,PSITIE21733,,,,,"Traslado de pio nono a Nueva costanera 4261, Vitacura",
+454,135,76129526-4,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.1,0,mensual,201604274,mam,,,,,, PSITIE24777 - PSITIE23755,,,,,de huerfanos a isidora goyenechea,
+455,136,53.322.520-9,activo,tna solutions,enlace dedicado,100-10,0,1.33,mensual,,romina,,,,,,,,,,,"Badajoz 45, las condes",
+456,137,53.322.520-9,activo,tna solutions,telefonia ip,1.000 min,0.1,0.42,mensual,,romina,,,,,,,,,,,,
+457,138,53.322.520-9,activo,tna solutions,equipo en arriendo,T19 compartido,0,0.09,mensual,,romina,,,,,,,,,,,,
+458,139,53.322.520-9,activo,tna solutions,equipo en arriendo,T19 compartido,0,0.09,mensual,,romina,,,,,,,,,,,,
+459,140,53.322.520-9,activo,tna solutions,equipo en arriendo,T19 compartido,0,0.09,mensual,,romina,,,,,,,,,,,,
+460,141,53.322.520-9,activo,tna solutions,equipo en arriendo,T19 compartido,0,0.09,mensual,,romina,,,,,,,,,,,,
+461,142,53.322.520-9,activo,tna solutions,equipo en arriendo,T19 compartido,0,0,mensual,,romina,,,,,,,,,,,,
+462,143,53.322.520-9,activo,tna solutions,equipo en arriendo,T19 compartido,0,0.09,mensual,,romina,,,,,,,,,,,,
+463,144,53.322.520-9,activo,tna solutions,equipo en arriendo,T19 compartido,0,0.09,mensual,,romina,,,,,,,,,,,,
+464,145,53.322.520-9,activo,tna solutions,equipo en arriendo,T19 compartido,0,0.09,mensual,,romina,,,,,,,,,,,,
+465,146,53.322.520-9,activo,tna solutions,equipo en arriendo,MIKROTIK RB3011 compartido,0,0.44,mensual,,romina,,,,,,,,,,,,
+466,147,76.381.314-2,en instalacion,gtd teleductos,enlace dedicado,100-10 - 1:4,4.8,5.9,mensual,,romina,,,,,,,,,,,"Am√©rico Vespucio 1731, Quilicura",
+467,148,76.381.314-2,en instalacion,tna phone,telefonia ip,1.000 min,1.3,1.96,mensual,,romina,,,,,,,,,,,,
+468,149,76.523.625-8,en instalacion,telefonica empresas,enlace dedicado,10-ene,6,8,mensual,,romina,,,,,,,,,,,"San Nicol√°s 795, San Miguel",
+469,150,99.556.110-7,en instalacion,telefonica empresas,vpn,VPLS,1,1.6,mensual,,mao,,,,,,,,,,,,
+470,151,93.689.000-8,en instalacion,telefonica empresas,mpls,100,5.9,8.27,mensual,,romina,,,,,,,,,,, San Isidro 1675. Santiago Centro.,
+471,152,93.689.000-8,en instalacion,telefonica empresas,mpls,10,7.12,9.25,mensual,,romina,,,,,,,,,,,"Manuel Rodriguez 417, Concepci√≥n.",
+472,153,93.689.000-8,en instalacion,telefonica empresas,mpls,10,5.02,6.52,mensual,,romina,,,,,,,,,,,Av. Matta 241. Santiago Centro.,
+473,154,93.689.000-8,en instalacion,telefonica empresas,mpls,10,5.02,6.52,mensual,,romina,,,,,,,,,,,Av. Las Condes 7700. Las Condes.,
+474,155,76.144.594-4,activo,3cx,telefonia ip,licencia 3cx,30.4,86,anual,,romina,,,,,,,,,,,,
+475,156,76.117.337-5,activo,tna solutions,vps,50 GB,0,1,mensual,,romina,01-04-19,,,,01-04-19,,,,,,,
+476,157,76.848.887-8,activo,telefonica mayorista,enlace dedicado,200-10,11.38,18.5,mensual,FAC Pit 187 - FAC TNA 153,romina,,36,,,,LLAMOV 14807,,,,,,
+477,158,76129526-4,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.1,0,mensual,201602095 - 201712279,mam,,,,,, PSITIE24777 - PSITIE23755,,,,,Traslado de Isidora 3900 a Jose alcalde Delano ,
+478,159,78.454.700-0,gasto,telefonica empresas,enlace dedicado,Cobro por traslado,0.1,0,mensual,201603630,mam,,,,,,VIP13678,,,,,"Santa Maria 7030, Vitacura",
+479,160,76.304.060-7,gasto,telefonica empresas,enlace dedicado,Cobro por traslado,0.1,0,mensual,201603922,mam,,,,,,PSITIE20771,,,,,Hu√©rfanos 786 oficina 1200,
+480,161,76874538-2,activo,tna solutions,telefonia ip,500 min,0.42,0.6,mensual,,mam,,,,,,,,,,,,
+481,162,76874538-2,activo,tna solutions,reseller,30 GB,0,0.72,mensual,,mam,,,,,,,,,,,,
+482,163,76.596.787-2,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.1,0,mensual,201503643 - 201505512,romina,,,,,,,,,,,,
+483,164,99.556.110-7,gasto,telefonica empresas,enlace dedicado,Cobro por traslado,0.1,0,mensual,201600044,romina,,,,,,,,,,,,
+484,165,76.848.190-3,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.1,0,mensual,201601774-201805476,mam,,,,,,PSTIE20068 - PSITIE24837,,,,,,
+485,166,77.597.410-9,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.1,0,mensual,201602930,mam,,,,,,PSITIE20459,,,,,,
+486,167,76.099.521-5,gasto,telefonica empresas,enlace dedicado,cobro por traslado,1.68,0,mensual,201502551-201504640,mam,01-04-18,29,,,01-04-18,PSITIE19092,,,,,"Avenida del Parque 4928,  Oficina 426, Ciudad Empresarial",
+487,168,76.858.593-8,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.16,0,mensual,201501642,mam,01-04-18,60,,,01-04-18,PSITIE18509,,,,,,
+488,169,76129526-4,gasto,telefonica empresas,enlace dedicado,cobro por traslado,0.6,0,mensual,201700957 - 201712658,mam,01-07-17,60,,,01-07-17,PSITIE21733 - PSITIE21733,,,,,,
+489,170,76.186.746-6,gasto,telefonica empresas,enlace dedicado,cobro por PEX,4.67,0,mensual,,mam,23-09-15,60,,,23-09-15,,,,,,,

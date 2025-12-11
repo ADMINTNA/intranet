@@ -1,0 +1,47 @@
+# === ARCHIVOS PESADOS Y BACKUPS ===
+*.zip
+*.sql
+*.tar.gz
+*.backup
+*.bak
+
+# === SWEET/SuiteCRM COMPLETO (muy pesado) ===
+sweet/
+sweet_*/
+sweet_bkp/
+sweet_respaldo/
+sweet_temp/
+sweet_entry_point/
+
+# === BACKUPS Y COPIAS ===
+*_respaldo/
+*_backup*/
+*copia/
+BACKUP_*/
+
+# === ARCHIVOS DE SISTEMA ===
+.DS_Store
+*.tmp
+Thumbs.db
+php.ini
+phpinfo.php
+
+# === LOGS ===
+logs/
+*.log
+
+# === CONFIGURACIÓN SENSIBLE ===
+config/database.php
+*.env
+
+# === TEST Y SANDBOX ===
+test_*.php
+sandbox/
+mao.php
+1Nf0.php
+tnaoffice.php
+server-checkup/
+rkhunter/
+
+# === OTROS PESADOS ===
+SuiteCRM-7.14.4.zip

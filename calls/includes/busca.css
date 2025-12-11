@@ -1,0 +1,83 @@
+/* ============================================================
+   Archivo : busca.css
+   Ubicación: /intranet/calls/includes/
+   Descripción:
+     Estilos para informes CALLS: alarmas, servicios activos,
+     datos de empresa. Incluye encabezados sticky y alternancia
+     de filas.
+   Autor: Mauricio Araneda (mAo)
+   Empresa: TNA Group / iConTel
+   Última actualización: 12-11-2025
+   ============================================================ */
+
+/* ============================================================
+   TABLA GENERAL
+   ============================================================ */
+.table_alarmas {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  color: black;
+
+  /* Previene scroll horizontal innecesario */
+  table-layout: fixed;
+}
+
+.table_alarmas th,
+.table_alarmas td {
+  padding: 5px;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Cabecera general */
+.table_alarmas thead {
+  background: #444;
+  color: white;
+  font-size: 13px;
+}
+
+/* ============================================================
+   ENCABEZADOS STICKY
+   ============================================================ */
+
+.contenedor-scroll-empresa th,
+.contenedor-scroll th {
+  position: sticky;
+  top: 0;
+
+  /* Color corporativo */
+  background-color: #1F1D3E;
+  color: white;
+
+  /* Para asegurar que siempre quede encima del contenido */
+  z-index: 5;
+
+  font-size: 13px;
+
+  /* Evita "parpadeo" en algunos navegadores */
+  box-shadow: 0 2px 2px rgba(0,0,0,0.15);
+}
+
+/* ============================================================
+   FILAS ALTERNADAS
+   ============================================================ */
+.table_alarmas tbody tr:nth-child(odd) {
+  background: #F6F9FA;
+}
+
+.table_alarmas tbody tr:nth-child(even) {
+  background: #FFFFFF;
+}
+
+/* ============================================================
+   RECOMENDACIÓN PARA CONTENEDORES SCROLL
+   (solo se aplica si existen los div .contenedor-scroll)
+   ============================================================ */
+.contenedor-scroll,
+.contenedor-scroll-empresa {
+  overflow-y: auto;
+  overflow-x: hidden;      /* evita desplazamiento lateral */
+  max-height: 400px;       /* ajustar según informe */
+  border: 1px solid #ddd;  /* borde suave */
+}

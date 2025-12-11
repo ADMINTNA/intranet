@@ -1,0 +1,56 @@
+/* === FILTRO DE COLUMNAS === */
+.filters th {
+  background-color: #3A2C4A;
+  padding: 4px;
+}
+
+.filter-input {
+  width: 90%;
+  padding: 3px 6px;
+  font-size: 12px;
+  border: 1px solid #C39BD3;
+  border-radius: 4px;
+  background-color: #2C2C4A;
+  color: #EAECEE;
+  text-align: center;
+}
+
+.filter-input::placeholder {
+  color: #999;
+  font-style: italic;
+  font-size: 11px;
+}
+
+.filter-input:focus {
+  background-color: #fff;
+  color: #000;
+  outline: none;
+  border-color: #64C2C8;
+}
+
+/* === BOTÓN LIMPIAR FILTROS === */
+#barra-botones {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 6px 12px;
+  margin-top: 10px;
+  background-color: #1F1D3E;
+  border-top: 1px solid #512554;
+}
+
+#btnLimpiarFiltros {
+  background-color: #512554;
+  color: white;
+  border: 1px solid #C39BD3;
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#btnLimpiarFiltros:hover {
+  background-color: #C39BD3;
+  color: #1F1D3E;
+}

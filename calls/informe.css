@@ -1,0 +1,92 @@
+@charset "UTF-8";
+/* CSS Document */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-size: 8px;
+    color: #333;
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;  
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contenido-principal {
+    flex: 1 1 auto;
+    overflow-y: auto;
+  }
+
+  .footer {
+    flex: 0 0 auto;
+    background-color: #1F1D3E;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .contenedor-scroll-empresa,
+  .contenedor-scroll {
+    overflow-y: auto;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .contenedor-scroll-empresa {
+    max-height: 30vh;
+  }
+
+  .contenedor-scroll {
+    max-height: 60vh;
+  }
+
+  .contenedor-scroll-empresa table,
+  .contenedor-scroll table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  .contenedor-scroll-empresa td,
+  .contenedor-scroll-empresa th,
+  .contenedor-scroll td,
+  .contenedor-scroll th {
+    padding: 4px;
+    margin: 0;
+  }
+
+  /* Cabeceras sticky */
+  .contenedor-scroll-empresa th,
+  .contenedor-scroll th {
+    position: sticky;
+    top: 0;
+    background-color: #1F1D3E;
+    color: white;
+    z-index: 2;
+  }
+
+  /* Footer sticky */
+  .contenedor-scroll tfoot td {
+    position: sticky;
+    bottom: 0;
+    background-color: #f3f3f3;
+    color: #555;
+    border-top: 1px solid #ddd;
+  }
+
+  .contenedor-scroll table th,
+  .contenedor-scroll table td {
+    border: none !important;
+  }
+
+  /* Nueva regla: reducir tamaño de letra SOLO en encabezados */
+    .contenedor-scroll td,
+    .contenedor-scroll th,
+    .contenedor-scroll-empresa td,
+    .contenedor-scroll-empresa th {
+    font-size: 12px !important;
+}

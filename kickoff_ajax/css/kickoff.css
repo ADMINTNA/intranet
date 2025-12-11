@@ -7,18 +7,26 @@
 
 /* --- VARIABLES DE COLOR --- */
 :root {
-  --color-principal: #512554;   /* ✅ Violeta oscuro */
-  --color-secundario: #1F1D3E;  /* ✅ Azul oscuro */
-  --color-acento: #64C2C8;      /* ✅ Turquesa */
-  --color-fondo: #FFFFFF;       /* ✅ Blanco */
- /* --color-gris: #5D6D7E; */
-  --color-gris: #7D8D9E;        /* ✅ Gris Claro */
-  --color-menu: #C39BD3;        /* ✅ Violeta Claro */
-  --color-hover: #f5f5f5;       /* ✅ Blanco hueso*/
+  --color-principal: #512554;
+  /* ✅ Violeta oscuro */
+  --color-secundario: #1F1D3E;
+  /* ✅ Azul oscuro */
+  --color-acento: #64C2C8;
+  /* ✅ Turquesa */
+  --color-fondo: #FFFFFF;
+  /* ✅ Blanco */
+  /* --color-gris: #5D6D7E; */
+  --color-gris: #7D8D9E;
+  /* ✅ Gris Claro */
+  --color-menu: #C39BD3;
+  /* ✅ Violeta Claro */
+  --color-hover: #f5f5f5;
+  /* ✅ Blanco hueso*/
 }
 
 /* --- TIPOGRAFÍA Y ESTILOS GENERALES --- */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -32,14 +40,15 @@ html, body {
 #page {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 300px); /* ajusta 40px según el alto de tabs si existen */
+  height: calc(100vh - 300px);
+  /* ajusta 40px según el alto de tabs si existen */
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 /* Header */
 #header {
-  height: 72px;
+  height: auto;
   background-color: var(--color-acento);
   color: #fff;
   padding: 0;
@@ -50,7 +59,8 @@ html, body {
 
 /* Contenido principal */
 #content {
-  margin-top: 0px; /* o usa padding-top si prefieres */
+  margin-top: 5px;
+  /* o usa padding-top si prefieres */
   flex: 1;
   overflow-y: auto;
   padding: 0px;
@@ -68,6 +78,7 @@ footer {
   position: relative;
   z-index: 1;
 }
+
 footer {
   position: fixed;
   bottom: 0;
@@ -121,7 +132,8 @@ table {
   border: none;
 }
 
-th, td {
+th,
+td {
   padding: 4px 6px;
   vertical-align: middle;
   font-size: 12px;
@@ -137,6 +149,7 @@ th {
 table tbody tr:nth-child(odd) {
   background: #F6F9FA;
 }
+
 table tbody tr:nth-child(even) {
   background: #FFFFFF;
 }
@@ -154,16 +167,20 @@ a:visited {
   color: dimgray;
   text-decoration: none;
 }
+
 a:hover {
   color: lightskyblue;
   text-decoration: underline;
 }
+
 a:active {
   color: blue;
 }
+
 .link {
   color: #FF0000;
 }
+
 .link:hover {
   color: #00FF00;
 }
@@ -199,7 +216,7 @@ button {
   color: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 #capa_iconos {
@@ -211,7 +228,7 @@ button {
   height: 50%;
   z-index: 9999;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 #capa_buscadores {
@@ -223,7 +240,7 @@ button {
   z-index: 9999;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -232,10 +249,12 @@ th.asc::after {
   content: " ▲";
   color: #5DADE2;
 }
+
 th:not(.asc)::after {
   content: " ▼";
   color: #AAB7B8;
 }
+
 th.active {
   background-color: #2E4053;
   color: #ECF0F1;
@@ -266,13 +285,19 @@ th.active {
 }
 
 @media (min-width: 768px) {
-  #frase-centro { font-size: 28px; }
-  #frase-motivacional { font-size: 14px; }
+  #frase-centro {
+    font-size: 28px;
+  }
+
+  #frase-motivacional {
+    font-size: 14px;
+  }
 }
 
 /* Separación visual entre la Touch Bar y el módulo cargado */
 #modulo-contenedor {
-    margin-top: 70px;      /* ⭐ Ajusta aquí la distancia exacta */
+  margin-top: 5px;
+  /* ⭐ Ajusta aquí la distancia exacta */
 }
 
 /* =============================== */
@@ -280,20 +305,21 @@ th.active {
 /* =============================== */
 
 .fadein {
-    opacity: 0;
-    transform: translateY(8px);
-    animation: fadeInModulo 0.35s ease-out forwards;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeInModulo 0.35s ease-out forwards;
 }
 
 @keyframes fadeInModulo {
-    0% {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============================================
@@ -301,183 +327,214 @@ th.active {
    ============================================ */
 
 th {
-    position: relative;
-    user-select: none;
+  position: relative;
+  user-select: none;
 }
 
 th.sortable::after {
-    content: "▼";
-    font-size: 10px;
-    color: #ddd;
-    margin-left: 6px;
+  content: "▼";
+  font-size: 10px;
+  color: #ddd;
+  margin-left: 6px;
 }
 
 th.sortable.asc::after {
-    content: "▲";
-    color: #5DADE2;
+  content: "▲";
+  color: #5DADE2;
 }
 
 th.sortable.desc::after {
-    content: "▼";
-    color: #AAB7B8;
+  content: "▼";
+  color: #AAB7B8;
 }
 
 th.sortable.active {
-    background-color: #2E4053 !important;
-    color: #ECF0F1 !important;
-    transition: background-color .25s ease;
+  background-color: #2E4053 !important;
+  color: #ECF0F1 !important;
+  transition: background-color .25s ease;
 }
 
 /* Animación de orden */
 tr.fade-sort {
-    animation: fadeSort .25s ease-out;
+  animation: fadeSort .25s ease-out;
 }
 
 @keyframes fadeSort {
-    from { opacity: 0.2; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0.2;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
+
 /* ===== SORT UNIVERSAL ===== */
 
 th.sortable {
-    cursor: pointer !important;
-    user-select: none;
-    position: relative;
+  cursor: pointer !important;
+  user-select: none;
+  position: relative;
 }
 
 th.sortable:hover {
-    background-color: #2E4053 !important;
-    color: #ECF0F1 !important;
+  background-color: #2E4053 !important;
+  color: #ECF0F1 !important;
 }
 
 th.sortable.asc::after {
-    content: " ▲";
-    color: #5DADE2;
+  content: " ▲";
+  color: #5DADE2;
 }
 
 th.sortable.desc::after {
-    content: " ▼";
-    color: #AAB7B8;
+  content: " ▼";
+  color: #AAB7B8;
 }
 
 th.sortable::after {
-    padding-left: 4px;
+  padding-left: 4px;
 }
+
 th.sortable {
-    cursor: pointer;
-    user-select: none;
-    position: relative;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
 }
 
 th.sortable.asc::after {
-    content: " ▲";
-    color: #5DADE2;
+  content: " ▲";
+  color: #5DADE2;
 }
 
 th.sortable.desc::after {
-    content: " ▼";
-    color: #AAB7B8;
+  content: " ▼";
+  color: #AAB7B8;
 }
+
 /* ==========================================================
    TABLAS DENTRO DEL MÓDULO AJAX — CORREGIDO
    ========================================================== */
 
 /* Ancho correcto del contenedor */
 #modulo-contenedor {
-    margin-top: 70px;              
-    padding-left: 15px;            /* margen natural */
-    padding-right: 15px;           /* margen natural */
-    overflow-x: hidden;            /* sin scroll lateral */
+  margin-top: 5px;
+  padding-left: 15px;
+  /* margen natural */
+  padding-right: 15px;
+  /* margen natural */
+  overflow-x: hidden;
+  /* sin scroll lateral */
 }
 
 /* TABLA A ANCHO REAL, SIN APRETARSE */
 #modulo-contenedor table {
-    width: 100% !important;
-    table-layout: auto !important;     /* ⭐ clave para que no se aplaste */
-    border-collapse: collapse;
+  width: 100% !important;
+  table-layout: auto !important;
+  /* ⭐ clave para que no se aplaste */
+  border-collapse: collapse;
 }
 
 /* Separación correcta */
 #modulo-contenedor table th,
 #modulo-contenedor table td {
-    padding: 6px 10px !important;      /* ⭐ más respiración */
-    vertical-align: middle;
-    white-space: nowrap;               /* ⭐ NO cortar texto */
-    overflow: hidden;
-    text-overflow: ellipsis;
+  padding: 6px 10px !important;
+  /* ⭐ más respiración */
+  vertical-align: middle;
+  white-space: nowrap;
+  /* ⭐ NO cortar texto */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Columna # pequeña */
 #modulo-contenedor table .col-num,
 #modulo-contenedor table th:nth-child(1) {
-    width: 40px !important;            /* ⭐ ahora sí funciona */
-    min-width: 40px !important;
-    max-width: 40px !important;
-    text-align: center;
+  width: 40px !important;
+  /* ⭐ ahora sí funciona */
+  min-width: 40px !important;
+  max-width: 40px !important;
+  text-align: center;
 }
+
 /* ==========================================================
    CONTENEDOR SCROLLABLE PARA TABLAS ANCHAS
    ========================================================== */
 
 .tabla-scroll {
-    width: 100%;
-    overflow-x: auto;        /* ⭐ permite ver TODAS las columnas */
-    overflow-y: hidden;
-    padding-bottom: 10px;    /* espacio respiración */
+  width: 100%;
+  overflow-x: auto;
+  /* ⭐ permite ver TODAS las columnas */
+  overflow-y: hidden;
+  padding-bottom: 10px;
+  /* espacio respiración */
 }
 
 .tabla-scroll table {
-    width: max-content;      /* ⭐ usa el ancho natural de la tabla */
-    min-width: 100%;         /* si es chica, se ajusta */
-    table-layout: auto !important;
+  width: max-content;
+  /* ⭐ usa el ancho natural de la tabla */
+  min-width: 100%;
+  /* si es chica, se ajusta */
+  table-layout: auto !important;
 }
+
 /* ==========================================================
    DISTRIBUCIÓN HORIZONTAL DE LA TOUCH BAR (SIN CAMBIAR ESTILOS)
    ========================================================== */
 
 #menu-ajax {
-    display: flex !important;      /* fuerza layout horizontal */
-    flex-direction: row !important;
-    justify-content: center;        /* centra los botones */
-    align-items: center;
-    gap: 10px;                      /* separación mínima entre botones */
-    flex-wrap: wrap;                /* permite pasar a segunda fila si no caben */
+  display: flex !important;
+  /* fuerza layout horizontal */
+  flex-direction: row !important;
+  justify-content: center;
+  /* centra los botones */
+  align-items: center;
+  gap: 10px;
+  /* separación mínima entre botones */
+  flex-wrap: nowrap;
+  /* permite pasar a segunda fila si no caben */
 }
 
 #menu-ajax .toolbar-btn {
-    display: inline-block !important;   /* respeta su estilo original */
-    margin: 0 !important;               /* evita saltos inesperados */
-    white-space: nowrap;                /* no se cortan los textos */
+  display: inline-block !important;
+  /* respeta su estilo original */
+  margin: 0 !important;
+  /* evita saltos inesperados */
+  white-space: nowrap;
+  /* no se cortan los textos */
 }
+
 /* ==========================================================
    TABLA ANCHA SIN APLASTARSE (UNIVERSAL PARA TODOS LOS MÓDULOS)
    ========================================================== */
 
 .tabla-scroll {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 /* La tabla respeta tus width="" */
 .tabla-scroll table {
-    width: max-content;      /* usa los width reales */
-    min-width: 100%;
-    border-collapse: collapse;
-    table-layout: auto !important;
+  width: max-content;
+  /* usa los width reales */
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto !important;
 }
 
 /* Celdas bien formadas */
 .tabla-scroll th,
 .tabla-scroll td {
-    white-space: nowrap;
-    padding: 6px 10px !important;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  white-space: nowrap;
+  padding: 6px 10px !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
+
 tr.subtitulo th {
-    background-color: #512554 !important;
-    color: white !important;
+  background-color: #512554 !important;
+  color: white !important;
 }

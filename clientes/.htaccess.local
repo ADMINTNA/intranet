@@ -1,0 +1,11 @@
+order allow,deny
+allow from 138.121.98.133
+allow from 170.79.233.3
+allow from 138.121.97.62
+allow from 172.16.140.120
+allow from 172.16.140.121
+allow from 172.16.140.122
+allow from 172.16.140.123
+allow from 172.16.140.124
+allow from 172.16.140.125
+deny from 0.0.0.0

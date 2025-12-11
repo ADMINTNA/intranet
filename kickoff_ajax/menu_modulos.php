@@ -24,7 +24,7 @@
 /* Barra fija bajo el header */
 #menu-ajax-fixed {
     position: sticky;
-    top: 70px;
+    top: 0px;
     z-index: 9998;
 }
 
@@ -42,7 +42,7 @@
     white-space: nowrap;
 }
 
-/* BOTÓN macOS */
+/* BOTON macOS */
 .toolbar-btn {
     display: flex;
     align-items: center;

@@ -1,0 +1,30 @@
+<YealinkIPPhoneDirectory>
+  <DirectoryEntry>
+    <Name>Recepción </Name>
+    <Telephone>000</Telephone>
+  </DirectoryEntry>
+  <DirectoryEntry>
+    <Name>Inaldi Collao</Name>
+    <Telephone>002</Telephone>
+  </DirectoryEntry>
+  <DirectoryEntry>
+    <Name>Ventas SE</Name>
+    <Telephone>003</Telephone>
+  </DirectoryEntry>
+  <DirectoryEntry>
+    <Name>Caja SE</Name>
+    <Telephone>004</Telephone>
+  </DirectoryEntry>
+  <DirectoryEntry>
+    <Name>Juan Hidalgo</Name>
+    <Telephone>005</Telephone>
+  </DirectoryEntry>
+  <DirectoryEntry>
+    <Name>German Carrasco</Name>
+    <Telephone>007</Telephone>
+  </DirectoryEntry>
+  <DirectoryEntry>
+    <Name>Andres Sepulveda</Name>
+    <Telephone>011</Telephone>
+  </DirectoryEntry>
+</YealinkIPPhoneDirectory>

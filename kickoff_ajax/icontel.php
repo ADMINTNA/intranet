@@ -289,8 +289,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const c = document.querySelector('.cargando');
-    if (c) c.classList.add('ocultar');
+    const c = document.querySelectorAll('.cargando');
+    c.forEach(el => el.classList.add('ocultar'));
 });
 </script>
 <script>

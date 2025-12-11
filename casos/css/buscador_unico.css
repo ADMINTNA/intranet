@@ -1,0 +1,217 @@
+@charset "UTF-8";
+
+/* ==========================================================
+   ESTILO TNA – BUSCADOR DE CASOS (UNIFICADO)
+   ========================================================== */
+
+/* Fuente corporativa */
+html, body, table, th, td, input {
+  font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 12px !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* ← MUY IMPORTANTE para que el scroll sea solo del tbody */
+  background-color: #1F1D3E;
+  color: white;
+}
+
+/* ==========================================================
+   TABLA MAESTRA
+   ========================================================== */
+
+.tabla-master {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #19173C;
+}
+
+/* ==========================================================
+   THEAD COMPLETO (3 líneas) — Fijo arriba
+   ========================================================== */
+
+.tabla-master thead {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: #1F1D3E;
+}
+
+/* ======== LÍNEA 1: Logo + título ======== */
+
+.header-top td {
+  border-bottom: 2px solid #512554;
+  padding: 0;
+  background-color: #1F1D3E;
+}
+
+.header-top img {
+  height: 70px;
+  display: block; /* elimina espacio fantasma */
+  margin-left: 10px;
+}
+
+.titulo-general {
+  font-size: 20px;
+  font-weight: bold;
+  color: #C39BD3;
+  padding-top: 5px;
+}
+
+.subtitulo-general {
+  font-size: 10px;
+  color: #C39BD3;
+  margin-bottom: 4px;
+}
+
+/* ======== LÍNEA 2: Encabezados (WATO) ======== */
+
+.wato-header th {
+  background-color: #512554;
+  color: #F3E6FF;
+  font-weight: 500;
+  padding: 0px 0px;
+  white-space: normal;
+  /* white-space: normal; */   
+  border-bottom: 1px solid #64466E;
+  border-right: 1px solid #6C4A78;
+  /* text-transform: uppercase; todos los titulos de columnas en mayúsculas*/ 
+  letter-spacing: 0.3px;
+}
+.wato-header th {
+    font-size: 12px !important;   /* o 12px o 10px */
+}
+
+.wato-header th:last-child {
+  border-right: none;
+}
+/* Cursor “manito” solo en columnas con orden */
+.wato-header th[onclick] {
+    cursor: pointer !important;
+}
+/* ======== LÍNEA 3: Filtros ======== */
+
+.filters th {
+  background-color: #3A2C4A !important;
+  border-bottom: 1px solid #512554 !important;
+  padding: 4px !important;
+}
+
+.filters input {
+  width: 95%;
+  padding: 3px;
+  background-color: #2C2C4A;
+  border: 1px solid #C39BD3;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+}
+
+.filters input:focus {
+  background-color: white;
+  color: black;
+  outline: none;
+}
+
+/* ==========================================================
+   TBODY — SCROLL INTERNO
+   ========================================================== */
+
+.tabla-master tbody {
+  display: block;
+  height: calc(100vh - 160px); /* Ajuste perfecto: 3 líneas del thead */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tabla-master thead tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.tabla-master tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* ==========================================================
+   FILAS & ZEBRA TNA
+   ========================================================== */
+
+.tabla-master tbody tr:nth-child(even) {
+  background-color: #1F1D3E;
+}
+
+.tabla-master tbody tr:nth-child(odd) {
+  background-color: #283747;
+}
+
+.tabla-master tbody tr:hover {
+  background-color: #2E4053;
+}
+
+/* ==========================================================
+   Celdas
+   ========================================================== */
+
+.tabla-master td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #444;
+ /*  white-space: nowrap;  */
+  white-space: normal:    
+}
+.tabla-master td {
+    line-height: 1.25;  /* líneas más compactas */
+}
+
+.tabla-master td a {
+  color: #76D7C4;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.tabla-master td a:hover {
+  text-decoration: underline;
+  color: #C39BD3;
+}
+/* Tamaño de letra SOLO para el cuerpo de los datos */
+    .tabla-master tbody td {
+    font-size: 12Px !important;   /* Puedes usar 11px, 12px o 13px */
+}
+
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+footer {
+  text-align: center;
+  padding: 0px;
+  background-color: #1F1D3E;
+  border-top: 2px solid #512554;
+  color: white;
+  font-size: 11px;
+  position: sticky;
+  bottom: 0;
+}
+
+footer a {
+  color: #76D7C4;
+}
+
+footer a:hover {
+  color: #C39BD3;
+}
+
+/* Margen interno del área scrolleable (lado izq/der) */
+.tabla-master tbody {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    box-sizing: border-box !important;
+}
+
