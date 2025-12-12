@@ -275,27 +275,21 @@ footer {
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // Cargar módulo inicial → TAREAS
+    // 1. Cargar módulo inicial → TAREAS
     loadModulo('cm_tareas_pendientes.php');
 
-    // Activar ordenamiento al cargar el primer módulo
+    // 2. Marcar botón como activo visualmente
+    const btn = document.getElementById('btn-def-tareas');
+    if (btn) btn.classList.add('active');
+
+    // 3. Activar ordenamiento al cargar el primer módulo
     if (typeof activarSortEnTablas === "function") {
         activarSortEnTablas();
     }
-});
-</script>
-
-<?php include_once("../footer/footer_oscuro.php"); ?>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+    
+    // 4. Ocultar loaders globales si quedaron pegados
     const c = document.querySelectorAll('.cargando');
     c.forEach(el => el.classList.add('ocultar'));
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    loadModulo('cm_tareas_pendientes.php');
 });
 </script>
 

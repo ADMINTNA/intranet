@@ -6,9 +6,8 @@
 // Versión AJAX – Editables + Correcciones
 // Codificación: UTF-8 sin BOM
 // ==========================================================
-
+header('Content-Type: text/html; charset=utf-8');
 mb_internal_encoding("UTF-8");
-
 // Bootstrap común AJAX (sesión + config + $sg_id + $sg_name + DbConnect)
 require_once __DIR__ . "/ajax_bootstrap.php";
 
@@ -100,7 +99,7 @@ $url_insidente = "https://sweet.icontel.cl/index.php?module=Bugs&action=DetailVi
 
 <tr>
     <td colspan="13" class="titulo" align="left">
-        &nbsp;&nbsp;🕵️ Tareas Abiertas DELEGADAS POR USTED
+        &nbsp;&nbsp;&#128373;&#65039;&#8205;&#9794;&#65039; Tareas Abiertas DELEGADAS POR USTED
     </td>
     <td align="right" style="font-size:20px; background:#512554; color:white;">
         <a href="<?=$url_nueva_tarea?>" target="new" title="Crear Nueva Tarea"
@@ -108,7 +107,7 @@ $url_insidente = "https://sweet.icontel.cl/index.php?module=Bugs&action=DetailVi
     </td>
 </tr>
 
-<tr class="subtitulo">
+<tr class="subtit">
     <th class="subtitulo">&nbsp;</th>
     <th class="subtitulo">#</th>
     <th class="subtitulo">Asunto</th>
@@ -128,6 +127,7 @@ $url_insidente = "https://sweet.icontel.cl/index.php?module=Bugs&action=DetailVi
 <?php
 $ptr = 0;
 foreach ($datos as $lin):
+
 
     $ptr++;
 
@@ -241,25 +241,34 @@ foreach ($datos as $lin):
 
     <td>
         <?php
-        // Lógica robusta para detectar estado (Key vs Value vs CaseInsensitive)
         $estado_db = trim($lin["estado"]);
         $estado_selected = "";
 
-        // 1. Coincidencia directa con la LLAVE (lo más probable si la BD guarda keys)
-        if (array_key_exists($estado_db, $lista_estado)) {
+        // MAPA MANUAL DE CORRECCIONES (DB => Key del sistema)
+        $mapa_estados = [
+            "Atrasada"             => "ATRASADA",
+            "En Progreso"          => "In Progress",
+            "Pendiente de Cliente" => "pendiente_cliente",
+            "Reasignada"           => "Reasignada"
+        ];
+
+        // 1. Verificar mapa manual
+        if (isset($mapa_estados[$estado_db])) {
+            $estado_selected = $mapa_estados[$estado_db];
+        }
+        // 2. Coincidencia directa con la LLAVE
+        elseif (array_key_exists($estado_db, $lista_estado)) {
             $estado_selected = $estado_db;
         } 
         else {
-            // 2. Búsqueda por VALOR o Keys insensible a mayúsculas
+            // 3. Búsqueda insensible
             $estado_db_lower = mb_strtolower($estado_db);
             
             foreach ($lista_estado as $key_list => $val_list) {
-                // Comparar con LLAVE (lowercase)
                 if (mb_strtolower($key_list) === $estado_db_lower) {
                     $estado_selected = $key_list;
                     break;
                 }
-                // Comparar con VALOR (lowercase) - (si la BD devuelve "Pendiente de Info")
                 if (mb_strtolower($val_list) === $estado_db_lower) {
                     $estado_selected = $key_list;
                     break;

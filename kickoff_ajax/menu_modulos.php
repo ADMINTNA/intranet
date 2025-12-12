@@ -321,7 +321,7 @@ if (function_exists('DbConnect')) {
 <?php endif; ?>
 
     <!-- TAREAS -->
-    <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_tareas_pendientes.php')">
+    <div id="btn-def-tareas" class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_tareas_pendientes.php')">
         <span class="icon">📌</span> Tareas
         <?php if($cnt_tareas > 0): ?><span class="badge-count"><?=$cnt_tareas?></span><?php endif; ?>
     </div>
