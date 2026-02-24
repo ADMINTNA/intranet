@@ -12,7 +12,7 @@ $no_mostrar = 0;
 $datoscompletos = "";
 $url_empresa = 'https://sweet.icontel.cl/index.php?module=Accounts&action=DetailView&record=';
 $conn = DbConnect($db_sweet);
-echo $sql = "CALL tnasolut_sweet.searchbyservicecode('%".$codserv."%')";
+$sql = "CALL tnasolut_sweet.searchbyservicecode('%".$codserv."%')";
 $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $contacto = Array();

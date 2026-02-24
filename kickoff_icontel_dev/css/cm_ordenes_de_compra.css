@@ -1,0 +1,87 @@
+/* ==========================================================
+   Órdenes de Compra Pendientes - Estilos Inline Edit
+   /kickoff_ajax/css/cm_ordenes_de_compra.css
+   Autor: Mauricio Araneda (mAo) - 2025-12
+   ========================================================== */
+
+/* Contenedores de estado y DTE */
+.estado-container,
+.dte-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Select de Estado */
+.estado-factura {
+    width: 100%;
+    min-width: 120px;
+    padding: 4px 6px;
+    font-size: 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.estado-factura:hover {
+    border-color: #ccc;
+    background: #f9f9f9;
+}
+
+.estado-factura:focus {
+    outline: none;
+    border-color: #512554;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(81, 37, 84, 0.2);
+}
+
+/* Input de N° DTE */
+.numero-dte-input {
+    width: 100%;
+    min-width: 80px;
+    max-width: 100px;
+    padding: 4px 6px;
+    font-size: 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+    color: inherit;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.numero-dte-input:hover {
+    border-color: #ccc;
+    background: #f9f9f9;
+}
+
+.numero-dte-input:focus {
+    outline: none;
+    border-color: #512554;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(81, 37, 84, 0.2);
+}
+
+/* Iconos de estado de guardado */
+.estado-icono,
+.dte-icono {
+    font-size: 14px;
+    min-width: 18px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.estado-icono:not(:empty),
+.dte-icono:not(:empty) {
+    opacity: 1;
+}
+
+/* Celdas editables */
+.estado-factura-cell,
+.numero-dte-cell {
+    padding: 2px 4px !important;
+}

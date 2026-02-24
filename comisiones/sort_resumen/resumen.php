@@ -12,8 +12,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include "config.php";
-$desde = date('d-m-Y', strtotime($_SESSION['desde']));
-$hasta = date('d-m-Y', strtotime($_SESSION['hasta']));
+// Fechas para el título
+$desde = date('d-m-Y', strtotime($_SESSION['com_inicio']));
+$hasta = date('d-m-Y', strtotime($_SESSION['com_fin']));
+
 ?>
 <!DOCTYPE html>
 <html>

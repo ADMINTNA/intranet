@@ -24,6 +24,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Fechas para el título
+$desde = date('d-m-Y', strtotime($_SESSION['com_inicio']));
+$hasta = date('d-m-Y', strtotime($_SESSION['com_fin']));
+
+
+
 // Query original que venía de la tabla principal
  $query = $_SESSION['query'] . " GROUP BY vc.fac_vendedor, vc.fac_estado ORDER BY vc.fac_vendedor"; 
 // $_SESSION['agrupar'] . $_SESSION['orden'];

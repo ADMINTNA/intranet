@@ -13,11 +13,32 @@ var refreshId = setInterval('window.location.reload()', 60000);
 clearInterval(refreshId);
 
 // ==========================================================
-// ðŸš€ Auto submit para select
+// 🚀 Auto submit para select - Versión AJAX
 // ==========================================================
 function autoSubmit() {
-  var formObject = document.forms['form_select'];
-  if (formObject) formObject.submit();
+  const select = document.querySelector('select[name="sg"]');
+  if (!select) return;
+
+  const newSgId = select.value;
+
+  // Actualizar sg_id en sesión via AJAX
+  fetch('update_sg_id.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `sg_id=${encodeURIComponent(newSgId)}`
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Recargar página completa para actualizar badges y módulo
+        window.location.reload();
+      }
+    })
+    .catch(err => {
+      console.error('Error actualizando sg_id:', err);
+      // Fallback: recargar página
+      window.location.reload();
+    });
 }
 
 // ==========================================================
@@ -225,12 +246,12 @@ function inicializarOrdenamiento(context = document) {
       if (m) {
         let [_, d, mo, y] = m;
         if (y.length === 2) y = (parseInt(y) < 50 ? "20" : "19") + y;
-        return parseInt(`${y}${mo.padStart(2,"0")}${d.padStart(2,"0")}${parseTime(timePart)}`, 10);
+        return parseInt(`${y}${mo.padStart(2, "0")}${d.padStart(2, "0")}${parseTime(timePart)}`, 10);
       }
       m = datePart.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/);
       if (m) {
         let [_, y, mo, d] = m;
-        return parseInt(`${y}${mo.padStart(2,"0")}${d.padStart(2,"0")}${parseTime(timePart)}`, 10);
+        return parseInt(`${y}${mo.padStart(2, "0")}${d.padStart(2, "0")}${parseTime(timePart)}`, 10);
       }
       return null;
     };
@@ -284,36 +305,69 @@ function inicializarOrdenamiento(context = document) {
 }
 
 function mostrarSolo(capaId) {
-    const capas = ['capa_casos', 'capa_iconos', 'capa_buscadores'];
+  const capas = ['capa_casos', 'capa_iconos', 'capa_buscadores'];
 
-    capas.forEach(id => {
-        const el = document.getElementById(id);
-        if (!el) return;
+  capas.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-        if (id === capaId) {
-            // Si la capa clickeada está visible, ocultarla; si no, mostrarla
-            if (el.style.display === 'block') {
-                el.style.display = 'none';
-                el.hidden = true;
-            } else {
-                el.style.display = 'block';
-                el.hidden = false;
-            }
-        } else {
-            // Ocultar todas las demás
-            el.style.display = 'none';
-            el.hidden = true;
-        }
-    });
+    if (id === capaId) {
+      // Si la capa clickeada está visible, ocultarla; si no, mostrarla
+      if (el.style.display === 'block') {
+        el.style.display = 'none';
+        el.hidden = true;
+      } else {
+        el.style.display = 'block';
+        el.hidden = false;
+      }
+    } else {
+      // Ocultar todas las demás
+      el.style.display = 'none';
+      el.hidden = true;
+    }
+  });
+}
+
+// ==========================================================
+// 🖱️ Cerrar capas al hacer click fuera de ellas
+// ==========================================================
+function ocultarCapaSiClickFuera(event) {
+  const capas = ['capa_casos', 'capa_iconos', 'capa_buscadores'];
+  const botonesHeader = ['botonheader2']; // Clase de los botones del header
+
+  // Verificar si el click fue en un botón del header (Casos, Favoritos, Buscadores)
+  const clickEnBoton = event.target.closest('.botonheader2') ||
+    event.target.closest('text[onclick*="mostrarSolo"]') ||
+    event.target.closest('b') && event.target.closest('td');
+
+  if (clickEnBoton) {
+    // Si clickeó en un botón del header, no hacer nada (mostrarSolo se encarga)
+    return;
+  }
+
+  capas.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // Si la capa está visible y el click fue fuera de ella
+    if (el.style.display === 'block' && !el.contains(event.target)) {
+      el.style.display = 'none';
+      el.hidden = true;
+      console.log(`🔴 Capa '${id}' cerrada por click externo`);
+    }
+  });
 }
 
 
 document.addEventListener("DOMContentLoaded", () => {
   inicializarOrdenamiento();
+
+  // Registrar listener para cerrar capas al hacer click fuera
+  document.addEventListener('click', ocultarCapaSiClickFuera);
 });
 
 // ==========================================================
-// ðŸ§© OnLoad principal
+// 🧩 OnLoad principal
 // ==========================================================
 function BodyOnLoad() {
   ocultarCapasPrincipales();

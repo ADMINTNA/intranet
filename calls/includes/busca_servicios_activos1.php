@@ -1,6 +1,6 @@
 <?PHP // include va a buscar servicios activos a Sweet por id de la cuenta y los despliega por linea
     $conn = DbConnect("tnasolut_sweet");
-echo     $sql = "CALL searchactiveservicesbyaccountid('{$account_id}')";  
+     $sql = "CALL searchactiveservicesbyaccountid('{$account_id}')";  
     $result = $conn->query($sql);
     $prod_id = Array();
     if ($result->num_rows > 0) {    

@@ -183,7 +183,7 @@ function horacl($fecha) {
 <tbody>
 <?php 
 $contador = 1;
-$url = "https://sweet.icontel.cl/?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DCases%26action%3DDetailView%26record=";
+$url = "https://sweet.icontel.cl/index.php?module=Cases&action=DetailView&record=";
 
 while ($row = $result->fetch_assoc()):
 ?>

@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/* CSS Document */
+ 
+   	html, body, div, iframe {
+   		margin:0;
+   		padding:0;
+   		height:100%;
+   		margin-left: 0px;
+   		margin-top: 0px;
+   		margin-right: 0px;
+   		margin-bottom: 0px;
+   	}
+   	table { width:100%; border:0px solid lightgrey; }
+   	iframe { display:block; width:100%;  border:2px; }
+ 	footer {
+	  background-color: white;
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height: 25px;
+	  color: gray;
+	  font-size: 12px;
+	}
+	/* unvisited link */
+	a:link {
+	  color: gray;
+	}
+	/* visited link */
+	a:visited {
+	  color: gray;
+	}
+	/* mouse over link */
+	a:hover {
+	  color: darkgrey;
+	  font-size: 20px;
+	  font-weight: bold;
+	}
+	/* selected link */
+	a:active {
+	  color: blue;
+	}	
+

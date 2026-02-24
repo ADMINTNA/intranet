@@ -108,23 +108,23 @@ include "config.php";
             <thead>
                 <tr>
                     <th>#</th>
-                    <th data-column="coti_num">Coti N°</th>
-                    <th data-column="fac_num">Fact N°</th>
-                    <th data-column="fac_fecha">Fecha</th>
-                    <th data-column="fac_cliente">Cliente</th>
-                    <th data-column="fac_estado">Tipo</th>
-                    <th data-column="fac_vendedor">Ejecutiv@</th>
-                    <th data-column="fechacierre">Fecha Cierre</th>
-                    <th data-column="meta_uf">Meta UF</th>
-                    <th data-column="cierre_uf">Cierre UF</th>
-                    <th data-column="cumplimiento">% Cumplimiento</th>
-                    <th data-column="comision">% Comisión</th>
-                    <th data-column="neto_uf">Neto UF</th>
-                    <th data-column="costo_uf">Costo UF</th>
-                    <th data-column="margen_uf">Margen UF</th>
-                    <th data-column="neto_comi_uf">Neto Comi</th>
-                    <th data-column="comision_uf">Comisión</th>
-                    <th data-column="comi_sgv_uf">Comi SGV</th>
+                    <th class="sortable-header" data-column="coti_num">Coti N°</th>
+                    <th class="sortable-header" data-column="fac_num">Fact N°</th>
+                    <th class="sortable-header" data-column="fac_fecha">Fecha</th>
+                    <th class="sortable-header" data-column="fac_cliente">Cliente</th>
+                    <th class="sortable-header" data-column="fac_estado">Tipo</th>
+                    <th class="sortable-header" data-column="fac_vendedor">Ejecutiv@</th>
+                    <th class="sortable-header" data-column="fechacierre">Fecha Cierre</th>
+                    <th class="sortable-header" data-column="meta_uf">Meta UF</th>
+                    <th class="sortable-header" data-column="cierre_uf">Cierre UF</th>
+                    <th class="sortable-header" data-column="cumplimiento">% Cumplimiento</th>
+                    <th class="sortable-header" data-column="comision">% Comisión</th>
+                    <th class="sortable-header" data-column="neto_uf">Neto UF</th>
+                    <th class="sortable-header" data-column="costo_uf">Costo UF</th>
+                    <th class="sortable-header" data-column="margen_uf">Margen UF</th>
+                    <th class="sortable-header" data-column="neto_comi_uf">Neto Comi</th>
+                    <th class="sortable-header" data-column="comision_uf">Comisión</th>
+                    <th class="sortable-header" data-column="comi_sgv_uf">Comi SGV</th>
                 </tr>
             </thead>
 

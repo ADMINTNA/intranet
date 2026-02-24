@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>cronometro</title>
+<script language="JavaScript">
+    var seconds = 300; //número de segundos a contar
+    function secondPassed() {
+      var minutes = Math.trunc(seconds/60); //calcula el número de minutos
+      var remainingSeconds = seconds % 60; //calcula los segundos restantes
+      //si los segundos y minutos usan sólo un dígito, añadimos un cero a la izq
+      if (remainingSeconds < 10) remainingSeconds = "0" + remainingSeconds; 
+      if (minutes < 10)  minutes = "0" + minutes; 
+      document.getElementById('reloj').innerHTML = "Actualiza: "+minutes + ":" + remainingSeconds; 
+      if (seconds == 0) { 
+        clearInterval(countdownTimer); 
+        location.reload(true);  
+      } else seconds--; 
+    } 
+    var countdownTimer = setInterval(secondPassed, 1000);
+</script>   
+    
+</head>
+
+<body>
+    
+<label id="reloj"></label>    
+</body>
+</html>

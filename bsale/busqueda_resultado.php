@@ -31,7 +31,7 @@ if ($tipo)   $condiciones[] = "cbd.tipo_doc = '" . addslashes($tipo) . "'";
 $where = $condiciones ? implode(" AND ", $condiciones) : "1";
 
 // --- Query final ---
-$query = "
+ echo $query = "
     SELECT 
         cbd.id_bsale,
         cbd.tipo_doc,

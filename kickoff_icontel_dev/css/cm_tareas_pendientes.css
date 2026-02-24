@@ -1,0 +1,490 @@
+@charset "UTF-8";
+
+/* ==========================================================
+   CSS ESPECÍFICO – TAREAS PENDIENTES (AJAX)
+   Autor: mAo
+   Versión optimizada 04-12-2025
+   ========================================================== */
+
+/* ==========================================================
+   1) TABLA PRINCIPAL
+   ========================================================== */
+#tareas,
+#casos_sujeto_a_cobro,
+#casos_debaja,
+#oportunidades,
+#Ordenes_de_Compra {
+    width: max-content;
+    /* usa ancho natural de contenido */
+    min-width: 1600px;
+    /* Fuerza scroll horizontal si la ventana es menor */
+    table-layout: auto !important;
+    /* permite que columnas se ajusten al contenido */
+    border-collapse: collapse;
+    border-spacing: 0 !important;
+    margin: 0 auto;
+}
+
+/* 🔒 LOCK VIEWPORT: Evita que se scrollee toda la página, rompiendo el sticky */
+html,
+body {
+    overflow: hidden !important;
+}
+
+.tabla-scroll {
+    width: 100%;
+    overflow-x: auto;
+    /* ⭐ permite ver TODAS las columnas */
+    overflow-y: auto !important;
+    /* Enable vertical scroll */
+    max-height: calc(100vh - 280px);
+    /* Altura calculada para encajar exacta */
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    /* espacio respiración */
+}
+
+/* Espacios dentro de columnas */
+#tareas th,
+#tareas td,
+#casos_sujeto_a_cobro th,
+#casos_sujeto_a_cobro td,
+#casos_debaja th,
+#casos_debaja td,
+#oportunidades th,
+#oportunidades td,
+#Ordenes_de_Compra th,
+#Ordenes_de_Compra td {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    vertical-align: middle;
+    white-space: nowrap;
+    /* evita saltos por defecto */
+}
+
+/* ==========================================================
+   DISTRIBUCIÓN DE ANCHOS DE COLUMNAS - TAREAS PENDIENTES
+   Usando min-width para anchos mínimos, sin máximo (expansión libre)
+   Estructura: 1=ícono, 2=#, 3=Asunto, 4=Categoría, 5=Prioridad, 
+   6=Asignado, 7=Estado, 8=EnEspera, 9=Origen, 10=N°, 
+   11=Creación, 12=Modif, 13=Venc, 14=Días
+   ========================================================== */
+
+/* Columna 1: Ícono estado */
+#tareas td:nth-child(1),
+#tareas th:nth-child(1) {
+    min-width: 25px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Columna 2: # */
+#tareas td:nth-child(2),
+#tareas th:nth-child(2) {
+    min-width: 30px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Columna 3: Asunto - compacto en 1 línea */
+#tareas td:nth-child(3),
+#tareas th:nth-child(3) {
+    min-width: 200px;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Columna 4: Categoría */
+#tareas td:nth-child(4),
+#tareas th:nth-child(4) {
+    min-width: 100px;
+    white-space: nowrap;
+}
+
+/* Columna 5: Prioridad */
+#tareas td:nth-child(5),
+#tareas th:nth-child(5) {
+    min-width: 80px;
+    white-space: nowrap;
+}
+
+/* Columna 6: Asignado a */
+#tareas td:nth-child(6),
+#tareas th:nth-child(6) {
+    min-width: 120px;
+    white-space: nowrap;
+}
+
+/* Columna 7: Estado */
+#tareas td:nth-child(7),
+#tareas th:nth-child(7) {
+    min-width: 100px;
+    white-space: nowrap;
+}
+
+/* Columna 8: En Espera de - compacto en 1 línea */
+#tareas td:nth-child(8),
+#tareas th:nth-child(8) {
+    min-width: 150px;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Columna 9: Origen Tipo */
+#tareas td:nth-child(9),
+#tareas th:nth-child(9) {
+    min-width: 90px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Columna 10: N° */
+#tareas td:nth-child(10),
+#tareas th:nth-child(10) {
+    min-width: 60px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Columna 11: Creación */
+#tareas td:nth-child(11),
+#tareas th:nth-child(11) {
+    min-width: 85px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Columna 12: Modificación */
+#tareas td:nth-child(12),
+#tareas th:nth-child(12) {
+    min-width: 85px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Columna 13: Vencimiento */
+#tareas td:nth-child(13),
+#tareas th:nth-child(13) {
+    min-width: 100px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Columna 14: Días */
+#tareas td:nth-child(14),
+#tareas th:nth-child(14) {
+    min-width: 45px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* ==========================================================
+   2) COLUMNA "#"
+   ========================================================== */
+#tareas th.col-num,
+#tareas td.col-num {
+    width: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+    text-align: center !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+}
+
+#tareas .estado-ajax {
+    padding: 0 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    width: 22px !important;
+}
+
+/* ==========================================================
+   3) ANCHOS Y ESTILO DE SELECTS (Prioridad, Categoría, Estado)
+   ========================================================== */
+#tareas select {
+    width: 100%;
+    font-size: 12px;
+}
+
+#tareas .select-prioridad {
+    width: 70px !important;
+    /* prioridad más angosta */
+    min-width: 70px !important;
+    max-width: 70px !important;
+}
+
+/* Categoría un poco más angosta */
+#tareas td:nth-child(3) select {
+    max-width: 120px !important;
+}
+
+/* Estado */
+#tareas td:nth-child(6) select {
+    max-width: 130px !important;
+}
+
+/* Usuario Asignado */
+#tareas td:nth-child(5) select {
+    max-width: 160px !important;
+}
+
+/* Campo "En Espera" - input de una línea */
+#tareas input[data-campo="en_espera"] {
+    width: 100%;
+    min-width: 150px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+#tareas input[data-campo="en_espera"]:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Input text general */
+#tareas input[type="text"] {
+    width: 100% !important;
+    min-width: 150px;
+}
+
+/* Fecha */
+#tareas input[type="date"] {
+    width: 120px !important;
+    text-align: center;
+}
+
+/* ==========================================================
+   4) COLORES POR PRIORIDAD
+   ========================================================== */
+.prio-escalado {
+    color: red;
+    font-weight: bold;
+}
+
+.prio-urgente {
+    color: orangered;
+    font-weight: bold;
+}
+
+.prio-alta {
+    color: orange;
+}
+
+.prio-baja {
+    color: green;
+}
+
+/* ==========================================================
+   5) EFECTO VISUAL EN HOVER
+   ========================================================== */
+#tareas tbody tr:hover {
+    background-color: #F0F3F4;
+}
+
+/* ==========================================================
+   6) ANIMACIÓN FADE-IN AL CARGAR MÓDULO
+   ========================================================== */
+.fadein {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeInModulo 0.35s ease-out forwards;
+}
+
+@keyframes fadeInModulo {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================
+   7) INPUTS Y SELECTS SIN BORDES (TAREAS PENDIENTES)
+   ========================================================== */
+#tareas select,
+#tareas input[type="text"],
+#tareas input[type="date"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+}
+
+#tareas select:focus,
+#tareas input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* ==========================================================
+   8) INPUTS Y SELECTS SIN BORDES (TAREAS DELEGADAS)
+   ========================================================== */
+#tareas_delegadas select,
+#tareas_delegadas input[type="text"],
+#tareas_delegadas input[type="date"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    width: 98%;
+}
+
+#tareas_delegadas select:focus,
+#tareas_delegadas input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* ==========================================================
+   9) INPUTS Y SELECTS SIN BORDES (CASOS ABIERTOS)
+   ========================================================== */
+#casos_abiertos select,
+#casos_abiertos input[type="text"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+}
+
+#casos_abiertos select:focus,
+#casos_abiertos input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* ==========================================================
+   10) INPUTS Y SELECTS SIN BORDES (CASOS SUJETOS A COBRO)
+   ========================================================== */
+#casos_sujeto_a_cobro select,
+#casos_sujeto_a_cobro input[type="text"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    width: 100%;
+}
+
+#casos_sujeto_a_cobro select:focus,
+#casos_sujeto_a_cobro input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* ==========================================================
+   11) HEADER FIJO (STICKY)
+   ========================================================== */
+/* Fila 1: Título principal */
+#tareas tr:first-child td,
+#tareas_delegadas tr:first-child td,
+#casos_abiertos tr:first-child td,
+#casos_sujeto_a_cobro tr:first-child td,
+#casos_debaja tr:first-child td,
+#oportunidades tr:first-child td,
+#Ordenes_de_Compra tr:first-child td,
+#cotizaciones tr:first-child td,
+#casos_congelados tr:first-child td,
+#casos_en_seguimiento tr:first-child td,
+#cobranza tr:first-child td,
+#clientes_potenciales tr:first-child td,
+#notas_abiertas tr:first-child td,
+#demo tr:first-child td,
+#oportunidades_archivadas tr:first-child td {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background-color: #512554;
+    /* Color violeta corporativo del título */
+    color: white;
+    /* Asegurar contraste */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Fila 2: Subtítulos */
+#tareas tr.subtit th,
+#tareas_delegadas tr.subtit th,
+#casos_abiertos tr.subtit th,
+#casos_sujeto_a_cobro tr.subtit th,
+#casos_debaja tr.subtit th,
+#oportunidades tr.subtit th,
+#Ordenes_de_Compra tr.subtit th,
+#cotizaciones tr.subtit th,
+#casos_congelados tr.subtit th,
+#casos_en_seguimiento tr.subtit th,
+#cobranza tr.subtit th,
+#clientes_potenciales tr.subtit th,
+#notas_abiertas tr.subtit th,
+#demo tr.subtit th,
+#oportunidades_archivadas tr.subtit th {
+    position: sticky;
+    top: 0px;
+    z-index: 10;
+    background-color: #512554;
+    color: white;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Fila 2: Soporte para 'subtitulo' (por consistencia) */
+#tareas tr.subtitulo th,
+#tareas_delegadas tr.subtitulo th,
+#casos_abiertos tr.subtitulo th,
+#casos_sujeto_a_cobro tr.subtitulo th,
+#casos_debaja tr.subtitulo th,
+#oportunidades tr.subtitulo th,
+#Ordenes_de_Compra tr.subtitulo th,
+#cotizaciones tr.subtitulo th,
+#casos_congelados tr.subtitulo th,
+#casos_en_seguimiento tr.subtitulo th,
+#cobranza tr.subtitulo th,
+#clientes_potenciales tr.subtitulo th,
+#notas_abiertas tr.subtitulo th,
+#demo tr.subtitulo th,
+#oportunidades_archivadas tr.subtitulo th {
+    position: sticky;
+    top: 0px;
+    z-index: 10;
+    background-color: #512554;
+    color: white;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================
+   12) COLUMNAS REDIMENSIONABLES
+   ========================================================== */
+
+/* Indicador visual al hacer resize */
+#tareas tr.subtit th,
+#tareas_delegadas tr.subtit th {
+    user-select: none;
+    transition: background-color 0.15s ease;
+}
+
+#tareas tr.subtit th:hover,
+#tareas_delegadas tr.subtit th:hover {
+    background-color: #3E2A5E;
+}
+
+/* Feedback visual durante resize */
+body.resizing {
+    cursor: col-resize !important;
+    user-select: none !important;
+}

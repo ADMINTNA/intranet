@@ -11,8 +11,8 @@ ob_start();
 // Incluye el contenido de tu tabla
 include("contenido.php");
 
-// Obtén todo el HTML generado
+// ObtÃ©n todo el HTML generado
 $html = ob_get_clean();
 
-// Imprime solo la tabla, Excel lo interpretará correctamente
+// Imprime solo la tabla, Excel lo interpretarÃ¡ correctamente
 echo $html;

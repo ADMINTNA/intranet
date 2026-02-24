@@ -5,14 +5,14 @@
     const montoData = <?= json_encode(array_column($resumen, 'monto')) ?>;
     const colors = ['#4CAF50', '#FF9800', '#2196F3', '#FF5722', '#9C27B0', '#E91E63', '#00BCD4'];
 
-    // Gráfico de Distribución de Cantidad de Cotizaciones por Estado
+    // GrÃ¡fico de DistribuciÃ³n de Cantidad de Cotizaciones por Estado
     const ctxCantidad = document.getElementById('chartCotizacionesPorEstado').getContext('2d');
     new Chart(ctxCantidad, {
         type: 'pie',
         data: {
             labels: estadosLabels,
             datasets: [{
-                label: 'Distribución de Cantidad',
+                label: 'DistribuciÃ³n de Cantidad',
                 data: cantidadData,
                 backgroundColor: colors,
                 borderWidth: 1
@@ -22,7 +22,7 @@
             responsive: true,
             plugins: {
                 legend: { display: true, position: 'top' },
-                title: { display: true, text: 'Distribución de Cantidad de Cotizaciones por Estado' },
+                title: { display: true, text: 'DistribuciÃ³n de Cantidad de Cotizaciones por Estado' },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
@@ -37,14 +37,14 @@
         }
     });
 
-    // Gráfico de Distribución de Montos por Estado
+    // GrÃ¡fico de DistribuciÃ³n de Montos por Estado
     const ctxMonto = document.getElementById('chartMontoPorEstado').getContext('2d');
     new Chart(ctxMonto, {
         type: 'pie',
         data: {
             labels: estadosLabels,
             datasets: [{
-                label: 'Distribución de Monto',
+                label: 'DistribuciÃ³n de Monto',
                 data: montoData,
                 backgroundColor: colors,
                 borderWidth: 1
@@ -54,7 +54,7 @@
             responsive: true,
             plugins: {
                 legend: { display: true, position: 'top' },
-                title: { display: true, text: 'Distribución de Montos por Estado' },
+                title: { display: true, text: 'DistribuciÃ³n de Montos por Estado' },
                 tooltip: {
                     callbacks: {
                         label: function(context) {

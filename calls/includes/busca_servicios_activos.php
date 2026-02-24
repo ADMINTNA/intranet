@@ -85,7 +85,15 @@ if ($result->num_rows > 0) {
 
         echo '<tr valign="top" style="' . $style . '">';
 ?>
-        <td><a href="<?php echo $row["url_new_caso"]; ?>" target="_blank"><img src="../../images/ticket.png" height="20" alt=""/></a></td>
+        <td style="text-align:center;">
+            <a href="<?php echo $row["url_new_caso"]; ?>" target="_blank" 
+               title="Crear Nuevo Caso" 
+               style="text-decoration:none; font-size:20px; display:inline-block; transition: transform 0.2s;"
+               onmouseover="this.style.transform='scale(1.2)'" 
+               onmouseout="this.style.transform='scale(1)'">
+                🎫
+            </a>
+        </td>
         <td align="center"><?php echo number_format($row["produ_cantidad"]); ?></td>
         <td><?php echo $row["coti_estado"]; ?></td>
         <td><?php echo $row["produ_nombre"]; ?></td>

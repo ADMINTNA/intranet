@@ -1,80 +1,78 @@
-        <?php
- // ==========================================================
-// kickoff_office/cm_oclientes_potenciales.php
-// Clientes Potenciales de Kickoff de TNA Office
+<?php
+//=====================================================
+// /intranet/kickoff_office_v2/cm_clientes_potenciales.php
+// Clientes Potenciales - Versi√≥n AJAX
 // Autor: Mauricio Araneda
-// Fecha: 2025-11-17
-// CodificaciÛn: UTF-8 sin BOM
-// ==========================================================
+// Actualizado: 2026-01-06
+//=====================================================
+header('Content-Type: text/html; charset=utf-8');
+mb_internal_encoding("UTF-8");
+require_once __DIR__ . "/ajax_bootstrap.php";
 
-    // --- ConexiÛn a la base de datos Sweet ---
-    $conn = DbConnect("tnaoffice_suitecrm");
-            $sql = "CALL Clientes_Potenciales_Pendientes()";       
-            $resultado = $conn->query($sql);
-            $ptr=0;
-            $contenido = "";
-			$muestra = $resultado->num_rows;
-            if($resultado->num_rows > 0)  { 
-                while($lin = $resultado->fetch_assoc()) {
-				  $style = ' style="color: orange;" ';
-                  $ptr ++; 
-				  if ($lin["dias"] >0 ) {
-						$contenido .= '<tr style="color: red" >';					
-				  } else {
-						switch ($lin["estado"]){    
-						  case "1 Nuevo":
-							$contenido .= '<tr style="color: red" >';
-							break;
-						  case "2 Asignado":
-							$contenido .= '<tr style="color: orange" >';
-							break;
-						  case "3 En Proceso":
-							$contenido .= '<tr style="color: green" >';
-							break;
-						  case "4 Retomar en 3 meses":
-							$contenido .= '<tr style="color: green" >';
-							break;
-						  default:
-							$contenido .= '<tr>';                     
-						  }   				
-				  }	
-                  $contenido .= "<td>".$ptr."</td>";
-                  $contenido .= '<td colspan="2"><a target="_blank" href="'.$lin["url_lead"].'">'.$lin["nombre"].'</a></td>';
-                  // $contenido .= "<td>".$lin["cuenta"]."</td>";
-                  $contenido .= "<td>".$lin["estado"]."</td>";
-                  $contenido .= "<td>".$lin["campana"]."</td>";
-                  $contenido .= "<td>".$lin["usuario"]."</td>";
-                  $contenido .= "<td>".$lin["f_creacion"]."</td>";
-                 // $contenido .= "<td>".$lin["f_prox_paso"]."</td>";
-                  $contenido .= "<td align='right'>".$lin["dias"]."&nbsp;&nbsp;</td>";
-                  $contenido .= "</tr>";
-                }
-            } else {
-			  $style = "";
-              $contenido = "<tr><td colspan='8'>No se encontraron Clientes Potenciales pendientes.</td></tr>";
-            }
-            $conn->close(); 
-            unset($resultado);
-            unset($conn);
-			$td = '<td colspan="7" align="left" valign="bottom" class="titulo" >&nbsp;&nbsp;üß≤ Clientes Potenciales en Proceso</td>
-				  <td colspan="1" align="right" valign="bottom" style="font-size: 20px;" class="titulo" ><a 
-				  href="'.$url_nuevo_lead.'" target="new" title="Lista Cliente Potenciales">+</a>&nbsp;&nbsp;&nbsp;</td>';
-        ?>
- 
-<table id="clientes_potenciales" align="center" width="100%">
-            <tr align="center" class="subtitulo"><?PHP echo $td; ?></tr>
-	<tr align="left" <?PHP echo $style_titulo; ?></tr>
-				<th class="subtitulo"> # </th>
-				<th class="subtitulo" width="25%" colspan="2">Nombre</th>                    
-				<!--th class="subtitulo" width="20%">Cuenta</th-->                
-				<th class="subtitulo" width="10%">Estado</th>
-				<th class="subtitulo" >CampaÒa</th>
-				<th class="subtitulo" width="11%">Asignado a</th>
-				<th class="subtitulo" width="10%">Fecha CreaciÛn</th>
-				<!--th class="subtitulo" width="10%">F Prox. Paso</th-->
-				<th class="subtitulo" width="1%"  align="right">DÌass&nbsp;&nbsp;</th>
-			</tr>
-             <?PHP echo $contenido; ?>
-        </table>   
-		<div><button style="color: #512554; border: none" onclick="capa('clientes_potenciales')">Clientes Potenciales [Muestra/Oculta <?PHP echo $ptr; ?>]</button></div>
-		<?PHP if(!$muestra) echo "<script>capa('clientes_potenciales');</script>"; ?>
+$conn = DbConnect("tnaoffice_suitecrm");
+$sql = "CALL Clientes_Potenciales_Pendientes()";       
+$resultado = $conn->query($sql);
+$ptr = 0;
+$contenido = "";
+
+if ($resultado && $resultado->num_rows > 0) { 
+    while ($lin = $resultado->fetch_assoc()) {
+        $ptr++; 
+        if ($lin["dias"] > 0) {
+            $contenido .= '<tr style="color: red">';					
+        } else {
+            switch ($lin["estado"]) {    
+                case "1 Nuevo":
+                    $contenido .= '<tr style="color: red">'; break;
+                case "2 Asignado":
+                    $contenido .= '<tr style="color: orange">'; break;
+                case "3 En Proceso":
+                    $contenido .= '<tr style="color: green">'; break;
+                case "4 Retomar en 3 meses":
+                    $contenido .= '<tr style="color: green">'; break;
+                default:
+                    $contenido .= '<tr>';                     
+            }   				
+        }	
+        $contenido .= "<td>{$ptr}</td>";
+        $contenido .= '<td colspan="2"><a target="_blank" href="' . $lin["url_lead"] . '">' . $lin["nombre"] . '</a></td>';
+        $contenido .= "<td>" . $lin["estado"] . "</td>";
+        $contenido .= "<td>" . $lin["campana"] . "</td>";
+        $contenido .= "<td>" . $lin["usuario"] . "</td>";
+        $contenido .= "<td>" . $lin["f_creacion"] . "</td>";
+        $contenido .= "<td align='right'>" . $lin["dias"] . "&nbsp;&nbsp;</td>";
+        $contenido .= "</tr>";
+    }
+} else {
+    $contenido = "<tr><td colspan='8'>‚ö†Ô∏è No se encontraron Clientes Potenciales</td></tr>";
+}
+$conn->close(); 
+?>
+
+<link rel="stylesheet" href="css/kickoff.css">
+
+<div class="tabla-scroll">
+<table id="clientes_potenciales" width="100%">
+    <tr>
+        <td colspan="7" align="left" class="titulo">
+            &nbsp;&nbsp;üß≤ Clientes Potenciales en Proceso
+        </td>
+        <td align="right" style="font-size: 20px; color: white; background-color: #512554;">
+            <a style="color: white; text-decoration: none;" href="<?=$url_nuevo_lead?>" target="new" title="Nuevo Cliente Potencial"><b>+</b></a>&nbsp;&nbsp;&nbsp;
+        </td>
+    </tr>
+    <tr class="subtit">
+        <th class="subtitulo">#</th>
+        <th class="subtitulo" colspan="2">Nombre</th>                    
+        <th class="subtitulo">Estado</th>
+        <th class="subtitulo">Campa√±a</th>
+        <th class="subtitulo">Asignado a</th>
+        <th class="subtitulo">Fecha Creaci√≥n</th>
+        <th class="subtitulo" align="right">D√≠as&nbsp;&nbsp;</th>
+    </tr>
+    <?php echo $contenido; ?>
+</table>
+</div>
+
+<script src="js/cm_sort.js?v=<?=time()?>"></script>
+<script src="js/cm_resizable_columns.js?v=<?=time()?>"></script>

@@ -82,7 +82,7 @@ if (empty($listaEstadoSweet)) {
 // ==========================================================
 // Ejecutar SP
 // ==========================================================
-    $sql = sprintf(
+  echo  $sql = sprintf(
     "CALL search_by_status_min_docs(%d, %d, '%s', '%s', %d)",
     $p_status,
     $p_min_docs,

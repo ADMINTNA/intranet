@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reloj de espera iframe</title>
+  <style>
+    /* Estilos para el contenedor del iframe */
+    .iframe-container {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      border: 1px solid #ccc;
+    }
+    
+    /* Estilos para el reloj de espera */
+    .reloj {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      font-weight: bold;
+      display: none;
+    }
+    
+    /* Estilos para el elemento de carga */
+    .cargando {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Estilos para el svg del elemento de carga */
+    .cargando svg {
+      width: 50px;
+      height: 50px;
+      animation: girar 2s linear infinite;
+    }
+    
+    @keyframes girar {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="iframe-container">
+    <iframe id="miIframe" src="coti.php" frameborder="0" width="100%" height="100%"></iframe>
+    <div class="cargando">
+      <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="none" stroke-width="4" stroke-miterlimit="10" />
+      </svg>
+    </div>
+    <div class="reloj">
+      <span id="tiempo">00:00</span>
+    </div>
+  </div>
+  
+  <script>
+    var tiempo = 0;
+    var intervalo;
+    
+    // Función para mostrar el reloj de espera y comenzar a contar
+    function mostrarReloj() {
+      document.querySelector('.reloj').style.display = 'block';
+      document.querySelector('.cargando').style.display = 'flex';
+      tiempo = 0;
+      intervalo = setInterval(function() {
+        tiempo++;
+        document.getElementById('tiempo').innerHTML = formatoTiempo(tiempo);
+      }, 1000);
+    }
+    
+    // Función para ocultar el reloj de espera y detener el intervalo
+    function ocultarReloj() {
+      document.querySelector('.reloj').style.display = 'none';
+      document.querySelector('.cargando').style.display = 'none';
+      clearInterval(intervalo);
+    }
+    
+    // Formatea el tiempo en mm:ss
+    function formatoTiempo(segundos) {
+      var minutos = Math.floor(segundos / 60);
+      var segundos = segundos % 60;
+      return (minutos < 10 ? '0' + minutos : minutos) + ':' + (segundos < 10 ? '0' + segundos : segundos);
+    }
+    
+    // Muestra el reloj de espera cuando el iframe se carga o se recarga
+    document.getElementById('miIframe').addEventListener('load', function() {
+      ocultarReloj();
+    });
+    
+    // Muestra el reloj de espera cuando el iframe se recarga
+    document.getElementById('miIframe').contentWindow.addEventListener('load', function() {
+      mostrarReloj();
+    });
+    
+    // Muestra el reloj de espera inicialmente
+    mostrarReloj();
+  </script>
+</body>
+</html>

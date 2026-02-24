@@ -20,7 +20,7 @@
     else {
         if(!empty($nombre)) $clave = $nombre; else $clave = $apellido;
     }
-   echo  $sql = "CALL tnasolut_sweet.searchbycontacto_por_clave('%".$clave."%')";  
+   $sql = "CALL tnasolut_sweet.searchbycontacto_por_clave('%".$clave."%')";  
     $result = $conn->query($sql);
     if($result->num_rows > 0)  { 
         while($row = $result->fetch_assoc()) {

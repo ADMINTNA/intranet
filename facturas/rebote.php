@@ -1,5 +1,5 @@
 <?php
-// Inicia la sesión
+// Inicia la sesiÃ³n
 session_start();
 ?>
 
@@ -28,12 +28,12 @@ session_start();
       animation: flotar 6s linear infinite;
     }
     
-    /* Estilos para ocultar la imagen de espera cuando la página esté cargada */
+    /* Estilos para ocultar la imagen de espera cuando la pÃ¡gina estÃ© cargada */
     .cargando.ocultar {
       display: none;
     }
     
-    /* Animación para hacer flotar el texto */
+    /* AnimaciÃ³n para hacer flotar el texto */
     @keyframes flotar {
       0% {
         top: 10%;
@@ -74,7 +74,7 @@ session_start();
     <?php include_once 'contenido.php'; ?>
   </div>
   
-  <!-- Script para ocultar la imagen de espera cuando la página esté cargada -->
+  <!-- Script para ocultar la imagen de espera cuando la pÃ¡gina estÃ© cargada -->
   <script>
     // Oculta la imagen de espera y muestra el contenido
     document.addEventListener('DOMContentLoaded', function() {

@@ -1,0 +1,158 @@
+/* ===== Base ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fafafa;
+  color: #1F1D3E;
+  overflow: hidden; /* evita scroll global */
+}
+
+/* ===== Header fijo ===== */
+header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: #1F1D3E;
+  color: #fff;
+  padding: 10px 16px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+  z-index: 1000;
+}
+
+/* ===== Contenedor scrolleable ===== */
+.table-container{
+  position: absolute;
+  top: 50px;           /* debajo del header */
+  bottom: 80px;        /* espacio para barra + footer */
+  left: 0; right: 0;
+  overflow: auto;      /* <— scroll aquí */
+  background: #fff;
+}
+
+/* ===== Tabla principal ===== */
+#tablaDocs{
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;    /* reparte ancho */
+  max-width: 100%;        /* no se sale de la ventana */
+}
+
+/* Encabezados (misma identidad que el título) */
+#tablaDocs thead tr:first-child th{
+  position: sticky;
+  top: 0;                 /* pegado arriba del contenedor */
+  z-index: 5;
+  background: #1F1D3E;    /* igual que el header */
+  color: #fff;
+  border: 1px solid #1F1D3E;
+  padding: 8px 6px;
+  text-align: left;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,.1);
+}
+#tablaDocs thead th.sortable:hover{ background:#29255d; cursor:pointer; }
+
+/* Fila de filtros (la inyecta JS) */
+#tablaDocs thead .filter-row th{
+  position: sticky;
+  top: 36px;              /* justo bajo los títulos */
+  z-index: 4;
+  background: #2C2A55;
+  color: #fff;
+  border: 1px solid #1F1D3E;
+  padding: 6px;
+}
+#tablaDocs thead .filter-row input{
+  width: 95%;
+  padding: 3px 5px;
+  font-size: 11px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  background: #fff;
+  color: #1F1D3E;
+  box-sizing: border-box;
+}
+
+/* Cuerpo */
+#tablaDocs td{
+  border: 1px solid #ccc;
+  padding: 6px 4px;
+  font-size: 13px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+#tablaDocs tbody tr:nth-child(even){ background:#f9f9f9; }
+
+/* Anchos compactos de columnas */
+#tablaDocs th:nth-child(1), #tablaDocs td:nth-child(1){ /* Tipo */
+  width: 10%; min-width: 90px;
+}
+#tablaDocs th:nth-child(2), #tablaDocs td:nth-child(2){ /* N° */
+  width: 6%; min-width: 70px; text-align: center;
+}
+#tablaDocs th:nth-child(3), #tablaDocs td:nth-child(3){ /* Fecha Emisión */
+  width: 8%; min-width: 90px; text-align: center;
+}
+#tablaDocs th:nth-child(4), #tablaDocs td:nth-child(4){ /* Cliente */
+  width: 30%; min-width: 220px;
+}
+#tablaDocs th:nth-child(5), #tablaDocs td:nth-child(5){ /* RUT */
+  width: 10%; min-width: 100px; text-align: center;
+}
+#tablaDocs th:nth-child(6), #tablaDocs td:nth-child(6){ /* UF */
+  width: 8%; min-width: 80px; text-align: right; font-variant-numeric: tabular-nums;
+}
+#tablaDocs th:nth-child(7), #tablaDocs td:nth-child(7), /* PDF */
+#tablaDocs th:nth-child(8), #tablaDocs td:nth-child(8){ /* Ver */
+  width: 5%; min-width: 60px; text-align: center;
+}
+
+/* ===== Barra de acciones fija ===== */
+.action-bar{
+  position: fixed;
+  left: 0; right: 0; bottom: 42px;
+  background: #f8f8f8;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 -2px 6px rgba(0,0,0,.1);
+  display: flex; justify-content: center; gap: 20px;
+  padding: 8px 0; z-index: 950;
+}
+.action-bar button{
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-weight: bold;
+  cursor: pointer; font-size: 13px;
+}
+.action-bar .clear-btn{ background:#c0392b; color:#fff; }
+.action-bar .clear-btn:hover{ background:#a93226; }
+.action-bar .help-btn{ background:#3498db; color:#fff; }
+.action-bar .help-btn:hover{ background:#2e86c1; }
+
+/* ===== Ayuda ===== */
+#helpOverlay{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none; z-index: 9999;
+  justify-content: center; align-items: center;
+}
+#helpBox{
+  background:#fff; padding:20px 25px; border-radius:10px;
+  max-width:520px; width:90%; box-shadow:0 0 20px rgba(0,0,0,.4);
+}
+#helpBox code{ background:#f4f4f4; padding:2px 5px; border-radius:4px; }
+#helpClose{
+  margin-top:15px; background:#c0392b; color:#fff; border:none;
+  padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:bold;
+}
+
+/* ===== Footer fijo (incluido) ===== */
+footer{
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: #1F1D3E; color:#fff; text-align:center;
+  padding: 8px 12px; font-size:12px; z-index: 900;
+  box-shadow: 0 -2px 6px rgba(0,0,0,.2);
+}

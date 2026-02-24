@@ -1,37 +1,35 @@
 <?php
 //=====================================================
-// /intranet/kickoff/cd_casos_abiertos.php
-// busca casos pendientes.
+// /intranet/kickoff_office_v2/cm_casos_abiertos.php
+// Casos Abiertos - Versión AJAX
 // Autor: Mauricio Araneda
-// Actualizado: 08-11-2025
+// Actualizado: 2026-01-06
 //=====================================================
+header('Content-Type: text/html; charset=utf-8');
 mb_internal_encoding("UTF-8");
+
+// Bootstrap AJAX (sesión + config + variables)
+require_once __DIR__ . "/ajax_bootstrap.php";
+
 $conn = DbConnect('tnaoffice_suitecrm');
-$sql = "CALL Kick_Off_Operaciones_Abiertos('" . $sg_id . "')";                        
+$sql = "CALL Kick_Off_Operaciones_Abiertos('" . $conn->real_escape_string($sg_id) . "')";                        
 $resultado = $conn->query($sql);
 
 $ptr = 0;
 $contenido = "";
-$muestra = false;
 
 if ($resultado && $resultado->num_rows > 0) {  
-    $muestra=true;
-    $style = ' style="color: orange;" ';
     while ($row = $resultado->fetch_assoc()) {
         $ptr++; 
         switch ($row["prioridad"]) {    
             case "P1E":
-                $contenido .= '<tr style="color: red">';
-                break;
+                $contenido .= '<tr style="color: red">'; break;
             case "P1":
-                $contenido .= '<tr style="color: orangered">';
-                break;
+                $contenido .= '<tr style="color: orangered">'; break;
             case "P2":
-                $contenido .= '<tr style="color: orange">';
-                break;
+                $contenido .= '<tr style="color: orange">'; break;
             case "P3":
-                $contenido .= '<tr style="color: dimgray">';
-                break;
+                $contenido .= '<tr style="color: dimgray">'; break;
             default:
                 $contenido .= '<tr>';                     
         }   
@@ -41,7 +39,6 @@ if ($resultado && $resultado->num_rows > 0) {
         $contenido .= "<td>" . $row["prioridad_descr"] . "</td>";                      
         $contenido .= "<td>" . $row["asunto"] . "</td>";
         $contenido .= "<td>" . $row["estado"] . "</td>";
-        // $contenido .= "<td>" . $row["en_espera_de"] . "</td>";
         $contenido .= "<td>" . $row["categoria"] . "</td>";
         $contenido .= "<td>" . $row["nombre"] . " " . $row["apellido"] . "</td>";                    
         $contenido .= "<td>" . $row["cliente"] . "</td>";
@@ -51,44 +48,40 @@ if ($resultado && $resultado->num_rows > 0) {
         $contenido .= "</tr>";
     }
 } else {
-    $style = "";
-    $contenido = "<tr><td colspan='12'>⚠️ No se encontraron datos de Casos Abiertos</td></tr>";
+    $contenido = "<tr><td colspan='11'>⚠️ No se encontraron Casos Abiertos</td></tr>";
 }
 
 $conn->close();
-unset($result);
-unset($conn);
-
-$td = '<td colspan="10" align="left" valign="top" class="titulo" >&nbsp;&nbsp;📑  Casos Abiertos &nbsp;&nbsp;&nbsp;</td>
-<td align="right" valign="top" style="font-size: 20px; color: white; background-color: #512554;">
-    <a style="color: white;" href="' . $url_nuevo_caso . '" target="new" title="Crear Nuevo Caso">+</a>&nbsp;&nbsp;&nbsp;
-</td>';
 ?>
 
-<table id="casos_abiertos" border="0" align="center" width="100%" cellpadding="0" cellspacing="0">
-    <tr align="left" style="color: white; background-color: #512554;">
-        <?php echo $td; ?>
+<link rel="stylesheet" href="css/kickoff.css">
+
+<div class="tabla-scroll">
+<table id="casos_abiertos" width="100%">
+    <tr>
+        <td colspan="10" align="left" class="titulo">
+            &nbsp;&nbsp;📑 Casos Abiertos
+        </td>
+        <td align="right" style="font-size: 20px; color: white; background-color: #512554;">
+            <a style="color: white; text-decoration: none;" href="<?=$url_nuevo_caso?>" target="new" title="Crear Nuevo Caso"><b>+</b></a>&nbsp;&nbsp;&nbsp;
+        </td>
     </tr>
-    <tr align="left" style="color: white; background-color: #512554;">
-        <th width="1%" class="subtitulo">#</th>
-        <th width="2%" class="subtitulo">Nº</th>
-        <th width="2%" class="subtitulo">Prioridad</th>
-        <th width="11%" class="subtitulo">Asunto</th>
-        <th width="2%" class="subtitulo">Estado</th>                
-        <!--th width="8%" class="subtitulo">En Espera De</th-->                
-        <th width="3%" class="subtitulo">Categoría</th>
-        <th width="5%" class="subtitulo">Asignado a</th>                    
-        <th width="15%" class="subtitulo">Razón Social</th>
-        <th width="3%" class="subtitulo">F.Creación</th>
-        <th width="3%" class="subtitulo">F.Modif.</th>
-        <th width="2%" class="subtitulo" align="right">Días&nbsp;&nbsp;</th>
+    <tr class="subtit">
+        <th class="subtitulo">#</th>
+        <th class="subtitulo">Nº</th>
+        <th class="subtitulo">Prioridad</th>
+        <th class="subtitulo">Asunto</th>
+        <th class="subtitulo">Estado</th>                
+        <th class="subtitulo">Categoría</th>
+        <th class="subtitulo">Asignado a</th>                    
+        <th class="subtitulo">Razón Social</th>
+        <th class="subtitulo">F.Creación</th>
+        <th class="subtitulo">F.Modif.</th>
+        <th class="subtitulo" align="right">Días&nbsp;&nbsp;</th>
     </tr>
     <?php echo $contenido; ?>
 </table>
-
-<div>
-    <button style="color: #512554; border: none" onclick="capa('casos_abiertos')">
-        Casos Abiertos [Muestra/Oculta <?php echo $ptr; ?>]
-    </button>
-    <?php if (!$muestra) echo "<script>capa('casos_abiertos');</script>"; ?>
 </div>
+
+<script src="js/cm_sort.js?v=<?=time()?>"></script>
+<script src="js/cm_resizable_columns.js?v=<?=time()?>"></script>

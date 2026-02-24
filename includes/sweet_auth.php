@@ -270,7 +270,7 @@ class SweetAuth {
      */
     public static function getLoginUrl($return_url = '') {
         if (empty($return_url)) {
-            $return_url = 'https://intranet.icontel.cl/kickoff_ajax/icontel.php';
+            $return_url = 'https://intranet.icontel.cl/kickoff_icontel/icontel.php';
         }
         
         return 'https://sweet.icontel.cl/index.php?return_url=' . urlencode($return_url);

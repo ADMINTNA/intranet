@@ -1,0 +1,318 @@
+<?php
+// ==========================================================
+// KickOff AJAX — Órdenes de Compra Pendientes
+// /kickoff_icontel/cm_ordenes_de_compra_pendientes.php
+// Autor: Mauricio Araneda (mAo)
+// Fecha: 2025-12
+// Codificación: UTF-8 sin BOM
+// ==========================================================
+
+mb_internal_encoding("UTF-8");
+
+// ------------------------------------------------------
+// Cargar bootstrap AJAX (sesión + $sg_id + DbConnect)
+// ------------------------------------------------------
+require_once __DIR__ . "/ajax_bootstrap.php";
+
+// Seguridad mínima
+if ($sg_id === "" || $sg_name === "") {
+    echo "<div style='padding:20px; color:red;'>❌ Error: sesión inválida.</div>";
+    exit;
+}
+
+// ==========================================================
+// LISTA DINÁMICA DE ESTADOS DESDE SWEET API
+// ==========================================================
+function obtenerListaEstadoFactura()
+{
+    $url = "https://sweet.icontel.cl/custom/tools/api_dropdown.php?list=quote_invoice_status_dom";
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+
+    $resp = curl_exec($ch);
+    curl_close($ch);
+
+    if (!$resp) {
+        return [];
+    }
+
+    $json = json_decode($resp, true);
+    return is_array($json) ? $json : [];
+}
+
+// Cargar lista una sola vez
+$LISTA_ESTADO_FACTURA = obtenerListaEstadoFactura();
+
+// ==========================================================
+// FUNCIÓN SELECT (render del combo de Estado)
+// ==========================================================
+function selectEstadoFactura($estadoActual, $lista, $cotiId)
+{
+    $html  = "<div class='estado-container'>";
+    $html .= "<select class='estado-factura' data-coti-id='{$cotiId}'>";
+
+    foreach ($lista as $item) {
+        $key   = htmlspecialchars($item['key'], ENT_QUOTES, 'UTF-8');
+        $label = htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8');
+
+        // Comparar de forma flexible (mayúsculas/minúsculas, espacios)
+        $estadoNorm = strtolower(trim(str_replace('_', ' ', $estadoActual)));
+        $keyNorm = strtolower(trim(str_replace('_', ' ', $key)));
+        $labelNorm = strtolower(trim(str_replace('_', ' ', $item['label'])));
+        
+        $selected = ($estadoNorm === $keyNorm || $estadoNorm === $labelNorm) ? "selected" : "";
+
+        $html .= "<option value='{$key}' {$selected}>{$label}</option>";
+    }
+
+    $html .= "</select><span class='estado-icono'></span></div>";
+    return $html;
+}
+
+// ==========================================================
+// FUNCIÓN INPUT DTE (render del input de Nº DTE)
+// ==========================================================
+function inputNumeroDte($numeroDte, $cotiId)
+{
+    $valor = htmlspecialchars($numeroDte ?? '', ENT_QUOTES, 'UTF-8');
+    $html  = "<div class='dte-container'>";
+    $html .= "<input type='text' class='numero-dte-input' value='{$valor}' data-coti-id='{$cotiId}'>";
+    $html .= "<span class='dte-icono'></span></div>";
+    return $html;
+}
+
+// ==========================================================
+// FUNCIÓN PARA EXTRAER ID DE COTIZACIÓN DESDE URL
+// ==========================================================
+function extraerCotiId($url)
+{
+    // Decodificar URL por si tiene caracteres escapados
+    $urlDecoded = urldecode($url);
+    
+    // Formato 1: record=XXXX (URL normal)
+    if (preg_match('/record=([a-zA-Z0-9\-]+)/', $urlDecoded, $matches)) {
+        return $matches[1];
+    }
+    
+    // Formato 2: record%3D (URL encoded)
+    if (preg_match('/record%3D([a-zA-Z0-9\-]+)/i', $url, $matches)) {
+        return $matches[1];
+    }
+    
+    return '';
+}
+
+// ------------------------------------------------------
+// Conexión a SweetCRM
+// ------------------------------------------------------
+$conn = DbConnect($db_sweet);
+$conn->set_charset("utf8mb4");
+
+// Procedimiento almacenado
+$sql = "CALL CM_Ordenes_de_Compra_Pendientes()";
+$resultado = $conn->query($sql);
+
+$ptr       = 0;
+$contenido = "";
+$muestra   = ($resultado && $resultado->num_rows > 0);
+
+// ------------------------------------------------------
+// Construcción de filas
+// ------------------------------------------------------
+if ($muestra) {
+
+    while ($lin = $resultado->fetch_assoc()) {
+
+        $ptr++;
+        
+        // Extraer ID de cotización - primero verificar si viene directo del SP
+        $cotiId = isset($lin["coti_id"]) ? $lin["coti_id"] : '';
+        
+        // Si no viene directo, intentar extraer de la URL
+        if (empty($cotiId) && isset($lin["url_coti"])) {
+            $cotiId = extraerCotiId($lin["url_coti"]);
+        }
+
+        // ===============================
+        //  COLOR POR ESTADO DE FACTURA
+        // ===============================
+        switch ($lin["coti_estado_factura"]) {
+
+            case "DTE Pagado":
+
+                if ($lin["opor_estado"] == "Facturado / Cerrado") {
+                    $color = "color:orangered;";
+                } else {
+                    $color = "color:orange;";
+                }
+                break;
+
+            default:
+                $color = "color:#333;";
+        }
+
+        $contenido .= "<tr style='{$color}'>";
+
+        // Celdas seguras
+        $contenido .= "<td width='1%'>{$ptr}</td>";
+
+       
+        $contenido .= "<td width='1%'>" . htmlspecialchars($lin["coti_numero"]) . "</td>";
+
+        $contenido .= '<td colspan="2"><a target="_blank" href="' .
+                       htmlspecialchars($lin["url_coti"]) . '">' .
+                       htmlspecialchars($lin["coti_titulo"]) . '</a></td>';
+
+        // Estado como SELECT editable
+        $contenido .= "<td class='estado-factura-cell'>" . 
+                      selectEstadoFactura($lin["coti_estado_factura"], $LISTA_ESTADO_FACTURA, $cotiId) . 
+                      "</td>";
+        
+        // Nº DTE como INPUT editable
+        $contenido .= "<td class='numero-dte-cell'>" . 
+                      inputNumeroDte($lin["numero_dte"], $cotiId) . 
+                      "</td>";
+        
+        $contenido .= "<td align='right'>" . htmlspecialchars($lin["moneda"]) . "</td>";
+
+        // Formato numérico según moneda
+        if ($lin["moneda"] == "$") {
+            $monto = number_format($lin["coti_neto"], 0);
+        } else {
+            $monto = number_format($lin["coti_neto"], 2);
+        }
+
+        $contenido .= "<td align='right'>{$monto}</td>";
+
+        $contenido .= '<td align="right"><a target="_blank" href="' .
+                       htmlspecialchars($lin["url_opor"]) . '">' .
+                       htmlspecialchars($lin["opor_numero"]) . '</a></td>';
+
+        $contenido .= "<td>" . htmlspecialchars($lin["op_nombre"]) . "</td>";
+        $contenido .= "<td>" . htmlspecialchars($lin["opor_estado"]) . "</td>";
+        $contenido .= "<td>" . htmlspecialchars($lin["account"]) . "</td>";
+
+        $contenido .= "</tr>";
+    }
+
+} else {
+
+    $contenido = "
+        <tr>
+            <td colspan='12' style='text-align:center; padding:12px; color:#666;'>
+                ⚠️ No se encontraron Órdenes de Compra pendientes.
+            </td>
+        </tr>";
+
+}
+
+$conn->close();
+unset($resultado);
+unset($conn);
+
+// URL nueva cotización
+$url_nueva_cotizacion = "https://sweet.icontel.cl/index.php?module=AOS_Quotes&action=EditView";
+
+?>
+<link rel="stylesheet" href="css/cm_tareas_pendientes.css?v=<?=time()?>">
+<link rel="stylesheet" href="css/cm_ordenes_de_compra.css?v=<?=time()?>">
+<link rel="stylesheet" href="css/cm_cobranza_comercial.css?v=<?=time()?>">
+
+<script>
+// Definir ruta base para AJAX
+window.KICKOFF_BASE_PATH = '/kickoff_icontel/';
+</script>
+
+<!-- OVERLAY OSCURO -->
+<div id="panel-overlay" onclick="cerrarPanelFiltros()"></div>
+
+<!-- PANEL FLOTANTE DE FILTROS (MODAL) -->
+<div id="panel-filtros" class="panel-filtros-hidden">
+    <div class="panel-filtros-header">
+        <span>🔍 Filtros de Búsqueda</span>
+        <button type="button" onclick="cerrarPanelFiltros()" class="btn-cerrar">✕</button>
+    </div>
+    <div class="panel-filtros-body">
+        <div class="filtro-group">
+            <label>Asunto:</label>
+            <input type="text" class="filtro-input" data-col="2" placeholder="Buscar asunto...">
+        </div>
+        <div class="filtro-group">
+            <label>Estatus de la Factura:</label>
+            <div class="estado-checks">
+                <?php foreach ($LISTA_ESTADO_FACTURA as $item): ?>
+                <label class="check-label">
+                    <input type="checkbox" class="filtro-estado-check" value="<?= htmlspecialchars($item['key']) ?>">
+                    <?= htmlspecialchars($item['label']) ?>
+                </label>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="filtro-group">
+            <label>Nº DTE:</label>
+            <input type="text" class="filtro-input" data-col="4" placeholder="Buscar DTE...">
+        </div>
+        <div class="filtro-group">
+            <label>OP Nombre:</label>
+            <input type="text" class="filtro-input" data-col="8" placeholder="Buscar oportunidad...">
+        </div>
+        <div class="filtro-group">
+            <label>Proveedor:</label>
+            <input type="text" class="filtro-input" data-col="10" placeholder="Buscar proveedor...">
+        </div>
+    </div>
+    <div class="panel-filtros-footer">
+        <button type="button" onclick="limpiarFiltros()" class="btn-limpiar">🧹 Limpiar</button>
+        <button type="button" onclick="aplicarYCerrar()" class="btn-aplicar">✅ Aplicar Filtros</button>
+    </div>
+</div>
+
+<!-- ======================================================= -->
+<!--  TABLA ÓRDENES DE COMPRA PENDIENTES — VERSIÓN AJAX       -->
+<!-- ======================================================= -->
+
+<div class="tabla-scroll">
+<table id="Ordenes_de_Compra" width="100%" cellspacing="0" cellpadding="0" border="0">
+
+    <!-- Título -->
+    <tr style="background:#512554; color:white;">
+        <td colspan="10" class="titulo" style="padding:8px;">
+            &nbsp;&nbsp;🧾 Órdenes de Compra Pendientes
+        </td>
+        <td colspan="2" align="right" style="padding-right:15px;">
+            <button type="button" id="btn-filtrar" onclick="togglePanelFiltros()" class="btn-filtrar">🔍 Filtrar</button>
+            &nbsp;
+            <button type="button" id="btn-limpiar-header" onclick="limpiarFiltros()" class="btn-limpiar-header">🧹 Limpiar</button>
+            &nbsp;
+            <a href="<?= $url_nueva_cotizacion ?>" 
+               target="new"
+               style="color:white; font-size:22px; text-decoration:none;"
+               title="Crear Nueva Cotización">
+               +
+            </a>
+        </td>
+    </tr>
+
+    <!-- Encabezado -->
+    <tr class="subtit">
+        <th width="1%">#</th>
+        <th width="1%">N°</th>
+        <th width="8%" colspan="2">Asunto</th>
+        <th width="2%">Estado</th>
+        <th width="2%">N° DTE</th>
+        <th width="1%" align="center">$</th>
+        <th width="1%" align="center">Bruto</th>
+        <th width="1%" align="right">OP #</th>
+        <th width="8%">OP Nombre</th>
+        <th width="2%">OP Etapa/Estado</th>
+        <th width="8%">Proveedor</th>
+    </tr>
+
+    <?= $contenido ?>
+
+</table>
+</div>
+
+<script src="js/cm_ordenes_de_compra.js?v=<?=time()?>"></script>

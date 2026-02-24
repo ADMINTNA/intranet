@@ -1,0 +1,67 @@
+ID: N/A - ESTADO DB: [Atrasada]
+ID: N/A - ESTADO DB: [En Progreso]
+ID: N/A - ESTADO DB: [En Progreso]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [En Progreso]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Atrasada]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [En Progreso]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+=== GLOSARIO ESTADOS ===
+Array
+(
+    [Aprobar_Hora_Extra] => Aprobación HH
+    [ATRASADA] => ATRASADA
+    [Completed] => Completada
+    [Crear_Oportunidad] => Crear Oportunidad
+    [rechazo_comercial] => En Rechazo Comercial
+    [retencion] => EN RETENCION DE CLIENTE
+    [en_traslado] => En traslado
+    [gastoexterno] => Gasto proveedor externo
+    [avance] => Mail a Cliente - Estado Avance
+    [validar] => Mail a Cliente - Validar
+    [tarea_creada] => Mail Cliente - Tarea Creada
+    [movil_solicitado] => Móvil solicitado
+    [Pending Input] => Pendiente de Información
+    [pendiente_cliente] => Pendiente por Cliente
+    [Reasignada] => Reasignada
+    [Rendicion] => Rendición
+    [tarea_sujeta_cobro] => Sujeta a cobro $
+    [In Progress] => Tarea En Progreso
+    [Not Started] => Tarea No Iniciada
+)
+
+========================
+ID: N/A - ESTADO DB: [Atrasada]
+ID: N/A - ESTADO DB: [En Progreso]
+ID: N/A - ESTADO DB: [En Progreso]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [En Progreso]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Atrasada]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Reasignada]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]
+ID: N/A - ESTADO DB: [En Progreso]
+ID: N/A - ESTADO DB: [Pendiente de Cliente]

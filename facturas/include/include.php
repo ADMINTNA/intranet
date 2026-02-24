@@ -10,7 +10,7 @@ define('DB_NAME', 'tnasolut_sweet');
 define('DB_USER', 'data_studio');
 define('DB_PASS', '1Ngr3s0.,');
 
-// --------- Conexión ----------
+// --------- ConexiÃ³n ----------
 function getConnection() {
     $dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4';
     try {
@@ -25,7 +25,7 @@ function getConnection() {
     } catch (PDOException $e) {
         error_log('DB connect error: ' . $e->getMessage());
         http_response_code(500);
-        die('Error de conexión a la base de datos');
+        die('Error de conexiÃ³n a la base de datos');
     }
 }
 
@@ -35,6 +35,7 @@ $end_date   = date('Y-m-d');
 
 $selected_users   = array();
 $selected_estados = array();
+$selected_estados_op = array();
 
 // Estos dos se usan en el formulario de contenido.php
 $excluir_op_gd       = false; // NO aplica a facturas; se deja por compatibilidad visual
@@ -47,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Volvemos a defaults
         $selected_users   = array();
         $selected_estados = array();
+        $selected_estados_op = array();
         $start_date = date('Y-m-01');
         $end_date   = date('Y-m-d');
         $excluir_op_gd       = false;
@@ -60,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Listas multi-select
         $selected_users   = isset($_POST['user'])   ? (array)$_POST['user']   : array();
         $selected_estados = isset($_POST['estado']) ? (array)$_POST['estado'] : array();
+        $selected_estados_op = isset($_POST['estado_op']) ? (array)$_POST['estado_op'] : array();
 
         // Checkboxes
         $excluir_op_gd       = !empty($_POST['excluir_op_gd']);      // visual, no se aplica a facturas
@@ -89,12 +92,15 @@ try {
     $facturas = array(); // Evita bloquear render
 }
 
-// --------- Filtro en PHP (según formulario) ----------
-$facturas = array_values(array_filter($facturas, function($row) use ($selected_users, $selected_estados, $excluir_op_perdida, $excluir_op_reempl) {
+// --------- Filtro en PHP (segÃºn formulario) ----------
+$facturas = array_values(array_filter($facturas, function($row) use ($selected_users, $selected_estados, $selected_estados_op, $excluir_op_perdida, $excluir_op_reempl) {
     if (!empty($selected_users) && !in_array($row['Usuario'], $selected_users, true)) {
         return false;
     }
     if (!empty($selected_estados) && !in_array($row['Estado'], $selected_estados, true)) {
+        return false;
+    }
+    if (!empty($selected_estados_op) && !in_array($row['op_estado'], $selected_estados_op, true)) {
         return false;
     }
     if ($excluir_op_perdida && isset($row['op_estado']) && $row['op_estado'] === 'Perdida') {
@@ -106,14 +112,24 @@ $facturas = array_values(array_filter($facturas, function($row) use ($selected_u
     return true;
 }));
 
-// --------- Listas únicas para filtros ----------
+// --------- Listas Ãºnicas para filtros ----------
 $usuarios = array_values(array_unique(array_map(function($r){
     return isset($r['Usuario']) ? $r['Usuario'] : '';
 }, $facturas)));
+natcasesort($usuarios);
+$usuarios = array_values($usuarios);
 
 $estados = array_values(array_unique(array_map(function($r){
     return isset($r['Estado']) ? $r['Estado'] : '';
 }, $facturas)));
+natcasesort($estados);
+$estados = array_values($estados);
+
+$estados_op = array_values(array_unique(array_map(function($r){
+    return isset($r['op_estado']) ? $r['op_estado'] : '';
+}, $facturas)));
+natcasesort($estados_op);
+$estados_op = array_values($estados_op);
 
 // --------- Resumen por Estado ----------
 $resumen = array();

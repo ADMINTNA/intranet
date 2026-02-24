@@ -1,0 +1,2 @@
+[27-Sep-2025 01:57:59 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ',' or ')' in /home/icontel/public_html/intranet/facturas/include/include.php on line 92
+[27-Sep-2025 01:58:03 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ',' or ')' in /home/icontel/public_html/intranet/facturas/include/include.php on line 92
