@@ -277,6 +277,10 @@ unset($conn);
 <!--  TABLA HTML – Casos Sujeto a Cobro     -->
 <!-- ===================================== -->
 
+<style>
+#casos_sujeto_a_cobro tr.subtit th { background:#512554 !important; color:#fff !important; }
+</style>
+
 <div class="tabla-scroll">
     <table id="casos_sujeto_a_cobro" width="100%" cellpadding="0" cellspacing="0" border="0">
     
@@ -289,7 +293,17 @@ unset($conn);
         <tr class="subtit" style="background:#512554; color:white;">
             <th class="subtitulo">#</th>
             <th class="subtitulo">Nº</th>
-            <th class="subtitulo">Asunto</th>
+            <th class="subtitulo" style="white-space:nowrap">
+                Asunto&nbsp;<input id="filtro-sac-asunto"
+                    type="text" placeholder="🔍"
+                    oninput="sacFilterAsunto(this.value)"
+                    style="width:80px!important;padding:2px 5px!important;border:1px solid rgba(255,255,255,0.6)!important;border-radius:4px;background:rgba(255,255,255,0.2)!important;color:#fff!important;font-size:11px;font-weight:400;outline:none;vertical-align:middle"><span
+                    id="filtro-sac-asunto-x"
+                    onclick="document.getElementById('filtro-sac-asunto').value='';sacFilterAsunto('')"
+                    title="Quitar filtro"
+                    style="display:none;cursor:pointer;color:#ffd600;font-weight:bold;font-size:13px;vertical-align:middle;margin-left:2px">✕</span>
+                
+            </th>
             <th class="subtitulo">Prioridad</th>
             <th class="subtitulo">Estado</th>
             <th class="subtitulo">Categoría</th>
@@ -305,6 +319,21 @@ unset($conn);
     
     </table>
 </div>
+
+<script>
+function sacFilterAsunto(q){
+    q=q.toLowerCase();
+    var x=document.getElementById('filtro-sac-asunto-x');
+    if(x) x.style.display=q?'inline':'none';
+    document.querySelectorAll('#casos_sujeto_a_cobro tr').forEach(function(r){
+        if(!r.querySelector('td')) return;
+        var tds=r.querySelectorAll('td');
+        if(parseInt(tds[0].getAttribute('colspan')||'0')>5) return; // skip título
+        var txt=tds[2]?tds[2].textContent.toLowerCase():'';
+        r.style.display=(!q||txt.includes(q))?'':'none';
+    });
+}
+</script>
 
 <script src="js/cm_sort.js?v=<?=time()?>"></script>
 <script src="js/cm_casos_abiertos.js?v=<?=time()?>"></script>

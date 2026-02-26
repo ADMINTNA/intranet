@@ -225,53 +225,15 @@ $url_nueva_cotizacion = "https://sweet.icontel.cl/index.php?module=AOS_Quotes&ac
 window.KICKOFF_BASE_PATH = '/kickoff_icontel/';
 </script>
 
-<!-- OVERLAY OSCURO -->
-<div id="panel-overlay" onclick="cerrarPanelFiltros()"></div>
 
-<!-- PANEL FLOTANTE DE FILTROS (MODAL) -->
-<div id="panel-filtros" class="panel-filtros-hidden">
-    <div class="panel-filtros-header">
-        <span>🔍 Filtros de Búsqueda</span>
-        <button type="button" onclick="cerrarPanelFiltros()" class="btn-cerrar">✕</button>
-    </div>
-    <div class="panel-filtros-body">
-        <div class="filtro-group">
-            <label>Asunto:</label>
-            <input type="text" class="filtro-input" data-col="2" placeholder="Buscar asunto...">
-        </div>
-        <div class="filtro-group">
-            <label>Estatus de la Factura:</label>
-            <div class="estado-checks">
-                <?php foreach ($LISTA_ESTADO_FACTURA as $item): ?>
-                <label class="check-label">
-                    <input type="checkbox" class="filtro-estado-check" value="<?= htmlspecialchars($item['key']) ?>">
-                    <?= htmlspecialchars($item['label']) ?>
-                </label>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <div class="filtro-group">
-            <label>Nº DTE:</label>
-            <input type="text" class="filtro-input" data-col="4" placeholder="Buscar DTE...">
-        </div>
-        <div class="filtro-group">
-            <label>OP Nombre:</label>
-            <input type="text" class="filtro-input" data-col="8" placeholder="Buscar oportunidad...">
-        </div>
-        <div class="filtro-group">
-            <label>Proveedor:</label>
-            <input type="text" class="filtro-input" data-col="10" placeholder="Buscar proveedor...">
-        </div>
-    </div>
-    <div class="panel-filtros-footer">
-        <button type="button" onclick="limpiarFiltros()" class="btn-limpiar">🧹 Limpiar</button>
-        <button type="button" onclick="aplicarYCerrar()" class="btn-aplicar">✅ Aplicar Filtros</button>
-    </div>
-</div>
 
 <!-- ======================================================= -->
 <!--  TABLA ÓRDENES DE COMPRA PENDIENTES — VERSIÓN AJAX       -->
 <!-- ======================================================= -->
+
+<style>
+#Ordenes_de_Compra tr.subtit th { background:#512554 !important; color:#fff !important; }
+</style>
 
 <div class="tabla-scroll">
 <table id="Ordenes_de_Compra" width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -282,10 +244,6 @@ window.KICKOFF_BASE_PATH = '/kickoff_icontel/';
             &nbsp;&nbsp;🧾 Órdenes de Compra Pendientes
         </td>
         <td colspan="2" align="right" style="padding-right:15px;">
-            <button type="button" id="btn-filtrar" onclick="togglePanelFiltros()" class="btn-filtrar">🔍 Filtrar</button>
-            &nbsp;
-            <button type="button" id="btn-limpiar-header" onclick="limpiarFiltros()" class="btn-limpiar-header">🧹 Limpiar</button>
-            &nbsp;
             <a href="<?= $url_nueva_cotizacion ?>" 
                target="new"
                style="color:white; font-size:22px; text-decoration:none;"
@@ -299,7 +257,17 @@ window.KICKOFF_BASE_PATH = '/kickoff_icontel/';
     <tr class="subtit">
         <th width="1%">#</th>
         <th width="1%">N°</th>
-        <th width="8%" colspan="2">Asunto</th>
+        <th width="8%" colspan="2" style="white-space:nowrap">
+            Asunto&nbsp;<input id="filtro-oc-asunto"
+                type="text" placeholder="🔍"
+                oninput="ocFilterAsunto(this.value)"
+                style="width:80px!important;padding:2px 5px!important;border:1px solid rgba(255,255,255,0.6)!important;border-radius:4px;background:rgba(255,255,255,0.2)!important;color:#fff!important;font-size:11px;font-weight:400;outline:none;vertical-align:middle"><span
+                id="filtro-oc-asunto-x"
+                onclick="document.getElementById('filtro-oc-asunto').value='';ocFilterAsunto('')"
+                title="Quitar filtro"
+                style="display:none;cursor:pointer;color:#ffd600;font-weight:bold;font-size:13px;vertical-align:middle;margin-left:2px">✕</span>
+            
+        </th>
         <th width="2%">Estado</th>
         <th width="2%">N° DTE</th>
         <th width="1%" align="center">$</th>
@@ -314,5 +282,24 @@ window.KICKOFF_BASE_PATH = '/kickoff_icontel/';
 
 </table>
 </div>
+
+<script>
+function ocFilterAsunto(q){
+    q=q.toLowerCase();
+    var x=document.getElementById('filtro-oc-asunto-x');
+    if(x) x.style.display=q?'inline':'none';
+    document.querySelectorAll('#Ordenes_de_Compra tr').forEach(function(r){
+        if(!r.querySelector('td')) return;
+        var tds=r.querySelectorAll('td'), txt='';
+        for(var i=1;i<Math.min(5,tds.length);i++){
+            if(tds[i]&&tds[i].querySelector('a')){txt=tds[i].textContent.toLowerCase();break;}
+        }
+        if(!txt) for(var i=1;i<Math.min(5,tds.length);i++){
+            if(tds[i]&&tds[i].textContent.trim()){txt=tds[i].textContent.toLowerCase();break;}
+        }
+        r.style.display=(!q||txt.includes(q))?'':'none';
+    });
+}
+</script>
 
 <script src="js/cm_ordenes_de_compra.js?v=<?=time()?>"></script>

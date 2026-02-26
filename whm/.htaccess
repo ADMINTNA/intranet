@@ -1,0 +1,25 @@
+# WHM Report - Icontel Intranet
+# Protección de archivos sensibles
+
+# Denegar acceso a archivos de configuración
+<FilesMatch "config\.php$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Denegar acceso a archivos .md
+<FilesMatch "\.md$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Opciones de seguridad
+Options -Indexes
+ServerSignature Off
+
+# Headers de seguridad
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>

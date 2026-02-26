@@ -1,4 +1,11 @@
-<?php require_once 'z_session.php'; ?>
+<?php
+require_once 'z_session.php';
+// ── Security headers ──────────────────────────────────────────
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: SAMEORIGIN");
+header("Referrer-Policy: strict-origin-when-cross-origin");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; frame-ancestors 'self' https://intranet.icontel.cl;");
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -829,6 +836,9 @@
   <div class="tabs-nav" style="margin-bottom:12px; display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap">
     <div style="display:flex; gap:12px; flex-wrap:wrap">
       <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard General</button>
+      <button class="tab-btn" onclick="switchTab('sla')">📈 SLA</button>
+      <button class="tab-btn" onclick="switchTab('turno')">🕐 Turno</button>
+      <button class="tab-btn" onclick="switchTab('historial')">🔍 Historial</button>
       
       <select id="filter-group" onchange="filterHosts()" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer;min-width:180px">
         <option value="all">Todos los grupos</option>
@@ -921,6 +931,148 @@
 
   </div> <!-- end main-grid -->
 
+<!-- ====== TAB: SLA ====== -->
+<div id="tab-sla" class="tab-panel" style="display:none">
+  <div class="container" style="padding-top:8px">
+    <div class="panel">
+      <div class="panel-header" style="flex-wrap:wrap;gap:8px">
+        <div class="panel-title">📈 Disponibilidad SLA por Host</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <label style="font-size:12px;color:var(--text-muted)">Período:</label>
+          <select id="sla-days" onchange="loadSLA()" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:12px">
+            <option value="7">Últimos 7 días</option>
+            <option value="30" selected>Últimos 30 días</option>
+            <option value="60">Últimos 60 días</option>
+            <option value="90">Últimos 90 días</option>
+          </select>
+          <select id="sla-filter-group" onchange="renderSLA()" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:12px">
+            <option value="all">Todos los grupos</option>
+          </select>
+          <label style="font-size:12px;color:var(--text-muted)">Umbral crítico:</label>
+          <select id="sla-threshold" onchange="renderSLA()" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:12px">
+            <option value="99">99%</option>
+            <option value="99.5">99.5%</option>
+            <option value="99.9">99.9%</option>
+            <option value="95" selected>95%</option>
+          </select>
+          <button onclick="exportSLAXls()" style="background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer">⬇ Excel</button>
+        </div>
+      </div>
+      <!-- KPIs resumen SLA -->
+      <div id="sla-kpis" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;padding:12px 16px 4px"></div>
+      <!-- Tabla SLA -->
+      <div style="overflow-x:auto;padding:0 8px 8px">
+        <table style="width:100%;border-collapse:collapse;font-size:13px" id="sla-table">
+          <thead>
+            <tr style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">
+              <th style="padding:8px 12px;text-align:left;background:var(--table-head);position:sticky;top:0">Host</th>
+              <th style="padding:8px 12px;text-align:left;background:var(--table-head);position:sticky;top:0">Grupo</th>
+              <th style="padding:8px 12px;text-align:center;background:var(--table-head);position:sticky;top:0">SLA %</th>
+              <th style="padding:8px 12px;text-align:center;background:var(--table-head);position:sticky;top:0">Downtime</th>
+              <th style="padding:8px 12px;text-align:center;background:var(--table-head);position:sticky;top:0">Incidentes</th>
+              <th style="padding:8px 12px;text-align:center;background:var(--table-head);position:sticky;top:0">MTTR</th>
+              <th style="padding:8px 12px;text-align:center;background:var(--table-head);position:sticky;top:0">Estado</th>
+            </tr>
+          </thead>
+          <tbody id="sla-tbody">
+            <tr><td colspan="7" style="padding:32px;text-align:center;color:var(--text-muted)">Cargando SLA…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== TAB: TURNO ====== -->
+<div id="tab-turno" class="tab-panel" style="display:none">
+  <div class="container" style="padding-top:8px">
+    <div class="panel">
+      <div class="panel-header" style="flex-wrap:wrap;gap:8px">
+        <div class="panel-title">🕐 Resumen de Turno</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <label style="font-size:12px;color:var(--text-muted)">Período:</label>
+          <select id="turno-hours" onchange="loadTurno()" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:12px">
+            <option value="8">Últimas 8 horas</option>
+            <option value="12">Últimas 12 horas</option>
+            <option value="24" selected>Últimas 24 horas</option>
+            <option value="48">Últimas 48 horas</option>
+            <option value="168">Última semana</option>
+          </select>
+        </div>
+      </div>
+      <!-- KPIs turno -->
+      <div id="turno-kpis" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;padding:12px 16px"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 16px 16px">
+        <!-- Por técnico -->
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Por Técnico</div>
+          <div id="turno-tech"></div>
+        </div>
+        <!-- Últimos eventos -->
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Últimos eventos atendidos</div>
+          <div id="turno-recent" style="max-height:400px;overflow-y:auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== TAB: HISTORIAL FILTRABLE ====== -->
+<div id="tab-historial" class="tab-panel" style="display:none">
+  <div class="container" style="padding-top:8px">
+    <div class="panel">
+      <div class="panel-header" style="flex-wrap:wrap;gap:8px">
+        <div class="panel-title">🔍 Historial de Eventos</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <input type="date" id="hist-from" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:4px;padding:4px 8px;font-size:12px">
+          <span style="color:var(--text-muted);font-size:12px">→</span>
+          <input type="date" id="hist-to" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:4px;padding:4px 8px;font-size:12px">
+          <select id="hist-user" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:12px">
+            <option value="">Todos los técnicos</option>
+          </select>
+          <select id="hist-severity" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:12px">
+            <option value="-1">Todas las severidades</option>
+            <option value="0">Not classified</option>
+            <option value="1">Information</option>
+            <option value="2">Warning</option>
+            <option value="3">Average</option>
+            <option value="4">High</option>
+            <option value="5">Disaster</option>
+          </select>
+          <select id="hist-limit" style="background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:12px">
+            <option value="50">50 resultados</option>
+            <option value="100" selected>100 resultados</option>
+            <option value="200">200 resultados</option>
+            <option value="500">500 resultados</option>
+          </select>
+          <button onclick="loadHistorial()" style="background:var(--accent);color:#fff;border:none;border-radius:4px;padding:5px 14px;font-size:12px;cursor:pointer;font-weight:600">Buscar</button>
+          <button onclick="exportHistorialXls()" style="background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:12px;cursor:pointer">⬇ Excel</button>
+        </div>
+      </div>
+      <div id="hist-count" style="padding:4px 16px;font-size:12px;color:var(--text-muted)"></div>
+      <div style="overflow-x:auto;padding:0 8px 8px">
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead>
+            <tr style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">
+              <th style="padding:8px 12px;text-align:left;background:var(--table-head);position:sticky;top:0">Fecha</th>
+              <th style="padding:8px 12px;text-align:left;background:var(--table-head);position:sticky;top:0">Hora</th>
+              <th style="padding:8px 12px;text-align:left;background:var(--table-head);position:sticky;top:0">Host</th>
+              <th style="padding:8px 12px;text-align:left;background:var(--table-head);position:sticky;top:0">Alerta</th>
+              <th style="padding:8px 12px;text-align:center;background:var(--table-head);position:sticky;top:0">Sev.</th>
+              <th style="padding:8px 12px;text-align:left;background:var(--table-head);position:sticky;top:0">Técnico</th>
+              <th style="padding:8px 12px;text-align:left;background:var(--table-head);position:sticky;top:0">Comentario</th>
+            </tr>
+          </thead>
+          <tbody id="hist-tbody">
+            <tr><td colspan="7" style="padding:32px;text-align:center;color:var(--text-muted)">Selecciona un rango de fechas y presiona Buscar</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- ====== KPI POR SERVICIO + LOG DE EVENTOS (2 columnas) ====== -->
 <div class="container" style="margin-top:0;padding-top:0">
@@ -1003,16 +1155,32 @@ window.onerror = function(msg, url, lineNo, columnNo, error) {
 
 function switchTab(tabId) {
   currentTab = tabId;
+
+  // Update button active state
   document.querySelectorAll('.tab-btn').forEach(btn => {
     const isTarget = btn.getAttribute('onclick')?.includes(`'${tabId}'`);
     btn.classList.toggle('active', isTarget);
   });
-  
+
+  // Show/hide tab-content (dashboard)
   document.querySelectorAll('.tab-content').forEach(cont => {
     cont.classList.toggle('active', cont.id === `tab-${tabId}`);
   });
 
-  loadAll();
+  // Show/hide tab-panel (sla, turno, historial)
+  document.querySelectorAll('.tab-panel').forEach(panel => {
+    panel.style.display = panel.id === `tab-${tabId}` ? 'block' : 'none';
+  });
+
+  // Also hide the bottom panels (service kpi + network status) for non-dashboard tabs
+  const bottomPanels = document.querySelector('.container[style*="margin-top:0"]');
+  if (bottomPanels) bottomPanels.style.display = tabId === 'dashboard' ? '' : 'none';
+
+  // Load data for the new tab
+  if (tabId === 'dashboard') loadAll();
+  else if (tabId === 'sla')       { if (!slaData.length) loadSLA(); }
+  else if (tabId === 'turno')     { loadTurno(); }
+  else if (tabId === 'historial') { initHistorial(); }
 }
 
 function handleGlobalSearch() {
@@ -1021,6 +1189,16 @@ function handleGlobalSearch() {
 
 const SEV_LABELS = ['No clasificado', 'Información', 'Warning', 'Promedio', 'Alto', 'Desastre'];
 const SEV_COLORS = ['#607d8b','#42a5f5','#ffc107','#ff9800','#ff5722','#f44336'];
+
+// ── Formato de hora ──────────────────────────────────────────
+function is24h() {
+  return (localStorage.getItem('zabbix-time-format') || '24h') === '24h';
+}
+window.addEventListener('message', e => {
+  if (e.data?.type === 'timeFormat') {
+    localStorage.setItem('zabbix-time-format', e.data.is24h ? '24h' : '12h');
+  }
+});
 
 // =====================
 //  DATA LOADING
@@ -1038,29 +1216,35 @@ async function loadAll() {
   };
 
   try {
-    updateStatus('Cargando estadísticas...');
-    const stats = await fetch(`${API}?action=stats`).then(async r => {
-      if (!r.ok) throw new Error(`HTTP ${r.status} en estadísticas`);
-      return r.json();
-    });
+    updateStatus('Cargando datos...');
 
+    // OPTIMIZACIÓN: dashboard + problems en paralelo.
+    // dashboard = stats + hosts en un solo round-trip al servidor.
+    const [dashboard, problems] = await Promise.all([
+      fetch(`${API}?action=dashboard`).then(async r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status} en dashboard`);
+        return r.json();
+      }),
+      fetch(`${API}?action=problems`).then(async r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status} en problemas`);
+        return r.json();
+      }),
+    ]);
+
+    // Verificar error de sesión o API en el response de dashboard
+    if (dashboard.error) throw new Error(dashboard.error);
+
+    const stats = dashboard.stats;
+    const hosts = dashboard.hosts;
+
+    if (!stats) throw new Error('Respuesta de dashboard inválida');
     if (stats.error) throw new Error(stats.error);
     renderKPIs(stats);
 
-    updateStatus('Cargando alertas...');
-    const problems = await fetch(`${API}?action=problems`).then(async r => {
-      if (!r.ok) throw new Error(`HTTP ${r.status} en problemas`);
-      return r.json();
-    });
-    allProblems = problems; // Save globally
+    allProblems = problems;
     renderProblems(problems);
 
-    updateStatus('Cargando lista de hosts...');
-    const hosts = await fetch(`${API}?action=hosts`).then(async r => {
-      if (!r.ok) throw new Error(`HTTP ${r.status} en hosts`);
-      return r.json();
-    });
-    allHosts = hosts; // Save globally
+    allHosts = hosts;
     populateFilters(hosts);
     renderHosts(hosts);
 
@@ -1380,7 +1564,7 @@ async function loadEventLog() {
       
       if (newProblemFound) {
         try {
-          const audio = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
+          const audio = new Audio('beep_alert.ogg'); // Archivo local — no depende de Google
           if (soundEnabled) {
             audio.play().catch(e => console.warn('Audio play failed:', e));
           }
@@ -1587,7 +1771,7 @@ function resetAutoRefresh() {
 function updateTimestamp() {
   const now = new Date();
   document.getElementById('last-update').textContent =
-    'Actualizado: ' + now.toLocaleTimeString('es-CL');
+    'Actualizado: ' + now.toLocaleTimeString('es-CL', { hour12: !is24h() });
 }
 
 function timeAgo(ts, isRaw = false) {
@@ -1787,7 +1971,7 @@ function exportNetworkStatusPdf() {
   doc.text(`Estado de la Red`, 14, 22);
   doc.setFontSize(11);
   doc.setTextColor(100);
-  doc.text(`Generado el ${new Date().toLocaleString()}`, 14, 30);
+  doc.text(`Generado el ${new Date().toLocaleString('es-CL', {hour12:!is24h()})}`, 14, 30);
 
   const tableData = hostsToExport.map(h => {
     const alerts = allProblems.filter(p => p.host === h.name);
@@ -1842,7 +2026,7 @@ function exportKpiToPdf() {
   doc.text(`Lista de Hosts: ${window._currentKpiLabel}`, 14, 22);
   doc.setFontSize(11);
   doc.setTextColor(100);
-  doc.text(`Generado el ${new Date().toLocaleString()}`, 14, 30);
+  doc.text(`Generado el ${new Date().toLocaleString('es-CL', {hour12:!is24h()})}`, 14, 30);
 
   const tableData = window._currentKpiHosts.map(h => {
     const alerts = allProblems.filter(p => p.host === h.name);
@@ -1909,7 +2093,7 @@ function exportEventLogToPdf() {
   doc.text(`Log de Últimos Eventos`, 14, 22);
   doc.setFontSize(11);
   doc.setTextColor(100);
-  doc.text(`Generado el ${new Date().toLocaleString()}`, 14, 30);
+  doc.text(`Generado el ${new Date().toLocaleString('es-CL', {hour12:!is24h()})}`, 14, 30);
 
   const tableData = eventsToExport.map(ev => {
     const isProblem = ev.value === '1' || ev.value === 1;
@@ -2175,12 +2359,12 @@ function formatDateOnly(ts) {
 
 function formatTimeOnly(ts) {
   const d = new Date(ts * 1000);
-  return d.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
+  return d.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit', hour12: !is24h() });
 }
 
 function formatDate(ts) {
   const d = new Date(ts * 1000);
-  return d.toLocaleString('es-CL', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  return d.toLocaleString('es-CL', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: !is24h() });
 }
 
 function prepareExportData() {
@@ -2341,6 +2525,272 @@ document.addEventListener('DOMContentLoaded', () => {
         loadAll();
     }, 100);
 });
+
+
+// ════════════════════════════════════════════════════════════════
+// SLA
+// ════════════════════════════════════════════════════════════════
+let slaData = [];
+let slaRawData = [];
+
+async function loadSLA() {
+  const days = document.getElementById('sla-days').value;
+  const tbody = document.getElementById('sla-tbody');
+  tbody.innerHTML = '<tr><td colspan="7" style="padding:32px;text-align:center;color:var(--text-muted)">Calculando SLA…</td></tr>';
+  document.getElementById('sla-kpis').innerHTML = '';
+
+  const data = await fetch(`${API}?action=sla&days=${days}`).then(r => r.json()).catch(() => []);
+  slaRawData = Array.isArray(data) ? data : [];
+
+  // Populate group filter
+  const groups = [...new Set(slaRawData.map(h => h.group))].sort();
+  const sel = document.getElementById('sla-filter-group');
+  sel.innerHTML = '<option value="all">Todos los grupos</option>' +
+    groups.map(g => `<option value="${esc(g)}">${esc(g)}</option>`).join('');
+
+  renderSLA();
+}
+
+function renderSLA() {
+  const groupFilter = document.getElementById('sla-filter-group').value;
+  const threshold   = parseFloat(document.getElementById('sla-threshold').value);
+  slaData = groupFilter === 'all' ? slaRawData : slaRawData.filter(h => h.group === groupFilter);
+
+  const tbody = document.getElementById('sla-tbody');
+  const kpisEl = document.getElementById('sla-kpis');
+
+  if (!slaData.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="padding:32px;text-align:center;color:var(--text-muted)">Sin datos</td></tr>';
+    return;
+  }
+
+  // KPIs resumen
+  const avgSLA     = slaData.reduce((s, h) => s + h.sla_pct, 0) / slaData.length;
+  const critical   = slaData.filter(h => h.sla_pct < threshold).length;
+  const totalInc   = slaData.reduce((s, h) => s + h.incidents, 0);
+  const worstHost  = slaData[0];
+  const kpiStyle   = 'background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:14px 18px;';
+
+  kpisEl.innerHTML = `
+    <div style="${kpiStyle}">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">SLA Promedio</div>
+      <div style="font-size:26px;font-weight:800;color:${avgSLA >= 99 ? 'var(--sev-ok)' : avgSLA >= 95 ? 'var(--sev-warning)' : 'var(--sev-disaster)'}">${avgSLA.toFixed(2)}%</div>
+    </div>
+    <div style="${kpiStyle}">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Hosts bajo ${threshold}%</div>
+      <div style="font-size:26px;font-weight:800;color:${critical > 0 ? 'var(--sev-disaster)' : 'var(--sev-ok)'}">${critical}</div>
+    </div>
+    <div style="${kpiStyle}">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Total Incidentes</div>
+      <div style="font-size:26px;font-weight:800;color:var(--text-main)">${totalInc}</div>
+    </div>
+    <div style="${kpiStyle}">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Peor Host</div>
+      <div style="font-size:14px;font-weight:700;color:var(--sev-disaster);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(worstHost.name)}">${esc(worstHost.name)}</div>
+      <div style="font-size:11px;color:var(--text-muted)">${worstHost.sla_pct}% SLA</div>
+    </div>
+  `;
+
+  // Table rows
+  tbody.innerHTML = slaData.map(h => {
+    const slaColor = h.sla_pct >= 99.9 ? 'var(--sev-ok)' :
+                     h.sla_pct >= 99   ? '#8bc34a' :
+                     h.sla_pct >= 95   ? 'var(--sev-warning)' :
+                     h.sla_pct >= 80   ? 'var(--sev-high)' : 'var(--sev-disaster)';
+    const badge    = h.sla_pct < threshold
+      ? `<span style="background:rgba(244,67,54,.15);color:var(--sev-disaster);font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700">⚠ Bajo umbral</span>`
+      : `<span style="background:rgba(76,175,80,.12);color:var(--sev-ok);font-size:10px;padding:2px 7px;border-radius:10px">✔ OK</span>`;
+
+    const mttrStr = h.mttr_sec >= 3600
+      ? `${(h.mttr_sec/3600).toFixed(1)}h`
+      : h.mttr_sec >= 60
+        ? `${Math.round(h.mttr_sec/60)}m`
+        : `${h.mttr_sec}s`;
+
+    const barPct = Math.min(100, h.sla_pct);
+    return `<tr style="border-top:1px solid var(--border)">
+      <td style="padding:9px 12px">
+        <div style="font-weight:600;font-size:13px">${esc(h.name)}</div>
+        ${h.service_code ? `<div style="font-size:10px;color:var(--text-muted)">${esc(h.service_code)}</div>` : ''}
+      </td>
+      <td style="padding:9px 12px;font-size:12px;color:var(--text-muted)">${esc(h.group)}</td>
+      <td style="padding:9px 12px;text-align:center">
+        <div style="font-size:17px;font-weight:800;color:${slaColor}">${h.sla_pct.toFixed(3)}%</div>
+        <div style="height:4px;background:var(--bg-dark);border-radius:2px;margin-top:4px;width:80px;margin-inline:auto">
+          <div style="height:100%;width:${barPct}%;background:${slaColor};border-radius:2px"></div>
+        </div>
+      </td>
+      <td style="padding:9px 12px;text-align:center;font-size:12px;color:${h.downtime_h > 0 ? 'var(--sev-high)' : 'var(--text-muted)'}">${h.downtime_h}h</td>
+      <td style="padding:9px 12px;text-align:center;font-size:13px;font-weight:600">${h.incidents}</td>
+      <td style="padding:9px 12px;text-align:center;font-size:12px;color:var(--text-muted)">${h.incidents > 0 ? mttrStr : '—'}</td>
+      <td style="padding:9px 12px;text-align:center">${badge}</td>
+    </tr>`;
+  }).join('');
+}
+
+function exportSLAXls() {
+  if (!slaData.length) return;
+  const rows = [['Host','Código','Grupo','SLA %','Downtime (h)','Incidentes','MTTR']];
+  slaData.forEach(h => {
+    const mttrStr = h.mttr_sec >= 3600 ? `${(h.mttr_sec/3600).toFixed(1)}h` : h.mttr_sec >= 60 ? `${Math.round(h.mttr_sec/60)}m` : `${h.mttr_sec}s`;
+    rows.push([h.name, h.service_code, h.group, h.sla_pct, h.downtime_h, h.incidents, h.incidents > 0 ? mttrStr : '—']);
+  });
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'SLA');
+  XLSX.writeFile(wb, `SLA_${document.getElementById('sla-days').value}dias_${new Date().toISOString().slice(0,10)}.xlsx`);
+}
+
+// ════════════════════════════════════════════════════════════════
+// TURNO
+// ════════════════════════════════════════════════════════════════
+async function loadTurno() {
+  const hours = document.getElementById('turno-hours').value;
+  const kpisEl  = document.getElementById('turno-kpis');
+  const techEl  = document.getElementById('turno-tech');
+  const recentEl = document.getElementById('turno-recent');
+
+  kpisEl.innerHTML  = '<div style="color:var(--text-muted);font-size:12px">Cargando…</div>';
+  techEl.innerHTML  = '';
+  recentEl.innerHTML = '';
+
+  const data = await fetch(`${API}?action=shift_report&hours=${hours}`).then(r => r.json()).catch(() => ({}));
+  const s = data.summary || {};
+  const kpiStyle = 'background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:14px 18px;';
+
+  kpisEl.innerHTML = `
+    <div style="${kpiStyle}">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">ACKs Totales</div>
+      <div style="font-size:28px;font-weight:800;color:var(--sev-ok)">${s.total || 0}</div>
+    </div>
+    <div style="${kpiStyle}">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Hosts Afectados</div>
+      <div style="font-size:28px;font-weight:800;color:var(--text-main)">${s.hosts_affected || 0}</div>
+    </div>
+    <div style="${kpiStyle}">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Técnicos activos</div>
+      <div style="font-size:28px;font-weight:800;color:var(--accent)">${s.technicians || 0}</div>
+    </div>
+  `;
+
+  // Por técnico
+  const techs = data.by_tech || [];
+  if (!techs.length) {
+    techEl.innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:12px 0">Sin actividad en este período</div>';
+  } else {
+    const maxAcks = Math.max(...techs.map(t => t.acks));
+    techEl.innerHTML = techs.map(t => {
+      const pct = Math.round((t.acks / maxAcks) * 100);
+      return `<div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span style="font-size:13px;font-weight:600">${esc(t.user)}</span>
+          <span style="font-size:12px;color:var(--sev-ok);font-weight:700">${t.acks} ACK${t.acks !== 1 ? 's' : ''}</span>
+        </div>
+        <div style="height:6px;background:var(--bg-dark);border-radius:3px">
+          <div style="height:100%;width:${pct}%;background:var(--accent);border-radius:3px;transition:width .4s ease"></div>
+        </div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px">
+          Primer ACK: ${new Date(t.first_ack * 1000).toLocaleTimeString('es-CL', {hour12:!is24h()})} · Último: ${new Date(t.last_ack * 1000).toLocaleTimeString('es-CL', {hour12:!is24h()})}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Eventos recientes
+  const recent = data.recent || [];
+  if (!recent.length) {
+    recentEl.innerHTML = '<div style="font-size:12px;color:var(--text-muted)">Sin eventos</div>';
+  } else {
+    recentEl.innerHTML = recent.map(ev => {
+      const sevColor = SEV_COLORS[ev.severity] ?? '#607d8b';
+      return `<div style="border-left:3px solid ${sevColor};padding:6px 10px;margin-bottom:6px;background:var(--bg-card);border-radius:0 6px 6px 0">
+        <div style="font-size:12px;font-weight:600">${esc(ev.host_name)}</div>
+        <div style="font-size:11px;color:var(--text-muted)">${esc(ev.alert_name)}</div>
+        <div style="font-size:10px;color:var(--text-dim);margin-top:2px">
+          ${ev.fecha} ${ev.hora} · <strong style="color:var(--accent)">${esc(ev.user_name)}</strong>
+          ${ev.message ? ` · ${esc(ev.message)}` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// HISTORIAL FILTRABLE
+// ════════════════════════════════════════════════════════════════
+let historialUsers = [];
+let historialData  = [];
+
+function initHistorial() {
+  // Default: últimos 7 días
+  const today   = new Date();
+  const weekAgo = new Date(today - 7 * 86400000);
+  const fmt = d => d.toISOString().slice(0, 10);
+  const fromEl = document.getElementById('hist-from');
+  const toEl   = document.getElementById('hist-to');
+  if (!fromEl.value) fromEl.value = fmt(weekAgo);
+  if (!toEl.value)   toEl.value   = fmt(today);
+
+  // Pre-load users list
+  if (!historialUsers.length) loadHistorial();
+}
+
+async function loadHistorial() {
+  const from     = document.getElementById('hist-from').value;
+  const to       = document.getElementById('hist-to').value;
+  const user     = document.getElementById('hist-user').value;
+  const severity = document.getElementById('hist-severity').value;
+  const limit    = document.getElementById('hist-limit').value;
+
+  const tbody = document.getElementById('hist-tbody');
+  tbody.innerHTML = '<tr><td colspan="7" style="padding:24px;text-align:center;color:var(--text-muted)">Buscando…</td></tr>';
+
+  const params = new URLSearchParams({ action:'event_log_filter', date_from:from, date_to:to, limit, user, severity });
+  const data   = await fetch(`${API}?${params}`).then(r => r.json()).catch(() => ({ events:[], users:[] }));
+
+  // Populate users dropdown once
+  if (data.users && data.users.length && !historialUsers.length) {
+    historialUsers = data.users;
+    const sel = document.getElementById('hist-user');
+    sel.innerHTML = '<option value="">Todos los técnicos</option>' +
+      data.users.map(u => `<option value="${esc(u)}">${esc(u)}</option>`).join('');
+  }
+
+  historialData = data.events || [];
+  document.getElementById('hist-count').textContent =
+    historialData.length ? `${historialData.length} resultado${historialData.length !== 1 ? 's' : ''}` : '';
+
+  if (!historialData.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="padding:32px;text-align:center;color:var(--text-muted)">Sin resultados para este filtro</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = historialData.map(ev => {
+    const sevColor = SEV_COLORS[ev.severity] ?? '#607d8b';
+    const sevLabel = SEV_LABELS[ev.severity] ?? ev.severity;
+    return `<tr style="border-top:1px solid var(--border)">
+      <td style="padding:8px 12px;white-space:nowrap;font-size:12px">${esc(ev.fecha)}</td>
+      <td style="padding:8px 12px;white-space:nowrap;font-size:12px">${esc(ev.hora)}</td>
+      <td style="padding:8px 12px;font-size:12px;font-weight:600">${esc(ev.host_name)}</td>
+      <td style="padding:8px 12px;font-size:12px">${esc(ev.alert_name)}</td>
+      <td style="padding:8px 12px;text-align:center">
+        <span style="font-size:10px;font-weight:700;color:${sevColor};background:${sevColor}22;padding:2px 7px;border-radius:10px">${esc(sevLabel)}</span>
+      </td>
+      <td style="padding:8px 12px;font-size:12px;color:var(--accent);font-weight:600">${esc(ev.user_name)}</td>
+      <td style="padding:8px 12px;font-size:11px;color:var(--text-muted);max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(ev.message)}">${esc(ev.message || '—')}</td>
+    </tr>`;
+  }).join('');
+}
+
+function exportHistorialXls() {
+  if (!historialData.length) return;
+  const rows = [['Fecha','Hora','Host','Alerta','Severidad','Técnico','Comentario']];
+  historialData.forEach(ev => rows.push([ev.fecha, ev.hora, ev.host_name, ev.alert_name, SEV_LABELS[ev.severity] ?? ev.severity, ev.user_name, ev.message]));
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Historial');
+  XLSX.writeFile(wb, `Historial_${document.getElementById('hist-from').value}_${document.getElementById('hist-to').value}.xlsx`);
+}
 
 </script>
 </body>

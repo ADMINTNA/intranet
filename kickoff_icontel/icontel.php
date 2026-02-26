@@ -225,6 +225,13 @@ include_once("meta_data/meta_data_kickoff.html");
         padding-bottom: 0px; 
     }
 
+    /* Animación de entrada para badges asíncronos */
+    @keyframes badgePop {
+        0%   { transform: scale(0.4); opacity: 0; }
+        70%  { transform: scale(1.2); }
+        100% { transform: scale(1);   opacity: 1; }
+    }
+
 html, body {
     height: auto !important;
     min-height: 100vh;
@@ -304,10 +311,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typeof activarSortEnTablas === "function") {
         activarSortEnTablas();
     }
-    
+
     // 4. Ocultar loaders globales si quedaron pegados
     const c = document.querySelectorAll('.cargando');
     c.forEach(el => el.classList.add('ocultar'));
+
+    // 5. Cargar badges del menú de forma asíncrona (no bloquea la UI)
+    if (typeof loadBadges === "function") {
+        loadBadges();
+    }
 });
 </script>
 

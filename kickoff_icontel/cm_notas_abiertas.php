@@ -105,6 +105,10 @@ $td = '
 </td>';
 ?>
 
+<style>
+#notas_abiertas tr.subtit th { background:#512554 !important; color:#fff !important; }
+</style>
+
 <div class="tabla-scroll">
 <table id="notas_abiertas" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -113,7 +117,17 @@ $td = '
 
     <tr class="subtit">
         <th class="subtitulo">#</th>
-        <th class="subtitulo">Asunto</th>
+        <th class="subtitulo" style="white-space:nowrap">
+            Asunto&nbsp;<input id="filtro-notas-asunto"
+                type="text" placeholder="🔍"
+                oninput="notasFilterAsunto(this.value)"
+                style="width:80px!important;padding:2px 5px!important;border:1px solid rgba(255,255,255,0.6)!important;border-radius:4px;background:rgba(255,255,255,0.2)!important;color:#fff!important;font-size:11px;font-weight:400;outline:none;vertical-align:middle"><span
+                id="filtro-notas-asunto-x"
+                onclick="document.getElementById('filtro-notas-asunto').value='';notasFilterAsunto('')"
+                title="Quitar filtro"
+                style="display:none;cursor:pointer;color:#ffd600;font-weight:bold;font-size:13px;vertical-align:middle;margin-left:2px">✕</span>
+            
+        </th>
         <th class="subtitulo">F. Creación</th>
         <th class="subtitulo">Relacionado Con</th>
         <th class="subtitulo">Estado</th>
@@ -127,3 +141,17 @@ $td = '
     <?= $contenido ?>
 </table>
 </div>
+<script>
+function notasFilterAsunto(q){
+    q=q.toLowerCase();
+    var x=document.getElementById('filtro-notas-asunto-x');
+    if(x) x.style.display=q?'inline':'none';
+    document.querySelectorAll('#notas_abiertas tr').forEach(function(r){
+        if(!r.querySelector('td')) return;
+        var tds=r.querySelectorAll('td');
+        if(parseInt(tds[0].getAttribute('colspan')||'0')>5) return;
+        var txt=tds[1]?tds[1].textContent.toLowerCase():'';
+        r.style.display=(!q||txt.includes(q))?'':'none';
+    });
+}
+</script>

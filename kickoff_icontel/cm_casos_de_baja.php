@@ -94,6 +94,10 @@ $td = '
 <!-- TABLA SCROLLEABLE RESPETANDO TUS ANCHOS               -->
 <!-- ===================================================== -->
 
+<style>
+#casos_debaja tr.subtit th { background:#512554 !important; color:#fff !important; }
+</style>
+
 <div class="tabla-scroll">
 
 <table id="casos_debaja" cellpadding="0" cellspacing="0" border="0">
@@ -106,7 +110,17 @@ $td = '
         <th class="subtitulo" width="1%">#</th>
         <th class="subtitulo" width="2%">Prioridad</th>
         <th class="subtitulo" width="2%">Número</th>
-        <th class="subtitulo" width="15%">Asunto</th>
+        <th class="subtitulo" width="15%" style="white-space:nowrap">
+            Asunto&nbsp;<input id="filtro-baja-asunto"
+                type="text" placeholder="🔍"
+                oninput="bajaFilterAsunto(this.value)"
+                style="width:80px!important;padding:2px 5px!important;border:1px solid rgba(255,255,255,0.6)!important;border-radius:4px;background:rgba(255,255,255,0.2)!important;color:#fff!important;font-size:11px;font-weight:400;outline:none;vertical-align:middle"><span
+                id="filtro-baja-asunto-x"
+                onclick="document.getElementById('filtro-baja-asunto').value='';bajaFilterAsunto('')"
+                title="Quitar filtro"
+                style="display:none;cursor:pointer;color:#ffd600;font-weight:bold;font-size:13px;vertical-align:middle;margin-left:2px">✕</span>
+            
+        </th>
         <th class="subtitulo" width="4%">Estado</th>
         <th class="subtitulo" width="5%">En Espera De</th>
         <th class="subtitulo" width="4%">Categoría</th>
@@ -122,3 +136,16 @@ $td = '
 </table>
 
 </div>
+<script>
+function bajaFilterAsunto(q){
+    q=q.toLowerCase();
+    var x=document.getElementById('filtro-baja-asunto-x');
+    if(x) x.style.display=q?'inline':'none';
+    document.querySelectorAll('#casos_debaja tr').forEach(function(r){
+        if(!r.querySelector('td')) return;
+        var tds=r.querySelectorAll('td');
+        var txt=tds[3]?tds[3].textContent.toLowerCase():'';
+        r.style.display=(!q||txt.includes(q))?'':'none';
+    });
+}
+</script>

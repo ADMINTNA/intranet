@@ -1,0 +1,9 @@
+# Bloquear acceso directo al directorio de cache
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^cache/ - [F,L]
+</IfModule>
+
+<FilesMatch "^api\.php$">
+    # Solo api.php es accesible directamente
+</FilesMatch>

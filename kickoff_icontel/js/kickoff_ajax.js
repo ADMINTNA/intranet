@@ -11,6 +11,58 @@ console.log("sg_name=", typeof sg_name !== "undefined" ? sg_name : "(no definido
 
 console.log("kickoff_icontel.js cargado correctamente");
 
+
+// ----------------------------------------------------------
+// Carga asíncrona de badges del menú
+// Se llama desde icontel.php al cargar la página.
+// Los badges se obtienen de ajax/badges.php (con caché 3min).
+// ----------------------------------------------------------
+function loadBadges(force) {
+    // Construir URL absoluta relativa al script de kickoff
+    const base = (function() {
+        const scripts = document.querySelectorAll('script[src]');
+        for (const s of scripts) {
+            if (s.src && s.src.includes('kickoff_ajax.js')) {
+                return s.src.replace(/js\/kickoff_ajax\.js.*$/, '');
+            }
+        }
+        return window.location.href.replace(/[^/]*$/, '');
+    })();
+
+    const url = base + 'ajax/badges.php' + (force ? '?force=1' : '');
+    console.log('🔖 Cargando badges desde:', url);
+
+    fetch(url, { credentials: 'include' })
+        .then(r => {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        })
+        .then(data => {
+            if (!data.success || !data.badges) {
+                console.warn('⚠️ Respuesta inesperada de badges:', data);
+                return;
+            }
+            const b = data.badges;
+            let painted = 0;
+            Object.entries(b).forEach(([key, val]) => {
+                const el = document.getElementById('badge-' + key);
+                if (!el) return;
+                if (val > 0) {
+                    el.textContent = val;
+                    el.style.display = 'inline-block';
+                    el.style.animation = 'none';
+                    el.offsetHeight;
+                    el.style.animation = 'badgePop .25s ease';
+                    painted++;
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+            console.log('✅ Badges pintados: ' + painted + (data.cached ? ' (caché)' : ' (frescos)'));
+        })
+        .catch(err => console.warn('⚠️ Error cargando badges:', err));
+}
+
 // ----------------------------------------------------------
 // Función principal para cargar módulos dentro del contenedor
 // ----------------------------------------------------------

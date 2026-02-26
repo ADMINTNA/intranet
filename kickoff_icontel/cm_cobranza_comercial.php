@@ -131,7 +131,16 @@ console.log("🛠 Base path configurado:", window.KICKOFF_BASE_PATH);
     <tr class="subtit subtitulo">
         <th>#</th>
         <th class="sortable" data-col="rut">RUT</th>
-        <th width="15%" class="sortable" data-col="razon">Razón Social</th>
+        <th width="15%" class="sortable" data-col="razon" style="white-space:nowrap">
+            Razón Social&nbsp;<input id="filtro-cob-razon"
+                type="text" placeholder="🔍"
+                oninput="cobFilterRazon(this.value)"
+                style="width:80px!important;padding:2px 5px!important;border:1px solid rgba(255,255,255,0.6)!important;border-radius:4px;background:rgba(255,255,255,0.2)!important;color:#fff!important;font-size:11px;font-weight:400;outline:none;vertical-align:middle"><span
+                id="filtro-cob-razon-x"
+                onclick="document.getElementById('filtro-cob-razon').value='';cobFilterRazon('')"
+                title="Quitar filtro"
+                style="display:none;cursor:pointer;color:#ffd600;font-weight:bold;font-size:13px;vertical-align:middle;margin-left:2px">✕</span>
+        </th>
         <th width="12%" class="sortable" data-col="estado">Estado Sweet</th>
         <th width="15%" class="sortable" data-col="comentario">Comentario</th>
         <th class="sortable" data-col="tipo">Tipo</th>
@@ -146,5 +155,21 @@ console.log("🛠 Base path configurado:", window.KICKOFF_BASE_PATH);
 
 </table>
 </div>
+
+<script>
+function cobFilterRazon(q){
+    q=q.toLowerCase();
+    var x=document.getElementById('filtro-cob-razon-x');
+    if(x) x.style.display=q?'inline':'none';
+    document.querySelectorAll('#cobranza tr').forEach(function(r){
+        if(!r.querySelector('td')) return;
+        var tds=r.querySelectorAll('td');
+        if(tds.length<5) return;                                     // skip título y totales
+        if(parseInt(tds[0].getAttribute('colspan')||'0')>2) return;  // skip título colspan
+        var txt=tds[2]?tds[2].textContent.toLowerCase():'';
+        r.style.display=(!q||txt.includes(q))?'':'none';
+    });
+}
+</script>
 
 <script src="js/cm_cobranza_comercial_v2.js?v=2"></script>

@@ -115,6 +115,10 @@ $conn->close();
 <link rel="stylesheet" href="css/kickoff.css">
 <link rel="stylesheet" href="css/cm_tareas_pendientes.css">
 
+<style>
+#casos_abiertos tr.subtit th { background:#512554 !important; color:#fff !important; }
+</style>
+
 <div class="tabla-scroll">
     <table id="casos_abiertos" border="0" width="100%" cellpadding="0" cellspacing="0">
         <tr style="color:white; background:#512554;">
@@ -129,7 +133,17 @@ $conn->close();
             <th class='subtitulo'>#</th>
             <th class='subtitulo'>N&deg;</th>
             <th class='subtitulo'>Prioridad</th>
-            <th class='subtitulo'>Asunto</th>
+            <th class='subtitulo' style="white-space:nowrap">
+                Asunto&nbsp;<input id="filtro-ca-asunto"
+                    type="text" placeholder="🔍"
+                    oninput="caFilterAsunto(this.value)"
+                    style="width:80px!important;padding:2px 5px!important;border:1px solid rgba(255,255,255,0.6)!important;border-radius:4px;background:rgba(255,255,255,0.2)!important;color:#fff!important;font-size:11px;font-weight:400;outline:none;vertical-align:middle"><span
+                    id="filtro-ca-asunto-x"
+                    onclick="document.getElementById('filtro-ca-asunto').value='';caFilterAsunto('')"
+                    title="Quitar filtro"
+                    style="display:none;cursor:pointer;color:#ffd600;font-weight:bold;font-size:13px;vertical-align:middle;margin-left:2px">✕</span>
+                
+            </th>
             <th class='subtitulo'>Estado</th>
             <th class='subtitulo'>En Espera De</th>
             <th class='subtitulo'>Categor&iacute;a</th>
@@ -142,6 +156,21 @@ $conn->close();
         <?= $contenido ?>
     </table>
 </div>
+
+<script>
+function caFilterAsunto(q){
+    q=q.toLowerCase();
+    var x=document.getElementById('filtro-ca-asunto-x');
+    if(x) x.style.display=q?'inline':'none';
+    document.querySelectorAll('#casos_abiertos tr').forEach(function(r){
+        if(!r.querySelector('td')) return;
+        var tds=r.querySelectorAll('td');
+        if(parseInt(tds[0].getAttribute('colspan')||'0')>5) return; // skip título
+        var txt=tds[3]?tds[3].textContent.toLowerCase():'';
+        r.style.display=(!q||txt.includes(q))?'':'none';
+    });
+}
+</script>
 
 <script src="js/cm_sort.js?v=<?=time()?>"></script>
 <script src="js/cm_casos_abiertos.js?v=<?=time()?>"></script>

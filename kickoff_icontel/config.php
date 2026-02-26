@@ -20,27 +20,40 @@ define('USE_SWEET_AUTH', false);  // Cambiar a true cuando esté listo para prod
 // ---------------------------------------------------------
 // FUNCIÓN LOCAL: leer listas vía API Sweet
 // ---------------------------------------------------------
-function sweet_get_dropdown_api($lista)
+function sweet_get_dropdown_api($lista, $ttl = 3600)
 {
+    // ── Caché en sesión (TTL = 1 hora por defecto) ────────────
+    $ckey = '_dropdown_' . $lista;
+    $tkey = '_dropdown_ts_' . $lista;
+
+    if (
+        !empty($_SESSION[$ckey]) &&
+        !empty($_SESSION[$tkey]) &&
+        (time() - $_SESSION[$tkey]) < $ttl
+    ) {
+        return $_SESSION[$ckey];
+    }
+
+    // ── Llamada a la API de SuiteCRM ──────────────────────────
     $url = "https://intranet.icontel.cl/sweet/custom/tools/api_dropdown.php?list="
          . urlencode($lista);
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    // Intranet interna, evitamos problemas de SSL
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5); // máximo 5s por llamada
 
     $json = curl_exec($ch);
     curl_close($ch);
 
     if ($json === false) {
-        return [];
+        return $_SESSION[$ckey] ?? []; // devolver caché expirada si existe
     }
 
     $arr = json_decode($json, true);
     if (!is_array($arr)) {
-        return [];
+        return $_SESSION[$ckey] ?? [];
     }
 
     $final = [];
@@ -50,10 +63,52 @@ function sweet_get_dropdown_api($lista)
         }
     }
 
+    // Guardar en caché de sesión
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        $_SESSION[$ckey]  = $final;
+        $_SESSION[$tkey]  = time();
+    }
+
     return $final;
 }
 
 
+
+// ── Lista de usuarios activos con caché de sesión ────────────
+function sweet_get_usuarios_activos($conn, $ttl = 3600)
+{
+    $ckey = '_usuarios_activos';
+    $tkey = '_usuarios_activos_ts';
+
+    if (
+        !empty($_SESSION[$ckey]) &&
+        !empty($_SESSION[$tkey]) &&
+        (time() - $_SESSION[$tkey]) < $ttl
+    ) {
+        return $_SESSION[$ckey];
+    }
+
+    $sql = "SELECT id, first_name, last_name
+            FROM users
+            WHERE deleted = 0 AND status = 'Active'
+            ORDER BY first_name, last_name";
+
+    $rs = $conn->query($sql);
+    $lista = [];
+    if ($rs) {
+        while ($u = $rs->fetch_assoc()) {
+            $lista[$u['id']] = trim($u['first_name'] . ' ' . $u['last_name']);
+        }
+        $rs->free();
+    }
+
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        $_SESSION[$ckey] = $lista;
+        $_SESSION[$tkey] = time();
+    }
+
+    return $lista;
+}
 
 if (!isset($autoRefreshState)) {
     $autoRefreshState = 'off';

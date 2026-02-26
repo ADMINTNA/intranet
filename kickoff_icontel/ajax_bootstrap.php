@@ -6,6 +6,10 @@
 // Codificación: UTF-8 sin BOM
 // ==========================================================
 
+// Caché del navegador: 30 s (el JS también tiene caché interno de 60 s)
+header('Cache-Control: private, max-age=30, must-revalidate');
+header('Content-Type: text/html; charset=UTF-8');
+
 // -------------------------
 // 1) CONFIGURAR SESIÓN
 // -------------------------

@@ -109,126 +109,8 @@
 </style>
 
 <?php
-// -------------------------------------------------------------
-// CONTADORES (BADGES)
-// -------------------------------------------------------------
-$cnt_casos          = 0;
-$cnt_sujeto_cobro   = 0;
-$cnt_traslados      = 0;
-$cnt_casos_baja     = 0;
-$cnt_cobranza       = 0;
-$cnt_potenciales    = 0;
-$cnt_tareas         = 0;
-$cnt_delegadas      = 0;
-$cnt_notas          = 0;
-$cnt_oportunidades  = 0;
-$cnt_demo           = 0;
-$cnt_archivadas     = 0;
-$cnt_oc_pendientes  = 0;
-$cnt_congelados     = 0;
-$cnt_seguimiento    = 0; // ⭐ NUEVO
-
-if (function_exists('DbConnect')) {
-
-    $conn_badge = DbConnect("tnasolut_sweet");
-
-    if ($conn_badge) {
-
-        while($conn_badge->more_results()) $conn_badge->next_result();
-        $sql = "CALL Kick_Off_Operaciones_Abiertos('$sg_id')";
-        if ($res = $conn_badge->query($sql)) { $cnt_casos = $res->num_rows; $res->free(); }
-
-        if (strpos($proveedores, $sg_name) !== false) {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL Kick_Off_Operaciones_Abiertos_sujeto_a_cobro()";
-            if ($res = $conn_badge->query($sql)) { $cnt_sujeto_cobro = $res->num_rows; $res->free(); }
-        }
-
-        if (strpos($mao_mam, $sg_name) !== false) {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL CM_Cotizaciones_baja_traslado()";
-            if ($res = $conn_badge->query($sql)) { $cnt_traslados = $res->num_rows; $res->free(); }
-        }
-
-        if (strpos($admin, $sg_name) !== false) {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL Kick_Off_Casos_Abiertos_de_baja()";
-            if ($res = $conn_badge->query($sql)) { $cnt_casos_baja = $res->num_rows; $res->free(); }
-        }
-
-        if (strpos($sac, $sg_name) !== false) {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL CM_Casos_Abiertos_Congelados('$sg_id')";
-            if ($res = $conn_badge->query($sql)) { $cnt_congelados = $res->num_rows; $res->free(); }
-
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL CM_Casos_Abiertos_Seguimiento('$sg_id')";
-            if ($res = $conn_badge->query($sql)) { $cnt_seguimiento = $res->num_rows; $res->free(); }
-        }
-
-        if (strpos($ventas, $sg_name) || strpos($admin, $sg_name)) {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "
-                SELECT COUNT(*) AS total
-                FROM accounts ac
-                JOIN accounts_cstm acc ON acc.id_c = ac.id
-                WHERE acc.estatusfinanciero_c IN (
-                    'cobranza_comercial','acuerdo_cobranza_comer','suspender',
-                    'Suspendido','retencion_posible_baja'
-                )
-            ";
-            if ($res = $conn_badge->query($sql)) {
-                $row = $res->fetch_assoc();
-                $cnt_cobranza = $row['total'];
-                $res->free();
-            }
-        }
-
-        if (strpos($ventas, $sg_name)) {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL Clientes_Potenciales_Pendientes()";
-            if ($res = $conn_badge->query($sql)) { $cnt_potenciales = $res->num_rows; $res->free(); }
-        }
-
-        while($conn_badge->more_results()) $conn_badge->next_result();
-        $sql = "CALL Kick_Off_Operaciones_Tareas_Abiertas('$sg_id')";
-        if ($res = $conn_badge->query($sql)) { $cnt_tareas = $res->num_rows; $res->free(); }
-
-        while($conn_badge->more_results()) $conn_badge->next_result();
-        $sql = "CALL Kick_Off_Tareas_Abiertas_Creadas('$sg_id')";
-        if ($res = $conn_badge->query($sql)) { $cnt_delegadas = $res->num_rows; $res->free(); }
-
-        while($conn_badge->more_results()) $conn_badge->next_result();
-        $sql = "CALL cm_notas_abiertas('$sg_id')";
-        if ($res = $conn_badge->query($sql)) { $cnt_notas = $res->num_rows; $res->free(); }
-
-        if ($sg_name !== "Soporte tecnico") {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL Oportunidades_Pendientes('$sg_id')";
-            if ($res = $conn_badge->query($sql)) { $cnt_oportunidades = $res->num_rows; $res->free(); }
-        }
-
-        if (strpos($ventas.$operaciones, $sg_name)) {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL Oportunidades_en_Demo()";
-            if ($res = $conn_badge->query($sql)) { $cnt_demo = $res->num_rows; $res->free(); }
-        }
-
-        if (strpos($ventas, $sg_name) !== false && $sg_name != "-..MAO") {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL Oportunidades_en_Pausa()";
-            if ($res = $conn_badge->query($sql)) { $cnt_archivadas = $res->num_rows; $res->free(); }
-        }
-
-        if (strpos($admin, $sg_name)) {
-            while($conn_badge->more_results()) $conn_badge->next_result();
-            $sql = "CALL CM_Ordenes_de_Compra_Pendientes()";
-            if ($res = $conn_badge->query($sql)) { $cnt_oc_pendientes = $res->num_rows; $res->free(); }
-        }
-
-        $conn_badge->close();
-    }
-}
+// Los badges se cargan de forma asíncrona via ajax/badges.php
+// para no bloquear la carga inicial del menú.
 ?>
 
 <!-- ====================================================== -->
@@ -240,14 +122,14 @@ if (function_exists('DbConnect')) {
 
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_casos_abiertos.php')">
         <span class="icon">📋</span> Casos
-        <?php if($cnt_casos > 0): ?><span class="badge-count"><?=$cnt_casos?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-casos" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 
 <?php if (strpos($proveedores, $sg_name) !== false): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_casos_abiertos_sujeto_a_cobro.php')">
         <span class="icon">💰</span> Sujeto Cobro
-        <?php if($cnt_sujeto_cobro > 0): ?><span class="badge-count"><?=$cnt_sujeto_cobro?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-sujeto_cobro" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 <?php endif; ?>
@@ -255,7 +137,7 @@ if (function_exists('DbConnect')) {
 <?php if (strpos($mao_mam, $sg_name) !== false): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_traslados_y_bajas.php')">
         <span class="icon">🔄</span> Traslados
-        <?php if($cnt_traslados > 0): ?><span class="badge-count"><?=$cnt_traslados?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-traslados" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 <?php endif; ?>
@@ -263,7 +145,7 @@ if (function_exists('DbConnect')) {
 <?php if (strpos($admin, $sg_name) !== false): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_casos_abiertos_debaja.php')">
         <span class="icon">📉</span> Casos Baja
-        <?php if($cnt_casos_baja > 0): ?><span class="badge-count"><?=$cnt_casos_baja?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-casos_baja" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 <?php endif; ?>
@@ -271,13 +153,13 @@ if (function_exists('DbConnect')) {
 <?php if (strpos($sac, $sg_name) !== false): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_casos_abiertos_congelados.php')">
         <span class="icon">🧊</span> Congelados
-        <?php if($cnt_congelados > 0): ?><span class="badge-count"><?=$cnt_congelados?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-congelados" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_casos_abiertos_seguimiento.php')">
         <span class="icon">🕵️</span> Seguimiento
-        <?php if($cnt_seguimiento > 0): ?><span class="badge-count"><?=$cnt_seguimiento?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-seguimiento" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 <?php endif; ?>
@@ -285,7 +167,7 @@ if (function_exists('DbConnect')) {
 <?php if (strpos($ventas, $sg_name) || strpos($admin, $sg_name)): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_cobranza_comercial.php')">
         <span class="icon">📊</span> Cobranza
-        <?php if($cnt_cobranza > 0): ?><span class="badge-count"><?=$cnt_cobranza?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-cobranza" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 <?php endif; ?>
@@ -293,32 +175,32 @@ if (function_exists('DbConnect')) {
 <?php if (strpos($ventas, $sg_name)): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_clientes_potenciales.php')">
         <span class="icon">📈</span> Potenciales
-        <?php if($cnt_potenciales > 0): ?><span class="badge-count"><?=$cnt_potenciales?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-potenciales" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 <?php endif; ?>
 
-<div class="toolbar-btn active" onclick="selectMenu(this); loadModulo('cm_tareas_pendientes.php')">
+<div class="toolbar-btn active" id="btn-def-tareas" onclick="selectMenu(this); loadModulo('cm_tareas_pendientes.php')">
     <span class="icon">📌</span> Tareas
-    <?php if($cnt_tareas > 0): ?><span class="badge-count"><?=$cnt_tareas?></span><?php endif; ?>
+    <span class="badge-count badge-async" id="badge-tareas" style="display:none"></span>
 </div>
 <span class="separator">|</span>
 
 <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_tareas_pendientes_delegadas.php')">
     <span class="icon">📤</span> Delegadas
-    <?php if($cnt_delegadas > 0): ?><span class="badge-count"><?=$cnt_delegadas?></span><?php endif; ?>
+    <span class="badge-count badge-async" id="badge-delegadas" style="display:none"></span>
 </div>
 <span class="separator">|</span>
 
 <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_notas_abiertas.php')">
     <span class="icon">📝</span> Notas
-    <?php if($cnt_notas > 0): ?><span class="badge-count"><?=$cnt_notas?></span><?php endif; ?>
+    <span class="badge-count badge-async" id="badge-notas" style="display:none"></span>
 </div>
 
 <?php if ($sg_name !== "Soporte tecnico"): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_oportunidades_abiertas.php')">
         <span class="icon">💼</span> Oportunidades
-        <?php if($cnt_oportunidades > 0): ?><span class="badge-count"><?=$cnt_oportunidades?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-oportunidades" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 <?php endif; ?>
@@ -326,7 +208,7 @@ if (function_exists('DbConnect')) {
 <?php if (strpos($ventas.$operaciones, $sg_name)): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_oportunidades_en_Demo.php')">
         <span class="icon">🧪</span> Demo
-        <?php if($cnt_demo > 0): ?><span class="badge-count"><?=$cnt_demo?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-demo" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 <?php endif; ?>
@@ -334,7 +216,7 @@ if (function_exists('DbConnect')) {
 <?php if (strpos($ventas, $sg_name) !== false && $sg_name != "-..MAO"): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_oportunidades_Archivadas.php')">
         <span class="icon">📦</span> Archivadas
-        <?php if($cnt_archivadas > 0): ?><span class="badge-count"><?=$cnt_archivadas?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-archivadas" style="display:none"></span>
     </div>
     <span class="separator">|</span>
 <?php endif; ?>
@@ -342,7 +224,7 @@ if (function_exists('DbConnect')) {
 <?php if (strpos($admin, $sg_name)): ?>
     <div class="toolbar-btn" onclick="selectMenu(this); loadModulo('cm_ordenes_de_compra_pendientes.php')">
         <span class="icon">🧾</span> OC Pendientes
-        <?php if($cnt_oc_pendientes > 0): ?><span class="badge-count"><?=$cnt_oc_pendientes?></span><?php endif; ?>
+        <span class="badge-count badge-async" id="badge-oc_pendientes" style="display:none"></span>
     </div>
 <?php endif; ?>
 

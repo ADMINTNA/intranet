@@ -1,0 +1,11 @@
+# consumo/.htaccess
+# Bloquea acceso directo al directorio de cache.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^cache/ - [F,L]
+</IfModule>
+
+<FilesMatch "\.json$">
+    Require all denied
+</FilesMatch>

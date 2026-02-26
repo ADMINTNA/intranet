@@ -14,30 +14,16 @@ require_once __DIR__ . "/ajax_bootstrap.php";
 $conn = DbConnect($db_sweet);
 
 // ---------------------------------------------------------
-// Listas via API SweetCRM (para los selects editables)
+// Listas via API SweetCRM — con caché de sesión (1h)
 // ---------------------------------------------------------
 $lista_categoria = sweet_get_dropdown_api("categoria_list");
 $lista_prioridad = sweet_get_dropdown_api("task_priority_dom");
 $lista_estado    = sweet_get_dropdown_api("task_status_dom");
 
 // ---------------------------------------------------------
-// Usuarios activos (assigned_user_id)
+// Usuarios activos — con caché de sesión (1h)
 // ---------------------------------------------------------
-$sqlUsers = "
-    SELECT id, first_name, last_name 
-    FROM users
-    WHERE deleted = 0 AND status = 'Active'
-    ORDER BY first_name, last_name
-";
-$rsUsers = $conn->query($sqlUsers);
-
-$lista_usuarios = [];
-if ($rsUsers) {
-    while ($u = $rsUsers->fetch_assoc()) {
-        $lista_usuarios[$u["id"]] = trim($u["first_name"] . " " . $u["last_name"]);
-    }
-    $rsUsers->free();
-}
+$lista_usuarios = sweet_get_usuarios_activos($conn);
 
 // -------------------------------------------------------------
 // Ejecutar SP (limpiando resultados previos del motor MySQL)
@@ -96,7 +82,17 @@ $url_insidente = "https://sweet.icontel.cl/index.php?module=Bugs&action=DetailVi
 <tr class="subtit">
     <th class="subtitulo">&nbsp;</th>
     <th class="subtitulo">#</th>
-    <th class="subtitulo">Asunto</th>
+    <th class="subtitulo" style="white-space:nowrap">
+        Asunto&nbsp;<input id="filtro-asunto"
+            type="text" placeholder="🔍"
+            oninput="tareasFilterAsunto(this.value)"
+            style="width:80px!important;padding:2px 5px!important;border:1px solid rgba(255,255,255,0.6)!important;border-radius:4px;background:rgba(255,255,255,0.2)!important;color:#fff!important;font-size:11px;font-weight:400;outline:none;vertical-align:middle"><span
+            id="filtro-asunto-x"
+            onclick="document.getElementById('filtro-asunto').value='';tareasFilterAsunto('')"
+            title="Quitar filtro"
+            style="display:none;cursor:pointer;color:#ffd600;font-weight:bold;font-size:13px;vertical-align:middle;margin-left:2px">✕</span>
+        
+    </th>
     <th class="subtitulo">Categoría</th>
     <th class="subtitulo">Prioridad</th>
     <th class="subtitulo">Asignado a</th>
@@ -329,6 +325,25 @@ foreach ($datos as $lin):
 
 </table>
 </div>
+
+<script>
+function tareasFilterAsunto(q){
+    q=q.toLowerCase();
+    var x=document.getElementById('filtro-asunto-x');
+    if(x) x.style.display=q?'inline':'none';
+    document.querySelectorAll('#tareas tr').forEach(function(r){
+        if(!r.querySelector('td')) return;
+        var tds=r.querySelectorAll('td'), txt='';
+        for(var i=1;i<Math.min(5,tds.length);i++){
+            if(tds[i]&&tds[i].querySelector('a')){txt=tds[i].textContent.toLowerCase();break;}
+        }
+        if(!txt) for(var i=1;i<Math.min(5,tds.length);i++){
+            if(tds[i]&&tds[i].textContent.trim()){txt=tds[i].textContent.toLowerCase();break;}
+        }
+        r.style.display=(!q||txt.includes(q))?'':'none';
+    });
+}
+</script>
 
 <script src="js/cm_tareas_pendientes.js?v=<?=time()?>_5"></script>
 <script src="js/cm_sort.js?v=<?=time()?>"></script>

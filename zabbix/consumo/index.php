@@ -1,4 +1,11 @@
-<?php require_once '../z_session.php'; ?>
+<?php
+require_once '../z_session.php';
+// ── Security headers ──────────────────────────────────────────
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: SAMEORIGIN");
+header("Referrer-Policy: strict-origin-when-cross-origin");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self' https://intranet.icontel.cl;");
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -683,7 +690,7 @@
                 const response = await fetch(`api.php?period=${currentPeriod}`);
                 const data = await response.json();
                 allHosts = data;
-                document.getElementById('last-update').textContent = `Última actualización: ${new Date().toLocaleTimeString()}`;
+                document.getElementById('last-update').textContent = `Última actualización: ${new Date().toLocaleTimeString('es-CL', {hour12: (localStorage.getItem('zabbix-time-format')||'24h')==='12h'})}`;
                 render();
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -867,10 +874,14 @@
                                         ${h.interfaces.length > 0 ? h.interfaces.map(iface => {
                                             const usagePct = iface.speed > 0 ? Math.min(100, Math.round((Math.max(iface.in, iface.out) / iface.speed) * 100)) : 0;
                                             const barColor = usagePct > 80 ? 'var(--danger)' : (usagePct > 50 ? 'var(--warning)' : 'var(--success)');
+                                            const isSaturated = iface.speed > 0 && usagePct >= 80;
+                                            const satBadge = isSaturated
+                                                ? `<span style="background:rgba(244,67,54,.18);color:var(--danger);font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px">⚠ ${usagePct}% SAT</span>`
+                                                : '';
                                             return `
-                                                <div class="iface-card">
-                                                    <div class="iface-name" style="display:flex; justify-content:space-between">
-                                                        <span>${iface.name}</span>
+                                                <div class="iface-card" style="${isSaturated ? 'border:1px solid var(--danger);' : ''}">
+                                                    <div class="iface-name" style="display:flex; justify-content:space-between; align-items:center">
+                                                        <span>${iface.name}${satBadge}</span>
                                                         <span style="font-weight:400; opacity:0.7">${pLabel}: ${formatBytes((iface.total_in || 0) + (iface.total_out || 0))}</span>
                                                     </div>
                                                     <div class="traffic-vals">
@@ -878,10 +889,10 @@
                                                         <span class="val-out">↑ ${formatBits(iface.out)}</span>
                                                     </div>
                                                     <div class="usage-container">
-                                                        <div class="usage-bar" style="width: ${usagePct}%; background-color: ${barColor}"></div>
+                                                        <div class="usage-bar" style="width: ${usagePct}%; background-color: ${barColor}; transition: width .4s ease"></div>
                                                     </div>
                                                     <div style="font-size: 10px; color: var(--text-dim); margin-top: 4px; display: flex; justify-content: space-between;">
-                                                        <span>${usagePct}% uso</span>
+                                                        <span style="color:${barColor};font-weight:${isSaturated ? '700' : '400'}">${usagePct}% uso</span>
                                                         <span>Cap: ${iface.speed > 0 ? formatBits(iface.speed) : '—'}</span>
                                                     </div>
                                                 </div>

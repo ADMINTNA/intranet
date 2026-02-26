@@ -48,3 +48,11 @@ SuiteCRM-7.14.4.zip
 
 zabbix/config.php
 
+
+# Dreamweaver
+_notes/
+**/_notes/
+**/dwsync.xml
+
+# macOS
+.DS_Store

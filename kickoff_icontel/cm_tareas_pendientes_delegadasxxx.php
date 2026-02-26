@@ -94,7 +94,17 @@ $url_insidente = "https://sweet.icontel.cl/index.php?module=Bugs&action=DetailVi
 <tr class="subtit">
     <th class="subtitulo">&nbsp;</th>
     <th class="subtitulo">#</th>
-    <th class="subtitulo">Asunto</th>
+    <th class="subtitulo" style="white-space:nowrap">
+        Asunto&nbsp;<input id="filtro-delxxx-asunto"
+            type="text" placeholder="🔍"
+            oninput="delxxxFilterAsunto(this.value)"
+            style="width:80px!important;padding:2px 5px!important;border:1px solid rgba(255,255,255,0.6)!important;border-radius:4px;background:rgba(255,255,255,0.2)!important;color:#fff!important;font-size:11px;font-weight:400;outline:none;vertical-align:middle"><span
+            id="filtro-delxxx-asunto-x"
+            onclick="document.getElementById('filtro-delxxx-asunto').value='';delxxxFilterAsunto('')"
+            title="Quitar filtro"
+            style="display:none;cursor:pointer;color:#ffd600;font-weight:bold;font-size:13px;vertical-align:middle;margin-left:2px">✕</span>
+        
+    </th>
     <th class="subtitulo">Categoría</th>
     <th class="subtitulo">Prioridad</th>
     <th class="subtitulo">Asignado a</th>
@@ -291,6 +301,25 @@ foreach ($datos as $lin):
 
 </table>
 </div>
+
+<script>
+function delxxxFilterAsunto(q){
+    q=q.toLowerCase();
+    var x=document.getElementById('filtro-delxxx-asunto-x');
+    if(x) x.style.display=q?'inline':'none';
+    document.querySelectorAll('#tareas_delegadas tr').forEach(function(r){
+        if(!r.querySelector('td')) return;
+        var tds=r.querySelectorAll('td'), txt='';
+        for(var i=1;i<Math.min(5,tds.length);i++){
+            if(tds[i]&&tds[i].querySelector('a')){txt=tds[i].textContent.toLowerCase();break;}
+        }
+        if(!txt) for(var i=1;i<Math.min(5,tds.length);i++){
+            if(tds[i]&&tds[i].textContent.trim()){txt=tds[i].textContent.toLowerCase();break;}
+        }
+        r.style.display=(!q||txt.includes(q))?'':'none';
+    });
+}
+</script>
 
 <script src="js/cm_tareas_pendientes.js?v=<?=time()?>_5"></script>
 <script src="js/cm_sort.js?v=<?=time()?>"></script>

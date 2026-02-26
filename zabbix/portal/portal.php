@@ -1,4 +1,11 @@
-<?php require_once '../z_session.php'; ?>
+<?php
+require_once '../z_session.php';
+// ── Security headers ──────────────────────────────────────────
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: SAMEORIGIN");
+header("Referrer-Policy: strict-origin-when-cross-origin");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self' https://intranet.icontel.cl;");
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,70 +48,76 @@
             transition: background 0.3s;
         }
 
-        /* Portal Header */
+        /* Portal Header — grid 3 columnas */
         .portal-header {
-            height: 64px;
+            height: 56px;
             background: var(--header-bg);
             border-bottom: 1px solid var(--border);
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
+            padding: 0 16px;
             backdrop-filter: blur(20px);
             z-index: 1000;
             position: relative;
+            gap: 12px;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 700;
-            font-size: 16px;
-            letter-spacing: -0.5px;
+            font-size: 14px;
+            letter-spacing: -0.3px;
+            min-width: 0;
+        }
+        .brand span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .brand-logo {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
             background: linear-gradient(135deg, var(--accent), #26a69a);
-            border-radius: 8px;
+            border-radius: 7px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 14px;
             color: white;
             cursor: pointer;
             transition: transform 0.2s;
         }
         .brand-logo:hover { transform: scale(1.1); }
 
-        /* Tab Navigation */
+        /* Tab Navigation — columna central */
         .nav-tabs {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
             background: var(--glass);
-            padding: 4px;
-            border-radius: 12px;
+            padding: 3px;
+            border-radius: 10px;
             border: 1px solid var(--border);
-            gap: 4px;
+            gap: 2px;
         }
 
         .nav-btn {
-            padding: 8px 20px;
+            padding: 6px 14px;
             border: none;
             background: transparent;
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            white-space: nowrap;
         }
 
         .nav-btn:hover { background: var(--glass-h); color: var(--text-main); }
@@ -114,39 +127,44 @@
             box-shadow: 0 4px 12px rgba(92, 107, 192, 0.3);
         }
 
-        /* Controls */
+        /* Controls — columna derecha */
         .controls {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: flex-end;
+            gap: 8px;
+            min-width: 0;
         }
 
         .theme-toggle {
             background: var(--glass);
             border: 1px solid var(--border);
             color: var(--text-muted);
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
+            flex-shrink: 0;
+            font-size: 14px;
         }
         .theme-toggle:hover { background: var(--glass-h); transform: scale(1.05); }
 
         .user-info {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 4px 12px;
+            gap: 6px;
+            padding: 3px 10px;
             background: var(--glass);
             border: 1px solid var(--border);
             border-radius: 20px;
             color: var(--text-main);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
+            flex-shrink: 0;
         }
 
         .user-avatar {
@@ -164,7 +182,7 @@
 
         /* Main Viewport */
         .viewport {
-            height: calc(100% - 64px);
+            height: calc(100% - 56px);
             position: relative;
         }
 
@@ -185,8 +203,8 @@
         /* Responsive */
         @media (max-width: 768px) {
             .brand span { display: none; }
-            .nav-tabs { position: static; transform: none; margin: 0 auto; }
-            .portal-header { padding: 0 12px; }
+            .portal-header { padding: 0 8px; gap: 6px; }
+            .nav-btn span:first-child { display: none; }
         }
     </style>
 </head>
@@ -205,11 +223,14 @@
             <button class="nav-btn" onclick="switchTab('bandwidth')">
                 <span>🔌</span> Consumo
             </button>
+            <button class="nav-btn" onclick="switchTab('anchobanda')">
+                <span>📡</span> Ancho de Banda
+            </button>
         </nav>
 
         <div class="controls">
-            <span id="last-update" style="font-size:12px;color:var(--text-muted);margin-right:8px">—</span>
-            <select id="global-refresh-interval" onchange="resetGlobalAutoRefresh()" title="Intervalo de actualización" style="background:var(--glass);color:var(--text-main);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer">
+            <span id="last-update" style="font-size:11px;color:var(--text-muted);white-space:nowrap">—</span>
+            <select id="global-refresh-interval" onchange="resetGlobalAutoRefresh()" title="Intervalo de actualización" style="background:var(--glass);color:var(--text-main);border:1px solid var(--border);border-radius:6px;padding:3px 6px;font-size:11px;cursor:pointer;height:28px">
                 <option value="30">30s</option>
                 <option value="60">1m</option>
                 <option value="300" selected>5m</option>
@@ -217,7 +238,10 @@
             </select>
             <button class="theme-toggle" id="btn-sound" onclick="toggleGlobalSound()" title="Activar sonido de alertas" style="font-size:16px;">🔇</button>
             <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema" style="font-size:16px;">☀️</button>
-            <button class="theme-toggle" style="width:auto;padding:0 12px;font-size:12px;font-weight:600;display:flex;gap:6px" onclick="triggerRefresh()">
+            <label title="Formato de hora en gráficos" style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);cursor:pointer;white-space:nowrap">
+              <input type="checkbox" id="chk-24h-global" style="accent-color:var(--accent-color,#3b82f6)" checked onchange="toggleTimeFormat()"> 24h
+            </label>
+            <button class="theme-toggle" style="width:auto;padding:0 10px;font-size:11px;font-weight:600;display:flex;gap:5px;height:32px" onclick="triggerRefresh()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
                 <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
@@ -236,22 +260,29 @@
 
     <main class="viewport">
         <iframe src="https://intranet.icontel.cl/zabbix/index.php" id="frame-monitoreo" class="active"></iframe>
-        <iframe src="https://intranet.icontel.cl/zabbix/consumo/index.php" id="frame-bandwidth"></iframe>
+        <!-- LAZY: src se asigna la primera vez que el usuario abre este tab -->
+        <iframe id="frame-bandwidth" data-src="https://intranet.icontel.cl/zabbix/consumo/index.php"></iframe>
+        <!-- LAZY: Módulo Ancho de Banda -->
+        <iframe id="frame-anchobanda" data-src="https://intranet.icontel.cl/zabbix/bandwidth/index.php"></iframe>
     </main>
 
     <script>
         function switchTab(tab) {
             // Update buttons
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                const text = btn.textContent.toLowerCase();
-                const isActive = (tab === 'monitoreo' && text.includes('monitoreo')) || 
-                                 (tab === 'bandwidth' && text.includes('ancho'));
-                btn.classList.toggle('active', isActive);
+                const onclick = btn.getAttribute('onclick') || '';
+                btn.classList.toggle('active', onclick.includes(`'${tab}'`));
             });
 
+            // LAZY LOAD: cargar el iframe de Consumo solo la primera vez que se abre
+            const frame = document.getElementById(`frame-${tab}`);
+            if (frame && !frame.src && frame.dataset.src) {
+                frame.src = frame.dataset.src;
+            }
+
             // Update iframes
-            document.querySelectorAll('iframe').forEach(frame => {
-                frame.classList.toggle('active', frame.id === `frame-${tab}`);
+            document.querySelectorAll('iframe').forEach(f => {
+                f.classList.toggle('active', f.id === `frame-${tab}`);
             });
 
             // Store preference
@@ -268,6 +299,27 @@
                 document.body.classList.remove('light-theme');
                 if (themeBtn) themeBtn.textContent = '☀️';
             }
+        }
+
+        function is24h() {
+            return (localStorage.getItem('zabbix-time-format') || '24h') === '24h';
+        }
+
+        function toggleTimeFormat() {
+            const fmt = document.getElementById('chk-24h-global').checked ? '24h' : '12h';
+            localStorage.setItem('zabbix-time-format', fmt);
+            // Propagar a todos los iframes via postMessage
+            document.querySelectorAll('iframe').forEach(f => {
+                try { f.contentWindow.postMessage({ type: 'timeFormat', is24h: fmt === '24h' }, '*'); } catch(e) {}
+            });
+            // Refrescar last-update en el portal
+            updateLastUpdate();
+        }
+
+        function initTimeFormat() {
+            const saved = localStorage.getItem('zabbix-time-format') || '24h';
+            const chk = document.getElementById('chk-24h-global');
+            if (chk) chk.checked = (saved === '24h');
         }
 
         function toggleTheme() {
@@ -291,13 +343,14 @@
         if (lastTab) switchTab(lastTab);
 
         initTheme();
+        initTimeFormat();
         let globalRefreshTimer;
         let globalCountdown;
         let soundEnabled = false;
 
         function updateLastUpdate() {
             const now = new Date();
-            const timeStr = now.toLocaleTimeString('es-CL');
+            const timeStr = now.toLocaleTimeString('es-CL', { hour12: !is24h() });
             document.getElementById('last-update').textContent = `Actualizado: ${timeStr}`;
         }
 
@@ -313,6 +366,11 @@
                 } else if (activeFrame.id === 'frame-bandwidth') {
                     if (typeof activeFrame.contentWindow.fetchData === 'function') {
                         activeFrame.contentWindow.fetchData();
+                        updateLastUpdate();
+                    }
+                } else if (activeFrame.id === 'frame-anchobanda') {
+                    if (typeof activeFrame.contentWindow.loadGraph === 'function') {
+                        activeFrame.contentWindow.loadGraph();
                         updateLastUpdate();
                     }
                 }

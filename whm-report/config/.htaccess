@@ -1,0 +1,9 @@
+# ============================================================
+# WHM Server Report - Icontel Intranet
+# Archivo    : .htaccess (config protection)
+# Path       : /home/icontel/public_html/intranet/whm-report/config/.htaccess
+# Versión    : 1.0.0
+# Fecha      : 2026-02-25 20:57:00
+# ============================================================
+Order Allow,Deny
+Deny from all
