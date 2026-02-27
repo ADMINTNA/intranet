@@ -306,23 +306,23 @@ const App = {
 
         container.innerHTML = `
             <div class="health-pill">
-                <span class="label">CPU Load (1m)</span>
+                <span class="label">CPU Load (1m) <small style="font-size:8px;opacity:0.4">(h.load)</small></span>
                 <span class="value ${cpuClass}">${cpuIcon} ${loadValue.toFixed(2)} <span style="font-size:10px;color:var(--text-muted);font-weight:400;margin-left:4px">/ ${cores} cores</span></span>
             </div>
             <div class="health-pill">
-                <span class="label">RAM Usage</span>
+                <span class="label">RAM Usage <small style="font-size:8px;opacity:0.4">(h.memory)</small></span>
                 <span class="value ${ramClass}">${ramIcon} ${ramPct}% <span style="font-size:10px;color:var(--text-muted);font-weight:400;margin-left:4px">(${h.memory.used_hr || '0 B'})</span></span>
             </div>
             <div class="health-pill">
-                <span class="label">Mail Queue</span>
+                <span class="label">Mail Queue <small style="font-size:8px;opacity:0.4">(h.mail_queue)</small></span>
                 <span class="value ${mqClass}">${mqIcon} ${mq} <span style="font-size:10px;color:var(--text-muted);font-weight:400;margin-left:4px">waiting</span></span>
             </div>
             <div class="health-pill">
-                <span class="label">Total Inodes</span>
+                <span class="label">Total Inodes <small style="font-size:8px;opacity:0.4">(h.inodes)</small></span>
                 <span class="value ${iClass}">${iIcon} ${i.percent}% <span style="font-size:10px;color:var(--text-muted);font-weight:400;margin-left:4px">filesystem</span></span>
             </div>
             <div class="health-pill">
-                <span class="label">Backups</span>
+                <span class="label">Backups <small style="font-size:8px;opacity:0.4">(h.backups)</small></span>
                 <span class="value ${bClass}">${bIcon} ${bStatus.toUpperCase()} <span style="font-size:10px;color:var(--text-muted);font-weight:400;margin-left:4px">${b.last_run || ''}</span></span>
             </div>
         `;
@@ -404,7 +404,7 @@ const App = {
                         <span class="td-user">${acct.user}</span>
                     </td>
                     <td class="td-domain">${acct.domain}</td>
-                    <td class="td-mono">${acct.disk_used_hr} / ${acct.disk_limit_hr} (${this.formatPercent(acct.disk_percent)}%)</td>
+                    <td class="td-mono">${acct.disk_used_hr} / ${acct.disk_limit_hr} ${acct.disk_limit > 0 ? `(${this.formatPercent(acct.disk_percent)}%)` : '(<span class="text-danger">Ilimitado</span>)'}</td>
                     <td class="td-mono">${this.formatNumber(days)} dias</td>
                     <td class="td-mono">${acct.start_date}</td>
                     <td><span class="badge ${badgeClass}">${label}</span></td>
@@ -457,8 +457,11 @@ const App = {
                     <td class="td-domain" onclick="App.showDetail('${acct.user}')" style="cursor:pointer">${acct.domain}</td>
                     <td class="td-mono text-danger fw-bold" onclick="App.showDetail('${acct.user}')" style="cursor:pointer">${acct.disk_used_hr}</td>
                     <td onclick="App.showDetail('${acct.user}')" style="cursor:pointer" style="min-width: 60px;">
-                        <span class="mini-bar"><span class="mini-bar-fill ${barClass}" style="width:${Math.min(acct.disk_percent, 100)}%"></span></span>
-                        <div style="font-size:10px;text-align:right;margin-top:2px;">${this.formatPercent(acct.disk_percent)}% ${acct.severity?.code || ''}</div>
+                        <span class="mini-bar"><span class="mini-bar-fill ${barClass}" style="width:${acct.disk_limit > 0 ? Math.min(acct.disk_percent, 100) : (acct.disk_used > 1024 * 1024 * 1024 ? 100 : 0)}%"></span></span>
+                        <div style="font-size:10px;text-align:right;margin-top:2px;">
+                            ${acct.disk_limit > 0 ? this.formatPercent(acct.disk_percent) + '%' : '<span class="text-danger">Ilimitado</span>'} 
+                            ${acct.severity?.code || ''}
+                        </div>
                     </td>
                     <td class="td-mono" onclick="App.showDetail('${acct.user}')" style="cursor:pointer">${acct.disk_limit_hr}</td>
                     <td onclick="App.showDetail('${acct.user}')" style="cursor:pointer"><span class="badge badge-active">Activa</span></td>
@@ -533,14 +536,21 @@ const App = {
                     </td>
                     <td class="td-domain" onclick="App.showDetail('${acct.user}')" style="cursor:pointer">${acct.domain}</td>
                     <td class="${diskClass}" onclick="App.showDetail('${acct.user}')" style="cursor:pointer">
-                        ${acct.disk_used_hr} / ${acct.disk_limit_hr} (${this.formatPercent(acct.disk_percent)}%)
+                        ${acct.disk_used_hr} / ${acct.disk_limit_hr} ${acct.disk_limit > 0 ? `(${this.formatPercent(acct.disk_percent)}%)` : ''}
                     </td>
-                    <td onclick="App.showDetail('${acct.user}')" style="cursor:pointer" style="min-width: 60px;">
-                        <span class="mini-bar"><span class="mini-bar-fill ${sev.class}" style="width:${Math.min(acct.disk_percent, 100)}%"></span></span>
+                    <td onclick="App.showDetail('${acct.user}')" style="cursor:pointer" style="min-width: 100px;">
+                        <span class="mini-bar" style="height:8px; border-radius:10px;"><span class="mini-bar-fill ${sev.class}" style="width:${acct.disk_limit > 0 ? Math.min(acct.disk_percent, 100) : (acct.disk_used > 1024 * 1024 * 1024 ? 100 : 0)}%"></span></span>
+                        <div style="font-size:10px; text-align:right; margin-top:3px; font-weight:600;">
+                            ${acct.disk_limit > 0 ? this.formatPercent(acct.disk_percent) + '%' : '<span class="text-danger">!!!ILIMITADO!!!</span>'}
+                        </div>
                     </td>
+                    <!-- AGENT_VERIFY_FLAG_v1 -->
                     <td class="td-mono" onclick="App.showDetail('${acct.user}')" style="cursor:pointer">${acct.bw_used_hr}</td>
                     <td onclick="App.showDetail('${acct.user}')" style="cursor:pointer">${acct.suspended ? '<span class="badge badge-suspended">Suspendida</span>' : '<span class="badge badge-active">Activa</span>'}</td>
                     <td class="td-mono" onclick="App.showDetail('${acct.user}')" style="cursor:pointer">${this.formatNumber(acct.email_count)} / ${acct.email_limit}</td>
+                    <td class="td-mono" onclick="App.showDetail('${acct.user}')" style="cursor:pointer;text-align:center;">
+                        ${acct.forwarder_count > 0 ? `<span class="badge badge-info" style="background:#6c5ce7;color:#fff;">${acct.forwarder_count}</span>` : '<span style="color:var(--text-muted)">-</span>'}
+                    </td>
                     <td>
                         <select class="form-select form-select-sm td-mono" style="min-width: 120px;" onchange="App.changePlan('${acct.user}', this.value, '${acct.plan}')">
                             ${planOptionsHtml(acct.plan)}
@@ -781,8 +791,9 @@ const App = {
             forwardersHtml = '<div class="table-container"><table>' +
                 '<thead><tr><th>Origen</th><th>Destino</th></tr></thead><tbody>';
             forwarders.forEach(function (f) {
-                var dest = f.forward || f.dest || 'N/A';
-                var from = f.html || f.uri || f.email || 'N/A';
+                // WHM Screenshot: 'dest' is Source, 'forward' is Destination
+                var from = f.dest || f.html_dest || f.uri_dest || 'N/A';
+                var dest = f.forward || f.html_forward || f.uri_forward || f.forwarder || String(f);
                 forwardersHtml += '<tr>' +
                     '<td class="td-mono">' + from + '</td>' +
                     '<td class="td-mono">' + dest + '</td>' +
@@ -831,31 +842,31 @@ const App = {
         content.innerHTML = `
                 <div class="modal-grid">
                 <div class="modal-item">
-                    <div class="modal-item-label">Usuario</div>
+                    <div class="modal-item-label">Usuario <span style="font-size:9px;opacity:0.4">(acct.user)</span></div>
                     <div class="modal-item-value" style="color:var(--accent)">${acct.user || user}</div>
                 </div>
                 <div class="modal-item">
-                    <div class="modal-item-label">Dominio Principal</div>
+                    <div class="modal-item-label">Dominio Principal <span style="font-size:9px;opacity:0.4">(acct.domain)</span></div>
                     <div class="modal-item-value">${acct.domain || 'N/A'}</div>
                 </div>
                 <div class="modal-item">
-                    <div class="modal-item-label">Email Contacto</div>
+                    <div class="modal-item-label">Email Contacto <span style="font-size:9px;opacity:0.4">(acct.email)</span></div>
                     <div class="modal-item-value">${acct.email || 'N/A'}</div>
                 </div>
                 <div class="modal-item">
-                    <div class="modal-item-label">Plan</div>
+                    <div class="modal-item-label">Plan <span style="font-size:9px;opacity:0.4">(acct.plan)</span></div>
                     <div class="modal-item-value">${acct.plan || 'N/A'}</div>
                 </div>
                 <div class="modal-item">
-                    <div class="modal-item-label">Disco Usado</div>
-                    <div class="modal-item-value">${acct.diskused || 'N/A'} / ${acct.disklimit === 'unlimited' ? 'Ilimitada' : (acct.disklimit || 'Ilimitada')}</div>
+                    <div class="modal-item-label">Disco Usado <span style="font-size:9px;opacity:0.4">(acct.diskused)</span></div>
+                    <div class="modal-item-value">${acct.diskused || 'N/A'} / ${acct.disklimit === 'unlimited' || !acct.disklimit ? '<span class="text-danger">Ilimitado</span>' : acct.disklimit}</div>
                 </div>
                 <div class="modal-item">
-                    <div class="modal-item-label">IP</div>
+                    <div class="modal-item-label">IP <span style="font-size:9px;opacity:0.4">(acct.ip)</span></div>
                     <div class="modal-item-value">${acct.ip || 'N/A'}</div>
                 </div>
                 <div class="modal-item" style="grid-column: span 2">
-                    <div class="modal-item-label">Inodes (Cantidad de Archivos)</div>
+                    <div class="modal-item-label">Inodes (Cantidad de Archivos) <span style="font-size:9px;opacity:0.4">(acct.inodesused)</span></div>
                     <div class="modal-item-value">
                         ${(() => {
                 const iUsed = parseInt(acct.inodesused || 0);
@@ -880,25 +891,25 @@ const App = {
                 }
                 return `<span style="color:${color}; font-weight:bold; font-size:15px;">${icon}${this.formatNumber(iUsed)}</span>
                     <span style="font-size:11px;color:var(--text-muted);margin-left:6px">${msg}</span>
-                    <span style="color:var(--text-muted)"> / ${acct.inodeslimit === 'unlimited' ? 'Ilimitada' : (this.formatNumber(acct.inodeslimit) || 'Ilimitada')}</span>
+                    <span style="color:var(--text-muted)"> / ${acct.inodeslimit === 'unlimited' || !acct.inodeslimit ? '<span class="text-danger">Ilimitado</span>' : this.formatNumber(acct.inodeslimit)}</span>
                     <div style="margin-top:7px;font-size:12px;color:var(--text-secondary);padding:8px 10px;background:var(--bg-primary);border-radius:6px;line-height:1.5">${explanation}</div>`;
             })()}
                     </div>
                 </div>
                 <div class="modal-item">
-                    <div class="modal-item-label">Fecha Creación</div>
+                    <div class="modal-item-label">Fecha Creación <span style="font-size:9px;opacity:0.4">(acct.startdate)</span></div>
                     <div class="modal-item-value">${this.formatDateTime(acct.startdate, false)}</div>
                 </div>
                 <div class="modal-item">
-                    <div class="modal-item-label">Email Max/Hora</div>
+                    <div class="modal-item-label">Email Max/Hora <span style="font-size:9px;opacity:0.4">(acct.max_email_per_hour)</span></div>
                     <div class="modal-item-value">${this.formatNumber(acct.max_email_per_hour) || 'N/A'}</div>
                 </div>
                 <div class="modal-item">
-                    <div class="modal-item-label">Cuentas Email</div>
-                    <div class="modal-item-value">${this.formatNumber(acct.email_count || '0')} / ${acct.email_limit === 'unlimited' ? 'Ilimitada' : (this.formatNumber(acct.email_limit) || 'Ilimitada')}</div>
+                    <div class="modal-item-label">Cuentas Email <span style="font-size:9px;opacity:0.4">(acct.email_count)</span></div>
+                    <div class="modal-item-value">${this.formatNumber(acct.email_count || '0')} / ${acct.email_limit === 'unlimited' || !acct.email_limit ? '<span class="text-danger">Ilimitado</span>' : this.formatNumber(acct.email_limit)}</div>
                 </div>
                 <div class="modal-item">
-                    <div class="modal-item-label">Reseller (Owner)</div>
+                    <div class="modal-item-label">Reseller (Owner) <span style="font-size:9px;opacity:0.4">(acct.owner)</span></div>
                     <div class="modal-item-value">
                         ${(() => {
                 const owner = acct.owner || 'root';
@@ -923,10 +934,10 @@ const App = {
                 </div>
             </div>
             
-            <div class="modal-section-title">📧 Cuentas de Email (${this.formatNumber(emails.length)})</div>
+            <div class="modal-section-title">📧 Cuentas de Email (${this.formatNumber(emails.length)}) <span style="font-size:9px;opacity:0.4">(renderEmailTable)</span></div>
             <div class="modal-grid" style="margin-bottom:16px">
                 <div class="modal-item">
-                    <div class="modal-item-label">Disco Total Emails</div>
+                    <div class="modal-item-label">Disco Total Emails <span style="font-size:9px;opacity:0.4">(totalEmailDisk)</span></div>
                     <div class="modal-item-value" style="color:var(--info)">${emailDiskHr}</div>
                 </div>
                 <div class="modal-item" onclick="App.filterEmailTable(function(e){ return parseInt(e.suspended_login||0)===1; }, 'Login Suspendido')" style="cursor:pointer" title="Haz clic para filtrar">
@@ -949,16 +960,16 @@ const App = {
                 </div>
             </div>
             
-            <div class="modal-section-title">↗️ Reenvíos / Forwarders (${this.formatNumber(forwarders.length)})</div>
+            <div class="modal-section-title">↗️ Reenvíos / Forwarders (${this.formatNumber(forwarders.length)}) <span style="font-size:9px;opacity:0.4">(forwardersHtml)</span></div>
             ${forwardersHtml}
 
-<div class="modal-section-title">🤖 Respuestas Automáticas (${this.formatNumber(autoresponders.length)})</div>
+<div class="modal-section-title">🤖 Respuestas Automáticas (${this.formatNumber(autoresponders.length)}) <span style="font-size:9px;opacity:0.4">(autorespondersHtml)</span></div>
             ${autorespondersHtml}
 
-<div class="modal-section-title">📋 Listas de Correo (${this.formatNumber(mailingLists.length)})</div>
+<div class="modal-section-title">📋 Listas de Correo (${this.formatNumber(mailingLists.length)}) <span style="font-size:9px;opacity:0.4">(mailingHtml)</span></div>
             ${mailingHtml}
 
-<div class="modal-section-title">🗄️ Bases de Datos (${this.formatNumber(databases.length)} creadas / ${acct.maxsql} permitidas)</div>
+<div class="modal-section-title">🗄️ Bases de Datos (${this.formatNumber(databases.length)} creadas / ${acct.maxsql} permitidas) <span style="font-size:9px;opacity:0.4">(databases)</span></div>
             ${databases.length > 0 ? `
                 <div class="table-container">
                     <table>
@@ -979,7 +990,7 @@ const App = {
             ` : '<p style="color:var(--text-muted);font-size:13px">Sin bases de datos</p>'
             }
 
-<div class="modal-section-title">🌐 Dominios (${allDomains.length})</div>
+<div class="modal-section-title">🌐 Dominios (${allDomains.length}) <span style="font-size:9px;opacity:0.4">(allDomains)</span></div>
             ${allDomains.length > 0 ? `
                 <div style="display:flex;flex-wrap:wrap;gap:6px">
                     ${allDomains.map(d => `<span class="badge badge-info">${d}</span>`).join('')}
@@ -1032,6 +1043,7 @@ const App = {
     },
 
     sortEmailTable(key) {
+        console.log('sortEmailTable Called with key:', key, 'Current Sort State:', this.emailSortState);
         if (this.emailSortState.key === key) {
             this.emailSortState.dir = this.emailSortState.dir === 'asc' ? 'desc' : 'asc';
         } else {
@@ -1039,8 +1051,11 @@ const App = {
         }
         this.emailPage = 0; // reset to first page on sort
         var container = document.getElementById('emailTableData');
+        console.log('Re-rendering table. Emails count:', this.modalEmails.length);
         if (container) {
             container.innerHTML = this.renderEmailTable(this.modalEmails);
+        } else {
+            console.error('emailTableData container not found!');
         }
     },
 
@@ -1110,6 +1125,23 @@ const App = {
             } else if (sortKey === 'diskquota') {
                 va = parseFloat(a._diskquota || a.diskquota || 0) || 0;
                 vb = parseFloat(b._diskquota || b.diskquota || 0) || 0;
+            } else if (sortKey === 'diskusedpercent') {
+                if ('diskusedpercent_float' in a && 'diskusedpercent_float' in b) {
+                    va = parseFloat(a.diskusedpercent_float || 0);
+                    vb = parseFloat(b.diskusedpercent_float || 0);
+                } else {
+                    var parseQuota = function (q) {
+                        if (!q || q === 'unlimited' || q === 'None') return 0;
+                        return parseFloat(q) || 0;
+                    };
+                    var quotaA = parseQuota(a._diskquota) || parseQuota(a.diskquota);
+                    var quotaB = parseQuota(b._diskquota) || parseQuota(b.diskquota);
+                    var usedA = parseFloat(a._diskused || a.diskused || 0);
+                    var usedB = parseFloat(b._diskused || b.diskused || 0);
+                    va = quotaA > 0 ? Math.min((usedA / quotaA) * 100, 100) : 0;
+                    vb = quotaB > 0 ? Math.min((usedB / quotaB) * 100, 100) : 0;
+                }
+                console.log('Sorting diskusedpercent. va:', va, 'vb:', vb, 'a.email:', a.email);
             } else if (sortKey === 'mtime') {
                 va = parseInt(a.mtime || 0);
                 vb = parseInt(b.mtime || 0);
@@ -1238,6 +1270,13 @@ const App = {
                 'style="padding:3px 7px;border:none;border-radius:5px;cursor:pointer;font-size:11px;margin-left:3px;' +
                 'background:rgba(220,53,69,0.12);color:var(--danger)">🗑️</button>';
 
+            var fwdBtn = '<button title="Forwardear email" ' +
+                'onclick="App.showForwarders(\'' + emailAddr + '\')" ' +
+                'style="padding:3px 7px;border:none;border-radius:5px;cursor:pointer;font-size:11px;margin-left:3px;' +
+                'background:rgba(108,92,231,0.12);color:#a29bfe">➡️ Fwd</button>';
+            var displayQuota = (e.humandiskquota || e.diskquota || '<span class="text-danger">Ilimitado</span>');
+            if (displayQuota === 'None' || displayQuota === 'unlimited') displayQuota = '<span class="text-danger">Ilimitado</span>';
+
             var fwdIndicator = (e.forwarder_count > 0) ? '<span title="' + e.forwarder_count + ' reenvío(s)" style="cursor:help;margin-left:4px">↗️</span>' : '';
             var fwdCell = '<td class="td-mono" style="text-align:center">' +
                 (e.forwarder_count > 0 ? '<span class="badge badge-info" style="cursor:pointer" onclick="App.showForwarders(\'' + emailAddr + '\')">' + e.forwarder_count + '</span>' : '<span style="color:var(--text-muted)">0</span>') +
@@ -1294,7 +1333,7 @@ const App = {
             '<th style="cursor:pointer" onclick="App.sortEmailTable(\'email\')">Email' + arrow('email') + '</th>' +
             '<th style="cursor:pointer" onclick="App.sortEmailTable(\'_diskused\')">Disco Usado' + arrow('_diskused') + '</th>' +
             '<th style="cursor:pointer" onclick="App.sortEmailTable(\'diskquota\')">Quota' + arrow('diskquota') + '</th>' +
-            '<th>% Uso</th>' +
+            '<th style="cursor:pointer" onclick="App.sortEmailTable(\'diskusedpercent\')">% Uso' + arrow('diskusedpercent') + '</th>' +
             '<th style="cursor:pointer" onclick="App.sortEmailTable(\'forwarder_count\')" title="Ordenar por Reenvíos">Reenvíos' + arrow('forwarder_count') + '</th>' +
             '<th style="cursor:pointer" onclick="App.sortEmailTable(\'suspended_login\')" title="Ordenar por Login">Login' + arrow('suspended_login') + '</th>' +
             '<th style="cursor:pointer" onclick="App.sortEmailTable(\'suspended_incoming\')" title="Ordenar por Entrada">Entrada' + arrow('suspended_incoming') + '</th>' +
@@ -1388,7 +1427,7 @@ const App = {
             { label: '2 GB', mb: 2048 },
             { label: '5 GB', mb: 5120 },
             { label: '10 GB', mb: 10240 },
-            { label: '∞ Ilimitada', mb: 0 },
+            { label: '∞ Ilimitado', mb: 0 },
         ];
 
         var closeBtn = '<button onclick="document.getElementById(\'' + targetRow.id + '\').style.display=\'none\'" ' +
@@ -1439,13 +1478,13 @@ const App = {
             var res = await fetch('api/index.php', { method: 'POST', body: fd });
             var data = await res.json();
             if (data.success) {
-                if (msgEl) msgEl.innerHTML = '<span style="color:var(--accent)">✅ Quota actualizada a ' + (quota === 0 ? 'ilimitada' : quota + ' MB') + '</span>';
+                if (msgEl) msgEl.innerHTML = '<span style="color:var(--accent)">✅ Quota actualizada a ' + (quota === 0 ? 'ilimitado' : quota + ' MB') + '</span>';
                 // Actualizar estado local
                 this.modalEmails.forEach(function (e) {
                     if ((e.email || e.login) === email) {
                         e.diskquota = quota;
                         e._diskquota = quota;
-                        e.humandiskquota = quota === 0 ? 'Ilimitada' : quota + ' MB';
+                        e.humandiskquota = quota === 0 ? 'Ilimitado' : quota + ' MB';
                     }
                 });
                 var self = this;
@@ -1509,22 +1548,31 @@ const App = {
         try {
             var res = await fetch('api/index.php?action=list_forwarders&user=' + encodeURIComponent(this.modalUser) + '&email=' + encodeURIComponent(email));
             var data = await res.json();
-            var fwds = data.forwarders || [];
-            if (!Array.isArray(fwds) || fwds.length === 0) {
+            var fwds = (data.forwarders || []).filter(function (f) {
+                // Filtrar donde 'dest' (Source) sea el email de la cuenta
+                var src = f.dest || f.html_dest || f.uri_dest || '';
+                return src === email || src === email.split('@')[0];
+            });
+            if (fwds.length === 0) {
                 listEl.innerHTML = '<em style="color:var(--text-muted)">Sin forwarders configurados.</em>';
                 return;
             }
             var html = '<div style="display:flex;flex-wrap:wrap;gap:6px">';
             fwds.forEach(function (f) {
-                var dest = f.dest || f.forward || f.forwarder || String(f);
+                // Mostrar 'forward' (Destination) en los tags
+                var destStr = f.forward || f.html_forward || f.dest || String(f);
                 html += '<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 10px;background:rgba(108,92,231,0.15);border-radius:20px;font-size:11px;color:#a29bfe">' +
-                    '➡️ ' + dest +
-                    '<button onclick="App._deleteFwd(\'' + email + '\',\'' + dest + '\',\'' + rowId + '\')" ' +
+                    '➡️ ' + destStr +
+                    '<button onclick="App._deleteFwd(\'' + email + '\',\'' + destStr + '\',\'' + rowId + '\')" ' +
                     'style="background:transparent;border:none;color:var(--danger);cursor:pointer;font-size:12px;padding:0;margin-left:2px" title="Eliminar">✕</button>' +
                     '</span>';
             });
             html += '</div>';
             listEl.innerHTML = html;
+            this._checkFwdPolicy(email, fwds, rowId);
+
+            // Política TNA de Forwarders
+            this._checkFwdPolicy(email, fwds, rowId);
         } catch (e) {
             if (listEl) listEl.innerHTML = '<span style="color:var(--danger)">Error: ' + e.message + '</span>';
         }
@@ -1949,7 +1997,7 @@ const App = {
                 '</tr>';
         });
         container.innerHTML = '<div class="table-container" style="max-height:400px;overflow-y:auto"><table>' +
-            '<thead><tr><th>IP</th><th>Motivo / Fuente</th><th style="text-align:right">Acciones</th></tr></thead>' +
+            '<thead><tr><th>IP <span style="font-size:9px;opacity:0.4">(entry.ip)</span></th><th>Motivo / Fuente <span style="font-size:9px;opacity:0.4">(entry.line / entry.source)</span></th><th style="text-align:right">Acciones</th></tr></thead>' +
             '<tbody>' + rows + '</tbody></table></div>' +
             '<p style="color:var(--text-muted);font-size:11px;margin-top:8px">' + self.formatNumber(ips.length) + ' bloqueos activos</p>';
     },
@@ -2009,7 +2057,7 @@ const App = {
                 '</tr>';
         });
         container.innerHTML = '<div class="table-container" style="max-height:400px;overflow-y:auto"><table>' +
-            '<thead><tr><th>IP</th><th>Comentario</th><th style="text-align:right"></th></tr></thead>' +
+            '<thead><tr><th>IP <span style="font-size:9px;opacity:0.4">(entry.ip)</span></th><th>Comentario <span style="font-size:9px;opacity:0.4">(entry.comment)</span></th><th style="text-align:right"></th></tr></thead>' +
             '<tbody>' + rows + '</tbody></table></div>';
     },
 
@@ -2092,7 +2140,7 @@ const App = {
             knownHtml += entryHtml('Login suspendido: ' + (isLoginSusp ? 'SÍ' : 'NO'), 'estado', isLoginSusp);
             knownHtml += entryHtml('Entrante suspendido: ' + (isIncomingSusp ? 'SÍ' : 'NO'), 'estado', isIncomingSusp);
             var displayQuota = knownEmail.humandiskquota || knownEmail.diskquota || '?';
-            if (displayQuota === 'None' || displayQuota === 'unlimited') displayQuota = 'Ilimitada';
+            if (displayQuota === 'None' || displayQuota === 'unlimited') displayQuota = '<span class="text-danger">Ilimitado</span>';
 
             knownHtml += entryHtml('Disco: ' + (knownEmail.humandiskused || '?') + ' de ' + displayQuota, 'estado');
             knownHtml += entryHtml('Último acceso: ' + lastAccess + (daysAgo !== null ? ' (hace ' + this.formatNumber(daysAgo) + ' días)' : ''), 'estado', daysAgo > 60);
@@ -2193,19 +2241,19 @@ const App = {
                 <div class="reseller-card-name">${suspIcon} 👤 ${r.name}</div>
                 <div class="reseller-card-stats">
                     <div class="reseller-stat">
-                        <div class="reseller-stat-label">Cuentas</div>
+                        <div class="reseller-stat-label">Cuentas <span style="font-size:9px;opacity:0.4">(acctcount)</span></div>
                         <div class="reseller-stat-value">${r.acctcount}</div>
                     </div>
                     <div class="reseller-stat">
-                        <div class="reseller-stat-label">Disco Usado</div>
+                        <div class="reseller-stat-label">Disco Usado <span style="font-size:9px;opacity:0.4">(diskused)</span></div>
                         <div class="reseller-stat-value">${App.formatMB(r.diskused)}</div>
                     </div>
                     <div class="reseller-stat">
-                        <div class="reseller-stat-label">Límite Disco</div>
-                        <div class="reseller-stat-value">${r.disklimit === 'unlimited' || !r.disklimit ? 'Ilimitado' : App.formatMB(r.disklimit)}</div>
+                        <div class="reseller-stat-label">Límite Disco <span style="font-size:9px;opacity:0.4">(disklimit)</span></div>
+                        <div class="reseller-stat-value">${r.disklimit === 'unlimited' || !r.disklimit ? '<span class="text-danger">Ilimitado</span>' : App.formatMB(r.disklimit)}</div>
                     </div>
                     <div class="reseller-stat">
-                        <div class="reseller-stat-label">BW Usado</div>
+                        <div class="reseller-stat-label">BW Usado <span style="font-size:9px;opacity:0.4">(bwused)</span></div>
                         <div class="reseller-stat-value">${App.formatMB(r.bwused)}</div>
                     </div>
                 </div>
@@ -2233,7 +2281,7 @@ const App = {
                 <td class="td-user" style="color:var(--purple)">${r.name}</td>
                 <td class="td-mono">${r.acctcount}</td>
                 <td class="td-mono">${App.formatMB(r.diskused)}</td>
-                <td class="td-mono">${r.disklimit === 'unlimited' || !r.disklimit ? 'Ilimitado' : App.formatMB(r.disklimit)}</td>
+                <td class="td-mono">${r.disklimit === 'unlimited' || !r.disklimit ? '<span class="text-danger">Ilimitado</span>' : App.formatMB(r.disklimit)}</td>
                 <td class="td-mono">${App.formatMB(r.bwused)}</td>
                 <td>${suspBadge}</td>
                 <td style="text-align:center;white-space:nowrap" onclick="event.stopPropagation()">
@@ -2299,20 +2347,20 @@ const App = {
                 <div class="modal-item-value" style="color:var(--purple);font-weight:700;font-size:20px">${r.acctcount}</div>
             </div>
             <div class="modal-item">
-                <div class="modal-item-label">Disco Usado</div>
+                <div class="modal-item-label">Disco Usado <span style="font-size:9px;opacity:0.4">(r.diskused)</span></div>
                 <div class="modal-item-value">${this.formatMB(r.diskused)} ${diskPct > 0 ? '<span style="font-size:11px;color:var(--text-muted)">(' + diskPct + '%)</span>' : ''}</div>
             </div>
             <div class="modal-item">
-                <div class="modal-item-label">Límite Disco</div>
-                <div class="modal-item-value">${(!r.disklimit || r.disklimit === 'unlimited') ? 'Ilimitado' : this.formatMB(r.disklimit)}</div>
+                <div class="modal-item-label">Límite Disco <span style="font-size:9px;opacity:0.4">(r.disklimit)</span></div>
+                <div class="modal-item-value">${(!r.disklimit || r.disklimit === 'unlimited') ? '<span class="text-danger">Ilimitado</span>' : this.formatMB(r.disklimit)}</div>
             </div>
             <div class="modal-item">
-                <div class="modal-item-label">BW Usado</div>
+                <div class="modal-item-label">BW Usado <span style="font-size:9px;opacity:0.4">(r.bwused)</span></div>
                 <div class="modal-item-value">${this.formatMB(r.bwused)}</div>
             </div>
             <div class="modal-item">
-                <div class="modal-item-label">Límite BW</div>
-                <div class="modal-item-value">${(!r.bwlimit || r.bwlimit === 'unlimited') ? 'Ilimitado' : this.formatMB(r.bwlimit)}</div>
+                <div class="modal-item-label">Límite BW <span style="font-size:9px;opacity:0.4">(r.bwlimit)</span></div>
+                <div class="modal-item-value">${(!r.bwlimit || r.bwlimit === 'unlimited') ? '<span class="text-danger">Ilimitado</span>' : this.formatMB(r.bwlimit)}</div>
             </div>
         </div>
 
@@ -2498,6 +2546,47 @@ const App = {
             this.closeModal();
             this.loadResellers();
         } catch (e) { alert('❌ Error: ' + e.message); }
+    },
+
+    _checkFwdPolicy(email, fwds, rowId) {
+        var msgEl = document.getElementById('fwdMsg-' + rowId);
+        if (!msgEl) return;
+
+        var alerts = [];
+        var externalCount = 0;
+        var myDomain = email.split('@')[1];
+
+        // Obtener data de la cuenta para análisis holístico
+        var accountInfo = this.modalEmails ? this.modalEmails.find(m => (m.email || m.login) === email) : null;
+        var isHighUsage = accountInfo && (parseFloat(accountInfo._diskused) / (1024 * 1024 * 1024)) > 10; // > 10GB
+        var isSuspended = accountInfo && (accountInfo.suspended_login == 1 || accountInfo.suspended_incoming == 1);
+
+        fwds.forEach(f => {
+            var dest = f.forward || f.html_forward || f.dest || String(f);
+            if (dest === email) {
+                alerts.push('<span style="color:var(--danger)">🚨 <b>Bucle Detectado:</b> El correo se reenvía a sí mismo. Genera carga innecesaria en el servidor. Recomendamos eliminarlo.</span>');
+            }
+            var destDomain = dest.split('@')[1];
+            if (destDomain && destDomain !== myDomain) externalCount++;
+        });
+
+        if (externalCount > 0) {
+            if (isHighUsage) {
+                alerts.push('<span style="color:var(--info)">🚀 <b>Migración Sugerida:</b> Esta cuenta usa ' + externalCount + ' reenvíos externos y tiene un alto consumo de disco (' + formatBytesJS(accountInfo._diskused) + '). Recomendamos migrar a <b>Google Workspace</b> o <b>M365</b> para usar apps oficiales y liberar recursos del servidor.</span>');
+            } else {
+                alerts.push('<span style="color:var(--info)">ℹ️ <b>Reenvío Externo:</b> Recomendamos usar apps oficiales (Gmail/Outlook) vía IMAP en lugar de reenvíos externos para evitar bloqueos de Spam y asegurar la entrega.</span>');
+            }
+        }
+
+        if (isSuspended) {
+            alerts.push('<span style="color:var(--danger)">⚠️ <b>Casilla Restringida:</b> Esta cuenta tiene el acceso o la entrada suspendida. Los reenvíos podrían no funcionar correctamente hasta que se reactive.</span>');
+        }
+
+        if (alerts.length > 0) {
+            msgEl.innerHTML = '<div style="margin-top:10px;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;border-left:4px solid var(--accent);display:flex;flex-direction:column;gap:8px;font-size:12px">' + alerts.join('') + '</div>';
+        } else {
+            msgEl.innerHTML = '';
+        }
     }
 };
 

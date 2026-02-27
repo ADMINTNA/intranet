@@ -311,10 +311,19 @@ class WhmApi {
      * Listar forwarders de un email
      */
     public function listForwarders($user, $email) {
-        $result = $this->callUapi($user, 'Email', 'list_forwarders', [
-            'email' => $email,
-        ]);
-        return $result['result']['data'] ?? [];
+        $result = $this->callUapi($user, 'Email', 'list_forwarders', []);
+        $data = $result['result']['data'] ?? [];
+        if (!is_array($data)) return [];
+        
+        $filtered = [];
+        foreach ($data as $f) {
+            // WHM Screenshot confirmation: 'dest' is Source, 'forward' is Destination
+            $src = $f['dest'] ?? $f['forwarder'] ?? $f['uri'] ?? $f['email'] ?? '';
+            if ($src === $email || strpos($src, $email . '@') === 0 || $src === explode('@', $email)[0]) {
+                $filtered[] = $f;
+            }
+        }
+        return $filtered;
     }
 
     /**
@@ -805,6 +814,10 @@ class WhmApi {
                 }
             }
             $emailLimit = $acct['maxpop'] ?? 'unlimited';
+
+            // Contar forwarders totales de la cuenta
+            $fwdsData = $this->getForwarders($user);
+            $fwdCount = is_array($fwdsData) ? count($fwdsData) : 0;
             
             // Calcular días desde creación
             $startDate = $acct['unix_startdate'] ?? $acct['startdate'] ?? null;
@@ -857,10 +870,11 @@ class WhmApi {
                 'theme' => $acct['theme'] ?? '',
                 'max_email_per_hour' => $acct['max_email_per_hour'] ?? 0,
                 'inodes_used' => intval($acct['inodesused'] ?? 0),
-                'inodes_limit' => intval($acct['inodeslimit'] ?? 0),
-                'inodes_percent' => ($acct['inodeslimit'] ?? 0) > 0 ? round(($acct['inodesused'] / $acct['inodeslimit']) * 100, 2) : 0,
+                'inodes_limit' => intval(str_replace('unlimited', '0', $acct['inodeslimit'] ?? '0')),
+                'inodes_percent' => (intval(str_replace('unlimited', '0', $acct['inodeslimit'] ?? '0')) > 0) ? round((intval($acct['inodesused'] ?? 0) / intval(str_replace('unlimited', '0', $acct['inodeslimit']))) * 100, 2) : 0,
                 'email_count' => $emailCount,
                 'email_limit' => $emailLimit,
+                'forwarder_count' => $fwdCount,
                 'max_mailbox_usage' => $maxMailboxUsage,
                 'db_count' => $this->countDatabases($user),
                 'is_managerial' => ($diskLimitRaw > 4 * 1024 * 1024 * 1024) || ($diskLimitRaw == 0),

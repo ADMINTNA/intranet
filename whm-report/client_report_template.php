@@ -94,6 +94,18 @@ if (!is_array($emails)) {
     $emails = [];
 }
 
+// Obtener forwarders para el conteo (Mapeo: dest = Source, forward = Destination)
+$fwdData = $whm->getForwarders($userParam);
+$fwdCounts = [];
+if (is_array($fwdData)) {
+    foreach ($fwdData as $f) {
+        $src = $f['dest'] ?? $f['forwarder'] ?? $f['uri'] ?? $f['email'] ?? '';
+        if (!empty($src)) {
+            $fwdCounts[$src] = ($fwdCounts[$src] ?? 0) + 1;
+        }
+    }
+}
+
 $totalEmailDiskBytes = 0;
 foreach ($emails as $email) {
     $totalEmailDiskBytes += floatval($email['_diskused'] ?? 0);
@@ -127,11 +139,35 @@ foreach ($emails as $email) {
         $inactiveEmails[] = $email['email'];
     }
 }
+
+// Auditoría de Política TNA de Forwarders
+$fwdLoops = [];
+$fwdExternalCount = 0;
+if (is_array($fwdData)) {
+    foreach ($fwdData as $f) {
+        $source = $f['dest'] ?? $f['forwarder'] ?? $f['uri'] ?? $f['email'] ?? '';
+        $target = $f['forward'] ?? $f['html_forward'] ?? $f['dest'] ?? '';
+        
+        // 1. Loop check
+        if (!empty($source) && $source === $target) {
+            $fwdLoops[] = $source;
+        }
+        
+        // 2. External check
+        $srcDomain = explode('@', $source)[1] ?? '';
+        $tgtDomain = explode('@', $target)[1] ?? '';
+        if ($srcDomain && $tgtDomain && $srcDomain !== $tgtDomain) {
+            $fwdExternalCount++;
+        }
+    }
+}
+$fwdLoopsCount = count(array_unique($fwdLoops));
+
 $suspendedEmailsCount = count(array_unique($suspendedEmails));
 $inactiveEmailsCount = count($inactiveEmails);
 $noTraffic = ($bwUsedBytes <= 0);
 
-$hasMaintenanceAlerts = $suspendedEmailsCount > 0 || $inactiveEmailsCount > 0 || $noTraffic;
+$hasMaintenanceAlerts = $suspendedEmailsCount > 0 || $inactiveEmailsCount > 0 || $noTraffic || $fwdLoopsCount > 0 || $fwdExternalCount > 0;
 
 ?>
 <!DOCTYPE html>
@@ -253,15 +289,31 @@ $hasMaintenanceAlerts = $suspendedEmailsCount > 0 || $inactiveEmailsCount > 0 ||
                 <svg class="w-6 h-6 text-blue-600 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <h3 class="font-bold text-lg">Sugerencias de Optimización</h3>
             </div>
-            <ul class="ml-9 list-disc text-blue-700 space-y-1 text-sm">
+            <ul class="ml-9 list-disc text-blue-700 space-y-1.5 text-sm">
+                <?php if ($fwdLoopsCount > 0): ?>
+                    <li><strong>⚠️ Eliminar Reenvíos Redundantes (Bucles):</strong> Se detectaron <?php echo $fwdLoopsCount; ?> cuenta(s) que se reenvían a sí mismas. Esto genera procesos innecesarios en el servidor sin beneficios reales. <strong>Recomendación:</strong> Eliminarlos para mejorar la velocidad de entrega.</li>
+                <?php endif; ?>
+
+                <?php if ($isCriticalMigration && $fwdExternalCount > 0): ?>
+                    <li><strong>🚀 Migración VIP Sugerida:</strong> Su cuenta está cerca del límite de espacio y usa <?php echo $fwdExternalCount; ?> reenvío(s) externos. <strong>Recomendación:</strong> Al migrar a Google Workspace o M365, podrá usar las aplicaciones oficiales en sus celulares sin depender de reenvíos, liberando espacio masivo y ganando seguridad frente al Spam.</li>
+                <?php elseif ($fwdExternalCount > 0): ?>
+                    <li><strong>📱 Optimización de Recepción:</strong> Detectamos <?php echo $fwdExternalCount; ?> reenvío(s) a dominios externos (Gmail/Outlook). <strong>Recomendación:</strong> Es más seguro y profesional configurar estas cuentas directamente en sus dispositivos vía IMAP. Los reenvíos externos suelen fallar o ser marcados como Spam por los proveedores.</li>
+                <?php endif; ?>
+
+                <?php if ($diskPercent >= 80 || $inodesUsed >= $inodeOrange): ?>
+                    <?php if ($inactiveEmailsCount > 0): ?>
+                        <li><strong>🧹 Limpieza Prioritaria:</strong> Al tener el espacio comprometido, le sugerimos eliminar las <?php echo $inactiveEmailsCount; ?> cuenta(s) sin uso detectadas. Esto liberará Espacio en Disco e Inodos de inmediato.</li>
+                    <?php endif; ?>
+                <?php elseif ($inactiveEmailsCount > 0): ?>
+                    <li><strong>Cuentas sin Uso (+90 días):</strong> Hay <?php echo $inactiveEmailsCount; ?> casilla(s) que no registran actividad reciente. Podría eliminarlas para mantener su cuenta organizada.</li>
+                <?php endif; ?>
+
                 <?php if ($suspendedEmailsCount > 0): ?>
-                    <li><strong>Casillas Suspendidas:</strong> Se detectaron <?php echo $suspendedEmailsCount; ?> cuenta(s) con restricciones de acceso o entrada.</li>
+                    <li><strong>Casillas Suspendidas:</strong> Se detectaron <?php echo $suspendedEmailsCount; ?> cuenta(s) con restricciones. ¿Desea que las reactivemos para su equipo?</li>
                 <?php endif; ?>
-                <?php if ($inactiveEmailsCount > 0): ?>
-                    <li><strong>Cuentas sin Uso (+90 días):</strong> Hay <?php echo $inactiveEmailsCount; ?> casilla(s) que no registran actividad reciente. Podría eliminarlas para ahorrar espacio.</li>
-                <?php endif; ?>
+
                 <?php if ($noTraffic): ?>
-                    <li><strong>Sin Tráfico Web:</strong> No se registra consumo de ancho de banda este mes. Verifique que su sitio web sea visible o si requiere mayor difusión.</li>
+                    <li><strong>Tráfico Web:</strong> No se registra consumo de ancho de banda este mes. Verifique si su sitio web requiere una actualización o nueva difusión.</li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -424,6 +476,7 @@ $hasMaintenanceAlerts = $suspendedEmailsCount > 0 || $inactiveEmailsCount > 0 ||
                         <tr class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
                             <th class="p-3 border-b text-center">#</th>
                             <th class="p-3 border-b">Casilla (Email)</th>
+                            <th class="p-3 border-b text-center">Reenvíos</th>
                             <th class="p-3 border-b">Uso Disco</th>
                             <th class="p-3 border-b">% Uso</th>
                             <th class="p-3 border-b">Último Acceso</th>
@@ -456,6 +509,18 @@ $hasMaintenanceAlerts = $suspendedEmailsCount > 0 || $inactiveEmailsCount > 0 ||
                                     }
                                     echo htmlspecialchars($emailName); 
                                 ?>
+                            </td>
+                            <td class="p-3 text-center">
+                                <?php 
+                                    $fCount = $fwdCounts[$emailName] ?? 0;
+                                    if ($fCount > 0): 
+                                ?>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-indigo-100 text-indigo-700">
+                                        ↗️ <?php echo $fCount; ?>
+                                    </span>
+                                <?php else: ?>
+                                    <span class="text-slate-300">-</span>
+                                <?php endif; ?>
                             </td>
                             <td class="p-3 text-slate-600"><?php echo formatBytesCustom($emUsed); ?></td>
                             <td class="p-3 text-slate-600">

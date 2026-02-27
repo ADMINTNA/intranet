@@ -61,8 +61,7 @@ try {
             if (is_array($emails) && is_array($forwarders)) {
                 $fwdCounts = [];
                 foreach ($forwarders as $f) {
-                    $src = $f['dest'] ?? ''; // In list_forwarders, 'dest' is the source email strangely, or 'uri'
-                    if (empty($src)) $src = $f['uri'] ?? '';
+                    $src = $f['dest'] ?? $f['forwarder'] ?? $f['uri'] ?? $f['email'] ?? ''; 
                     if (!empty($src)) {
                         $fwdCounts[$src] = ($fwdCounts[$src] ?? 0) + 1;
                     }

@@ -16,7 +16,8 @@ Autor      : Icontel Dev Team
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WHM Server Report - Icontel Intranet</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/style.css?v=<?= time() ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 </head>
 <body>
@@ -31,7 +32,7 @@ Autor      : Icontel Dev Team
 <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)App.closeModal()">
     <div class="modal">
         <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center;">
-            <div class="modal-title" id="modalTitle" style="flex:1;">Detalle de Cuenta</div>
+            <div class="modal-title" id="modalTitle" style="flex:1;">Detalle de Cuenta <small style="font-size:10px;color:rgba(255,255,255,0.4)">(#modalTitle)</small></div>
             <button class="btn-refresh" id="modalExportBtn" onclick="App.exportDetailXLS()" style="background:var(--success,#22c55e);color:#000;margin-right:12px;font-size:12px;padding:4px 10px;height:auto;line-height:normal;border-radius:4px;">⬇ XLS</button>
             <button class="modal-close" onclick="App.closeModal()" style="font-size:20px;height:auto;padding:0;line-height:1;">✕</button>
         </div>
@@ -48,7 +49,7 @@ Autor      : Icontel Dev Team
             <div class="header-icon">📊</div>
             <div>
                 <div class="header-title">WHM Server <span>Report</span></div>
-                <div class="header-sub">Icontel Intranet · Panel de Control</div>
+                <div class="header-sub">Icontel Intranet · Panel de Control <small style="font-size:9px;color:rgba(255,255,255,0.3)">(index.php)</small></div>
             </div>
             <!-- TNA HEALTH WIDGET -->
             <div id="tnaHealthWidget" class="health-widget-compact" style="margin-left:24px; display:flex; gap:16px;">
@@ -71,27 +72,27 @@ Autor      : Icontel Dev Team
         <!-- SUMMARY CARDS -->
         <div class="summary-grid">
             <div class="summary-card green animate-in delay-1">
-                <div class="card-label">Total Cuentas</div>
+                <div class="card-label">Total Cuentas <small style="font-size:9px;color:rgba(255,255,255,0.3)">(#totalAccounts)</small></div>
                 <div class="card-value green" id="totalAccounts">--</div>
                 <div class="card-sub">Cuentas cPanel</div>
             </div>
             <div class="summary-card blue animate-in delay-2">
-                <div class="card-label">Activas</div>
+                <div class="card-label">Activas <small style="font-size:9px;color:rgba(255,255,255,0.3)">(#activeAccounts)</small></div>
                 <div class="card-value blue" id="activeAccounts">--</div>
                 <div class="card-sub">En funcionamiento</div>
             </div>
             <div class="summary-card red animate-in delay-3">
-                <div class="card-label">Suspendidas</div>
+                <div class="card-label">Suspendidas <small style="font-size:9px;color:rgba(255,255,255,0.3)">(#suspendedAccounts)</small></div>
                 <div class="card-value red" id="suspendedAccounts">--</div>
                 <div class="card-sub">Cuentas pausadas</div>
             </div>
             <div class="summary-card yellow animate-in delay-4">
-                <div class="card-label">Sin Movimiento</div>
+                <div class="card-label">Sin Movimiento <small style="font-size:9px;color:rgba(255,255,255,0.3)">(#inactiveAccounts)</small></div>
                 <div class="card-value yellow" id="inactiveAccounts">--</div>
                 <div class="card-sub">Sin bandwidth actual</div>
             </div>
             <div class="summary-card purple animate-in delay-5">
-                <div class="card-label">Disco Usado</div>
+                <div class="card-label">Disco Usado <small style="font-size:9px;color:rgba(255,255,255,0.3)">(#diskUsed)</small></div>
                 <div class="card-value purple" id="diskUsed">--</div>
                 <div class="card-sub" id="diskPercent">--</div>
             </div>
@@ -100,7 +101,7 @@ Autor      : Icontel Dev Team
         <!-- DISK BAR -->
         <div class="disk-bar-container animate-in delay-6">
             <div class="disk-bar-header">
-                <div class="disk-bar-title">Uso Total de Disco del Servidor</div>
+                <div class="disk-bar-title">Uso Total de Disco del Servidor <small style="font-size:9px;color:rgba(255,255,255,0.3)">(#diskBarFill)</small></div>
                 <div class="disk-bar-stats" id="diskBarStats">--</div>
             </div>
             <div class="disk-bar">
@@ -110,14 +111,14 @@ Autor      : Icontel Dev Team
 
         <!-- TABS -->
         <nav class="tab-nav">
-            <button class="tab-btn" data-tab="overview">📈 Resumen</button>
+            <button class="tab-btn" data-tab="overview">📈 Resumen <small style="font-size:8px;opacity:0.5">(#tab-overview)</small></button>
             <button class="tab-btn" data-tab="space">💾 Top Espacio</button>
             <button class="tab-btn" data-tab="activity">📡 Top Actividad</button>
             <button class="tab-btn" data-tab="inactive">⏸️ Inactivas</button>
             <button class="tab-btn active" data-tab="all">📋 Todas</button>
             <button class="tab-btn" data-tab="alerts">🚨 Alertas</button>
-            <button class="tab-btn" data-tab="resellers" onclick="App.loadResellers()">👥 Resellers</button>
-            <button class="tab-btn" data-tab="firewall" onclick="App.loadFirewall()">🔒 Firewall</button>
+            <button class="tab-btn" data-tab="resellers" onclick="App.loadResellers()">👥 Resellers <small style="font-size:8px;opacity:0.5">(#tab-resellers)</small></button>
+            <button class="tab-btn" data-tab="firewall" onclick="App.loadFirewall()">🔒 Firewall <small style="font-size:8px;opacity:0.5">(#tab-firewall)</small></button>
         </nav>
 
         <!-- TAB: OVERVIEW -->
@@ -126,7 +127,7 @@ Autor      : Icontel Dev Team
             <!-- TOP ESPACIO (mini) -->
             <div class="section">
                 <div class="section-header">
-                    <div class="section-title"><span class="icon">💾</span> Top 10 — Uso de Espacio</div>
+                    <div class="section-title"><span class="icon">💾</span> Top 10 — Uso de Espacio <small style="font-size:9px;color:var(--text-muted)">(renderTopSpace)</small></div>
                     <div class="toggle-group" id="topSpaceToggleOverview">
                         <button class="toggle-btn active" data-mode="most" onclick="App.toggleTopSpace('most', this)">Más Espacio</button>
                         <button class="toggle-btn" data-mode="least" onclick="App.toggleTopSpace('least', this)">Menos Espacio</button>
@@ -153,7 +154,7 @@ Autor      : Icontel Dev Team
             <!-- TOP ACTIVIDAD (mini) -->
             <div class="section">
                 <div class="section-header">
-                    <div class="section-title"><span class="icon">📡</span> Top 10 — Actividad (Bandwidth)</div>
+                    <div class="section-title"><span class="icon">📡</span> Top 10 — Actividad (Bandwidth) <small style="font-size:9px;color:var(--text-muted)">(renderTopActivity)</small></div>
                     <div class="toggle-group" id="topActivityToggleOverview">
                         <button class="toggle-btn active" data-mode="most" onclick="App.toggleTopActivity('most', this)">Más Actividad</button>
                         <button class="toggle-btn" data-mode="least" onclick="App.toggleTopActivity('least', this)">Menos Actividad</button>
@@ -182,7 +183,7 @@ Autor      : Icontel Dev Team
         <div class="tab-content" id="tab-space">
             <div class="section">
                 <div class="section-header">
-                    <div class="section-title"><span class="icon">💾</span> Top 10 — Uso de Espacio en Disco</div>
+                    <div class="section-title"><span class="icon">💾</span> Top 10 — Uso de Espacio en Disco <small style="font-size:9px;color:var(--text-muted)">(renderTopSpace)</small></div>
                     <div class="toggle-group" id="topSpaceToggle">
                         <button class="toggle-btn active" data-mode="most" onclick="App.toggleTopSpace('most', this)">Más Espacio</button>
                         <button class="toggle-btn" data-mode="least" onclick="App.toggleTopSpace('least', this)">Menos Espacio</button>
@@ -211,7 +212,7 @@ Autor      : Icontel Dev Team
         <div class="tab-content" id="tab-activity">
             <div class="section">
                 <div class="section-header">
-                    <div class="section-title"><span class="icon">📡</span> Top 10 — Movimiento (Bandwidth)</div>
+                    <div class="section-title"><span class="icon">📡</span> Top 10 — Movimiento (Bandwidth) <small style="font-size:9px;color:var(--text-muted)">(renderTopActivity)</small></div>
                     <div class="toggle-group" id="topActivityToggle">
                         <button class="toggle-btn active" data-mode="most" onclick="App.toggleTopActivity('most', this)">Más Movimiento</button>
                         <button class="toggle-btn" data-mode="least" onclick="App.toggleTopActivity('least', this)">Menos Movimiento</button>
@@ -241,7 +242,7 @@ Autor      : Icontel Dev Team
             <div class="section">
                 <div class="section-header">
                     <div class="section-title">
-                        <span class="icon">⏸️</span> Cuentas Sin Movimiento
+                        <span class="icon">⏸️</span> Cuentas Sin Movimiento <small style="font-size:9px;color:var(--text-muted)">(#inactiveTable)</small>
                         <span class="badge badge-warning" id="inactiveCount">--</span>
                     </div>
                 </div>
@@ -283,7 +284,7 @@ Autor      : Icontel Dev Team
             <div class="section">
                 <div class="section-header">
                     <div class="section-title">
-                        <span class="icon">📋</span> Todas las Cuentas
+                        <span class="icon">📋</span> Todas las Cuentas <small style="font-size:9px;color:var(--text-muted)">(#allAccountsTable)</small>
                         <span class="badge badge-info" id="filteredCount">--</span>
                     </div>
                 </div>
@@ -320,6 +321,7 @@ Autor      : Icontel Dev Team
                                 <th data-sort="bw_used" onclick="App.sortTable('allAccounts','bw_used')">Bandwidth</th>
                                 <th data-sort="suspended" onclick="App.sortTable('allAccounts','suspended')">Estado</th>
                                 <th data-sort="email_count" onclick="App.sortTable('allAccounts','email_count')">Emails</th>
+                                <th data-sort="forwarder_count" onclick="App.sortTable('allAccounts','forwarder_count')">Reenvíos</th>
                                 <th data-sort="plan" onclick="App.sortTable('allAccounts','plan')">Plan</th>
                                 <th data-sort="owner" onclick="App.sortTable('allAccounts','owner')">Owner</th>
                                 <th>Informe</th>
@@ -336,7 +338,7 @@ Autor      : Icontel Dev Team
             <div class="section">
                 <div class="section-header">
                     <div class="section-title">
-                        <span class="icon">🚨</span> Alertas de Migración
+                        <span class="icon">🚨</span> Alertas de Migración <small style="font-size:9px;color:var(--text-muted)">(#alertsTable)</small>
                         <span class="badge badge-warning" id="alertCount" style="background:var(--warning,#f59e0b);color:#fff;">--</span>
                     </div>
                 </div>
@@ -367,7 +369,7 @@ Autor      : Icontel Dev Team
             <div class="section">
                 <div class="section-header">
                     <div class="section-title">
-                        <span class="icon">👥</span> Gestión de Resellers
+                        <span class="icon">👥</span> Gestión de Resellers <small style="font-size:9px;color:var(--text-muted)">(#tab-resellers)</small>
                         <span class="badge badge-info" id="resellerCount">--</span>
                     </div>
                     <div style="display:flex;gap:8px;align-items:center">
@@ -408,7 +410,7 @@ Autor      : Icontel Dev Team
                 <!-- BLOQUEOS -->
                 <div class="section">
                     <div class="section-header">
-                        <div class="section-title"><span class="icon">🔒</span> Bloqueos Recientes / Brute Force</div>
+                        <div class="section-title"><span class="icon">🔒</span> Bloqueos Recientes / Brute Force <small style="font-size:9px;color:var(--text-muted)">(#firewallTableContainer)</small></div>
                         <button class="btn-refresh" onclick="App.loadFirewall()" style="font-size:13px">⟳ Recargar</button>
                     </div>
                     <!-- Buscador -->
@@ -424,7 +426,7 @@ Autor      : Icontel Dev Team
                 <!-- LISTA BLANCA -->
                 <div class="section">
                     <div class="section-header">
-                        <div class="section-title"><span class="icon">✅</span> Lista Blanca (Whitelist)</div>
+                        <div class="section-title"><span class="icon">✅</span> Lista Blanca (Whitelist) <small style="font-size:9px;color:var(--text-muted)">(#whitelistTableContainer)</small></div>
                         <button class="btn-refresh" onclick="App.loadWhitelisted()" style="font-size:13px">⟳ Recargar</button>
                     </div>
                     <!-- Agregar a whitelist -->
